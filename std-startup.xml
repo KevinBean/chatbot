@@ -1,0 +1,13 @@
+<aiml version="1.0">
+
+<!-- This category works with the Standard AIML Set 与标准的AIML库配合使用 -->
+<category>
+<pattern>LOAD AIML B</pattern>
+<template>
+
+<!-- Load standard AIML set 学习特定文件夹下面的AIML库-->
+<learn>standard/std-*.aiml</learn>
+</template>
+</category>
+
+</aiml>
