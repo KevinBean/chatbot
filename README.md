@@ -1,11 +1,11 @@
-## 聊天机器人
+# 聊天机器人
 
-### AIML
+## AIML
 研究AIML的源文件。/Users/bianbin/anaconda/lib/python2.7/UserDict.py
-#### Util.py
+### Util.py
 用来切分句子。可以处理中文,但是要注意先把中文标点替换为英文标点。
 使用    print sents[1].decode('utf-8') 可以正常输出中文。
-#### aiml/WordSub.py
+### aiml/WordSub.py
 用来替换单词,适应中文。
 示例:
 ```
@@ -28,28 +28,26 @@ subber = WordSub()
     else: print "Test #2 FAILED: '%s'" % subber.sub(inStr)
 
 ```
-#### aiml/DefaultSubs.py
+### aiml/DefaultSubs.py
 预设的替换字典。
-#### aiml/PatternMgr.py
+### aiml/PatternMgr.py
 模式匹配。提取XML标签结构,不涉及输入内容?
 主要的是match(),被核心模块aiml/Kernel.py调用。
-#### aiml/AimlParser.py
+### aiml/AimlParser.py
 AIML解析器?
-#### aiml/Kernel.py
+### aiml/Kernel.py
 程序主要界面。
 最常用的就是respond()。
 
-#### 使用std-zhihu.aiml测试了中文结果,测试文件来自 [这里](https://github.com/Elvis-Zhou/zhihuDM/blob/master/%E7%9F%A5%E4%B9%8E%E9%87%91%E8%9E%8D%E9%97%AE%E9%A2%98%E8%A7%A3%E6%9E%90%E6%88%90aiml%E6%A0%BC%E5%BC%8F.txt)
+### 使用std-zhihu.aiml测试了中文结果,测试文件来自 [这里](https://github.com/Elvis-Zhou/zhihuDM/blob/master/%E7%9F%A5%E4%B9%8E%E9%87%91%E8%9E%8D%E9%97%AE%E9%A2%98%E8%A7%A3%E6%9E%90%E6%88%90aiml%E6%A0%BC%E5%BC%8F.txt)
 
+### formataiml.py中format()可以通过输入pattern和template值创建一个最基本的AIML。
 
-### idea
-#### 是否可以通过翻译工具解决AIML对中文的处理,比如输入内容先经过翻译处理后变成英文内容,英文内容经AIML处理后输出,输出再翻译成中文显示。
+### 可以通过翻译工具解决AIML对中文的处理,比如输入内容先经过翻译处理后变成英文内容,英文内容经AIML处理后输出,输出再翻译成中文显示。
 输入中文->翻译为英文->AIML处理->英文结果->翻译成中文
 经测,可实现。
 因为要用到翻译api,没有网络的情况下,较难实现。
-
-代码如下
-
+代码如下:
 ```
 import aiml
 from translate import Translator
@@ -70,27 +68,27 @@ while True:
     response = kernel.respond(message)
     print backtranslator.translate(response)
 ```
-####爬取文档,实现aiml自动生成 aimlformat
-####翻译standard语料库
 
-### 问题
-#### 中文的*匹配和英文的不同,在于'*'前后是否加_空格_。
+## TODOS
+
+### 语料库的来源问题
+#### 翻译standard语料库
+#### 爬取文档,实现aiml自动生成。
+- 可利用formataiml.py中format(file,pattern,template)
+- 关于输入与pattern的匹配问题
+    - 思路一:建立AIML时,pattern可以进行简单处理。这需要一定总结。形成固定格式。比如关于关系的问题,标准化为"A与B的关系如何?"或"*A*B*关系*"
+    - 思路二:利用DefaultSubs对输入进行处理。与上面pattern建立时类似,关于关系的问题统一转化为"A与B的关系如何?"
+    - 思路三:利用<srai>BYE</srai>标签创建同义替换
+### 回答计算问题
+- 获取参数是个问题。利用session进行获取操作?
+- 后台计算生成aiml然后作答。
+- 检测到计算问题,就转入另外的处理程序。
+
+
+
+## 注意问题
+### 中文的*匹配和英文的不同,在于*前后是否加_空格_。
 英文要写成<pattern> * BYE</pattern>可以匹配"mike,bye",
 而中文要写成<pattern> *再见</pattern>来匹配"迈克,再见"。
 如加空格写成<pattern> * 再见</pattern>则匹配的是"迈克, 再见"
 
-#### 已实现功能
-- 基本的图形绘制,包括起始站点,出线和线路名
-
-#### TODOS
-- 修复有两个同方向出线的情况下(如两条数据方向均为"南"),线条重复的错误。
-
-    - 基本思路1:建立线路起始点列表,使用过的起始点位置列为不可用,避免重复。
-    - 基本思路2:更进一步避免交叉,进行网格规划,整张画布分为10*10的网格,网格上的节点(0,0)、(0,10)、(10,0)、(10,10)间连线,已经使用/经过
-    的点不再走线。
-
-- 设置不能走线的范围
-
-- 走线非直线,需要转弯的情况,并且需要避免交叉
-
-- 每6回线并为一个线束,找出最优布线策略,使得线束组数最少。

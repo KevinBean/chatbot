@@ -4,8 +4,12 @@
 		<category>
 			<pattern>WENTI1</pattern>
 			<template>daan1</template>
+		</category>
+		<category>
 			<pattern>WENTI2</pattern>
 			<template>daan2</template>
+		</category>
+		<category>
 			<pattern>再见</pattern>
 			<template>&lt;srai&gt;BYE&lt;/srai&gt;</template>
 		</category>
