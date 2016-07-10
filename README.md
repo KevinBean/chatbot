@@ -6,7 +6,41 @@
 用来切分句子。可以处理中文,但是要注意先把中文标点替换为英文标点。
 使用    print sents[1].decode('utf-8') 可以正常输出中文。
 #### aiml/WordSub.py
-用来替换
+用来替换单词,适应中文。
+示例:
+```
+subber = WordSub()
+    subber["apple"] = "苹果"
+    subber["orange"] = "pear"
+    subber["banana" ] = "apple"
+    subber["he"] = "she"
+    subber["I'd"] = "I would"
+
+    # test case insensitivity
+    inStr =  "I'd like one apple, one Orange and one BANANA."
+    outStr = "I Would like one 苹果, one Pear and one APPLE."
+    if subber.sub(inStr) == outStr: print "Test #1 PASSED"    
+    else: print "Test #1 FAILED: '%s'" % subber.sub(inStr)
+
+    inStr = "He said he'd like to go with me"
+    outStr = "She said she'd like to go with me"
+    if subber.sub(inStr) == outStr: print "Test #2 PASSED"    
+    else: print "Test #2 FAILED: '%s'" % subber.sub(inStr)
+
+```
+#### aiml/DefaultSubs.py
+预设的替换字典。
+#### aiml/PatternMgr.py
+模式匹配。提取XML标签结构,不涉及输入内容?
+主要的是match(),被核心模块aiml/Kernel.py调用。
+#### aiml/AimlParser.py
+AIML解析器?
+#### aiml/Kernel.py
+程序主要界面。
+最常用的就是respond()。
+
+#### 使用std-zhihu.aiml测试了中文结果,测试文件来自 [这里](https://github.com/Elvis-Zhou/zhihuDM/blob/master/%E7%9F%A5%E4%B9%8E%E9%87%91%E8%9E%8D%E9%97%AE%E9%A2%98%E8%A7%A3%E6%9E%90%E6%88%90aiml%E6%A0%BC%E5%BC%8F.txt)
+
 
 ### idea
 #### 是否可以通过翻译工具解决AIML对中文的处理,比如输入内容先经过翻译处理后变成英文内容,英文内容经AIML处理后输出,输出再翻译成中文显示。
@@ -36,6 +70,7 @@ while True:
     response = kernel.respond(message)
     print backtranslator.translate(response)
 ```
+####爬取文档,实现aiml自动生成 aimlformat
 
 #### 已实现功能
 - 基本的图形绘制,包括起始站点,出线和线路名
