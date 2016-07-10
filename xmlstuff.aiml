@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<aiml version="1.0">
+		<meta author="KevinBean" language="zh"/>
+		<category>
+			<pattern>问题</pattern>
+			<template>回答</template>
+		</category>
+	</aiml>
