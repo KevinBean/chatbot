@@ -29,7 +29,7 @@ class PatternMgr:
 		self._templateCount = 0
 		self._botName = u"Nameless"
 		punctuation = "\"`~!@#$%^&*()-_=+[{]}\|;:',<.>/?"
-		self._puncStripRE = re.compile("[" + re.escape(punctuation) + "]")
+		self._puncStripRE = re.compile("[" + re.escape(punctuation) + "]", re.U) # FIXED: chinese unicode
 		self._whitespaceRE = re.compile("\s+", re.LOCALE | re.UNICODE)
 
 	def numTemplates(self):

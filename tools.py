@@ -1,46 +1,47 @@
-def writetoaiml(self):
-    global out, count
+def writetoaiml(aimlfile,cat):
+    out = open(aimlfile,'w')
+    out.write('<?xml version="1.0" encoding="utf-8"?>\n')
+    out.write('< aiml version = "1.0" >\n')
     out.write("  <category>\n")
     out.write("    <pattern>")
-    words = self.question.encode("utf-8")
-    if not words.strip():
+    pat = cat.pattern.encode("utf-8")
+    if not pat.strip():
         return
-    words = words.replace("&", "&amp;")
-    words = words.replace("<", "&lt;")
-    words = words.replace(">", "&gt;")
-    words = words.replace("'", "&apos;")
-    words = words.replace('"', "&quot;")
-    out.write(words)
+    else:
+        pat = pat.replace("&", "&amp;")
+        pat = pat.replace("<", "&lt;")
+        pat = pat.replace(">", "&gt;")
+        pat = pat.replace("'", "&apos;")
+        pat = pat.replace('"', "&quot;")
+        out.write(pat)
     out.write("</pattern>\n")
     out.write("    <template>\n")
-    print self.question
-    if len(self.answers) > 1:
+    print cat.pattern
+    if len(cat.tempaltes) > 1:
         out.write("      <random>\n")
-        for x in self.answers:
-            print x
+        for template in cat.tempaltes:
+            print template
             out.write("        <li>")
-            words = x.encode("utf-8").replace("&", "&amp;")
-            words = words.replace("<", "&lt;")
-            words = words.replace(">", "&gt;")
-            words = words.replace("'", "&apos;")
-            words = words.replace('"', "&quot;")
-            out.write(words)
+            temp = template.encode("utf-8").replace("&", "&amp;")
+            temp = temp.replace("<", "&lt;")
+            temp = temp.replace(">", "&gt;")
+            temp = temp.replace("'", "&apos;")
+            temp = temp.replace('"', "&quot;")
+            out.write(temp)
             out.write("</li>\n")
             # count += 1
             out.write("      </random>\n")
     else:
-        x = self.answer.encode("utf-8")
-        print x
-        words = x.replace("&", "&amp;")
-        words = words.replace("<", "&lt;")
-        words = words.replace(">", "&gt;")
-        words = words.replace("'", "&apos;")
-        words = words.replace('"', "&quot;")
+        template = cat.tempaltes("utf-8")
+        print template
+        temp = template.replace("&", "&amp;")
+        temp = temp.replace("<", "&lt;")
+        temp = temp.replace(">", "&gt;")
+        temp = temp.replace("'", "&apos;")
+        temp = temp.replace('"', "&quot;")
         # charset=chardet.detect(words)["encoding"]
-        out.write(words + '\n')
+        out.write(temp + '\n')
     out.write("    </template>\n")
     out.write("  </category>\n")
+    out.write('< /aiml >\n')
     out.flush()
-    count += 1
-    print count
-    # self.content=set()

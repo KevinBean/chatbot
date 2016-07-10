@@ -1,4 +1,4 @@
-# -*- coding=utf-8 -*-
+# -*- coding: latin-1 -*-
 # 起始欢迎界面。
 
 import aiml

@@ -6,7 +6,8 @@
 <template>
 
 <!-- Load standard AIML set 学习特定文件夹下面的AIML库-->
-<learn>standard/std-*.aiml</learn>
+<learn>standard/std-zhihu.aiml</learn>
+    <learn>standard/cn-*.aiml</learn>
 </template>
 </category>
 

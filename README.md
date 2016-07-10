@@ -71,6 +71,13 @@ while True:
     print backtranslator.translate(response)
 ```
 ####爬取文档,实现aiml自动生成 aimlformat
+####翻译standard语料库
+
+### 问题
+#### 中文的*匹配和英文的不同,在于'*'前后是否加_空格_。
+英文要写成<pattern> * BYE</pattern>可以匹配"mike,bye",
+而中文要写成<pattern> *再见</pattern>来匹配"迈克,再见"。
+如加空格写成<pattern> * 再见</pattern>则匹配的是"迈克, 再见"
 
 #### 已实现功能
 - 基本的图形绘制,包括起始站点,出线和线路名
