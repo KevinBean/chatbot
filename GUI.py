@@ -15,6 +15,7 @@ from translate import Translator
 from Tkinter import *
 import datetime
 import time
+from ScrolledText import ScrolledText #文本区加滑动条
 
 #发送按钮事件
 def sendmessage(k):
@@ -60,8 +61,8 @@ if __name__ == "__main__":
     # frame_right     = Frame(width=170, height=400, bg='white')
 
     ##创建需要的几个元素
-    text_msglist = Text(frame_top)
-    text_msg = Entry(frame_left_bottom);
+    text_msglist = ScrolledText(frame_top)  #文本区加滑动条
+    text_msg = Entry(frame_left_bottom)
     button_sendmsg = Button(frame_right_bottom, text=unicode('发送', 'utf-8'), command=lambda:sendmessage(k = kernel))
     # 不显示的标签
     text_respond = Label(frame_top)
@@ -82,7 +83,7 @@ if __name__ == "__main__":
     frame_right_bottom.grid_propagate(0)
 
     # 把元素填充进frame
-    text_msglist.grid()
+    text_msglist.pack(expand=True, fill='both') #文本区加滑动条
     text_msg.grid()
     button_sendmsg.grid(sticky=E)
 
