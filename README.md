@@ -84,6 +84,7 @@ while True:
 #### 翻译standard语料库
 
 #### 爬取文档,实现aiml自动生成。
+- 爬取文档使用jieba和nltk
 - 可利用formataiml.py中format(file,pattern,template)
 - 关于输入与pattern的匹配问题
     - 思路一:建立AIML时,pattern可以进行简单处理。这需要一定总结。形成固定格式。比如关于关系的问题,标准化为"A与B的关系如何?"或"*A*B*关系*"
