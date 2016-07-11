@@ -62,7 +62,7 @@ if __name__ == "__main__":
 
     ##创建需要的几个元素
     text_msglist = ScrolledText(frame_top)  #文本区加滑动条
-    text_msg = Entry(frame_left_bottom)
+    text_msg = Entry(frame_left_bottom,font='Yahei.ttf')
     button_sendmsg = Button(frame_right_bottom, text=unicode('发送', 'utf-8'), command=lambda:sendmessage(k = kernel))
     # 不显示的标签
     text_respond = Label(frame_top)
