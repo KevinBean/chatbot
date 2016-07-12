@@ -7,7 +7,13 @@
 先只实现 名称 时间 具体内容 的记录
 
 ！！！！！！！放弃操作xls以及所有的office文件！！！！！！！！！！！！！
+
+不管以前的xls文件，直接从头开始创建一个csv文件，并且添加内容。
 '''
+
+
+from __future__ import division
+import pandas
 import xlwt
 import xlrd
 import xlwings
@@ -16,7 +22,61 @@ import time
 
 import json #使用json,有点简单有复杂的感觉
 
-def writelog():
+def writelog(talktoMe):
+    logTypes = ['出版/记录',
+                '工程节点/记录',
+                '其他记录',
+                '会议/沟通',
+                '电话/沟通',
+                '其他沟通']
+
+    outofPlans = ['计划内',
+                  '额外',
+                  '调整变更']
+    num = jointPoint()
+    name = talktoMe[:8]
+    logType = logTypes[0]
+    datetime = time.strftime("%Y / %m / %d %H:%M", time.localtime())
+    howmanyHours = 5
+    howmanyDays = howmanyHours/5
+    detail = talktoMe[11:]
+    deal = ''
+    outofPlan =outofPlans[0]
+    changeRate = ''
+    other = ''
+    another = ''
+    # 使用变量字典生成数据，需要加index=[0]参数，否则会报错If using all scalar values, you must pass an index
+    worklog = {u'序号':num,
+                   u'名称/关键词':name,
+                                u'类型':logType,
+                                u'日期/时间':datetime,
+                                u'持续时间（小时）':howmanyHours,
+                                u'折合工日（自动计算）':howmanyDays,
+                                u'具体内容':detail,
+                                u'后续处理情况':deal,
+                                u'额外工作量？':outofPlan,
+                                u'调整变更比率':changeRate,
+                                u'备注1':other,
+                                u'备注2':another}
+    workFrame = pandas.DataFrame(worklog,index=[0])
+    # 后面append开启ignore_index=True，就不用这里columns参数控制显示顺序了
+    #,columns = [u'序号',u'名称/关键词',u'类型',u'日期/时间',u'持续时间（小时）',
+    # u'折合工日（自动计算）',u'具体内容',u'后续处理情况',u'额外工作量？',u'调整变更比率',u'备注1',u'备注2'])
+    print workFrame.head()
+    print worklog.keys()[0],len(worklog.keys())
+    sheet = pandas.read_excel('worklog.xlsx',sheetname=u'工作记录单')
+    sheet =pandas.DataFrame(sheet)
+    sheethead = sheet[:num-1]
+    sheettail = sheet[num+1:]
+    print sheet[num-1:num+1]
+    sheethead = sheethead.append(worklog,ignore_index=True) # 开启ignore_index=True 则按照列标题匹配增加行数据
+    newsheet = sheethead.append(sheettail,ignore_index=True)
+    print newsheet[num-1:num+1]
+    # ew = pandas.ExcelWriter('worklog.xlsx')
+    newsheet.to_csv('worklog.xlsx')
+    # ew.save()
+
+def jointPoint():
     # Read the file
     xls = xlrd.open_workbook('worklog.xlsx')
     sheet = xls.sheet_by_name(u'工作记录单')
@@ -25,18 +85,7 @@ def writelog():
         if sheet.cell_value(i,1) == '' and sheet.cell_value(i,1) == '':
             row = i
             break
-    # 时间格式 2016 / 6 / 14 9:00 ，写入(row,3)
-    print sheet.cell_value(row,3)
-    ctype = 3 # 类型 0 empty,1 string, 2 number, 3 date, 4 boolean, 5 error
-    xf = 0  # 扩展的格式化
-    sheet.put_cell(row,3,ctype,time.strftime("%Y / %m / %d %H:%M", time.localtime()),xf)
-    print sheet.cell_value(row, 3),row
-    # xls.save('工作记录单.xlsx')   xls.handle_writeaccess()
-    print sheet.name, sheet.nrows, sheet.ncols,sheet.cell_value(0,0).encode('utf-8'),\
-        sheet.cell_value(2,3),time.strftime("%Y / %m / %d %H:%M", time.localtime())
-
-    # xlsw = xlwt.Workbook('worklog.xlsx')
-    # sheetw = xlsw.get_sheet(1)
+    return  row
 
 if __name__ == "__main__":
-    writelog()
+    writelog(u'＊＊输变电工程，电话沟通，需要修改站址。')
