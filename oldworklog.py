@@ -16,7 +16,7 @@ newsheet.to_excel('newworklog.xlsx',engine='openpyxl') #engine改为'openpyxl'�
 '''
 
 
-from __future__ import division
+# from __future__ import division
 import pandas
 import xlrd
 import time
@@ -27,10 +27,9 @@ def jointPoint():
     sheet = xls.sheet_by_name(u'工作记录单')
     print(str(sheet.cell(2,2)).decode('utf-8'),sheet.nrows)
     # 寻找记录起始位置行，也就是第1列名称为空的位置
-    # for i in range(sheet.nrows):
-    #    if sheet.cell_value(i,2) == '' and sheet.cell_value(i,2) == '':
-    #        row = i
-    return sheet.nrows
+    for i in range(sheet.nrows):
+        if sheet.cell_value(i,2) == '' and sheet.cell_value(i,2) == '':
+            return i
 
 def writelog(talktoMe):
     logTypes = ['出版/记录',
@@ -76,7 +75,7 @@ def writelog(talktoMe):
     print worklog.keys()[0],len(worklog.keys())
     sheet = pandas.read_excel('worklog.xlsx',sheetname=u'工作记录单')
     sheet =pandas.DataFrame(sheet)
-    sheethead = sheet[:num-1]
+    sheethead = sheet.head(num-1)
     # sheettail = sheet[num+1:]
     print sheet[num-1:num+1]
     sheethead = sheethead.append(worklog,ignore_index=True) # 开启ignore_index=True 则按照列标题匹配增加行数据
