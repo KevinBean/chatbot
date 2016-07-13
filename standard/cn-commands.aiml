@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<aiml version="1.0">
+		<meta author="KevinBean" language="zh"/>
+		<category>
+			<pattern>QUIT</pattern>
+			<template>execexit()</template>
+		</category>
+		<category>
+			<pattern>WORKLOG*</pattern>
+			<template>execwritelog(msg)</template>
+		</category>
+		<category>
+			<pattern>再见</pattern>
+			<template>&lt;srai&gt;BYE&lt;/srai&gt;</template>
+		</category>
+	</aiml>

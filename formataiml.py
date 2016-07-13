@@ -67,4 +67,11 @@ if __name__ == "__main__":
     patterns = ["wenti1","wenti2","再见"]
     templates = ["daan1","daan2","<srai>BYE</srai>"]
     format(filename, patterns, templates)
+    # 生成commands文件
+    filename = "standard/cn-commands.aiml"
+    patterns = ["quit","worklog*","再见"]
+    templates = ["exe"+"cexit()","exec"+"writelog(msg)","<srai>BYE</srai>"]
+    format(filename, patterns, templates)
+    # quit:exit()
+    # worklog:worklog(msg) msg是调用时的输入函数
 

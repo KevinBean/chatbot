@@ -17,10 +17,11 @@ import datetime
 import time
 from ScrolledText import ScrolledText #文本区加滑动条
 
+from worklog import *
+
 #发送按钮事件
 def sendmessage(k):
-    msg = text_msg.get() # 获取输入框信息
-
+    msg = text_msg.get().encode('utf-8') # 获取输入框信息
 
     #在聊天内容上方加一行 显示发送人及发送时间
     if msg:
@@ -35,14 +36,17 @@ def sendmessage(k):
         exit()
     elif msg == "save":
         k.saveBrain("bot_brain.brn")
+    elif 'log' in msg:
+        writelog(msg)
     else:
         bot_response = k.respond(msg) # bot_response() 回复某些信息
         # print bot_response
-        msgcontent = unicode('Robot:', 'utf-8') + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '\n '
-        text_msglist.insert(END, msgcontent, 'green')
-        text_msglist.insert(END, bot_response + '\n')
-        text_msglist.yview(END) #文本区滚动条自动下滑
-        text_msg.delete(0, END)
+        if bot_response:
+            msgcontent = unicode('Robot:', 'utf-8') + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '\n '
+            text_msglist.insert(END, msgcontent, 'green')
+            text_msglist.insert(END, bot_response + '\n')
+            text_msglist.yview(END)  # 文本区滚动条自动下滑
+            text_msg.delete(0, END)
 
 if __name__ == "__main__":
     # 创建Kernel()和 AIML 学习文件
@@ -97,6 +101,7 @@ if __name__ == "__main__":
     text_select.grid()
     button_lable.grid(sticky=W)
     button_sendmsg.grid(sticky=E)
+
 
     # 主事件循环
     root.mainloop()

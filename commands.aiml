@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<aiml version="1.0">
+		<meta author="KevinBean" language="zh"/>
+		<category>
+			<pattern>WENTI1</pattern>
+			<template>daan1</template>
+			<pattern>WENTI2</pattern>
+			<template>daan2</template>
+			<pattern>再见</pattern>
+			<template>&lt;srai&gt;BYE&lt;/srai&gt;</template>
+		</category>
+	</aiml>
