@@ -31,7 +31,8 @@ def sendmessage(k):
         text_msg.delete(0, END)
     else:
         pass
-
+    # msg=>可执行＼无参数的函数调用语句bot_response，如'quit'=>'execexit()'，可以简化这里的ifelse语句，但相应的增加了commands.aiml
+    # 文件的维护量 可以用exec(bot_response.replace('exec',''))来执行调用
     if msg == "quit":
         exit()
     elif msg == "save":
