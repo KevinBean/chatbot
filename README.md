@@ -48,7 +48,7 @@ AIML解析器?
 
 ### formataiml.py中format()可以通过输入pattern和template值创建一个最基本的AIML。
 
-### 用Tkinter做了用户界面
+### 用Tkinter做了用户界面,进一步使用pygubu进行界面设计,详见pygubu.md介绍(使用不是特别顺利)
 
 ### worklog.py 实现将输入的文字转换为格式化的工作记录条目，并汇入excel文件
 - 使用pandas做数据条目的汇总，包括读取原excel文件，读取数据后增加新条目，再写回文件
