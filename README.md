@@ -47,6 +47,10 @@ AIML解析器?
 ### 使用std-zhihu.aiml测试了中文结果,测试文件来自 [这里](https://github.com/Elvis-Zhou/zhihuDM/blob/master/%E7%9F%A5%E4%B9%8E%E9%87%91%E8%9E%8D%E9%97%AE%E9%A2%98%E8%A7%A3%E6%9E%90%E6%88%90aiml%E6%A0%BC%E5%BC%8F.txt)
 
 ### formataiml.py中format()可以通过输入pattern和template值创建一个最基本的AIML。
+xls2aiml可以将xls第1＼2列作为模式＼回答整理成aiml。并且可以扩展五种模式：（基本模式；模式＋任意字符＋关键字；关键字＋任意字符＋模式；模式＋关键字；关键字＋模式）
+
+### 为了实现中文输入与模式的对应关系。
+建立模式时，和处理输入时，均使用相同的分词工具进行预处理。
 
 ### readdoc.py中doc2txt函数，目前可以处理docx文件的读取
 
@@ -118,6 +122,8 @@ while True:
 英文要写成<pattern> * BYE</pattern>可以匹配"mike,bye",
 而中文要写成<pattern> *再见</pattern>来匹配"迈克,再见"。
 如加空格写成<pattern> * 再见</pattern>则匹配的是"迈克, 再见"
+对于＊的匹配认识仍然不足，比如"姓名 * 电话"只能匹配"姓名 a 电话"，'姓名*电话'无法匹配"姓名的电话"
+中文匹配前后必须加空格，原因位置，比如"
 
 ### Tkinter用lambda传递函数
 button_sendmsg = Button(frame_right_bottom, text=unicode('发送', 'utf-8'), command=lambda:sendmessage(k = kernel))

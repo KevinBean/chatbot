@@ -148,7 +148,7 @@ class PatternMgr:
 		# Mutilate the input.  Remove all punctuation and convert the
 		# text to all caps.
 		#upper不会改变中文输入内容
-		input = string.upper(pattern) # 处理input
+		input = string.upper(pattern) # 处理input,不改变中文结构
 		input = re.sub(self._puncStripRE, " ", input) # 用正则替换input,特殊符号变成空格
 		if that.strip() == u"": that = u"ULTRABOGUSDUMMYTHAT" # 'that' must never be empty 处理that
 		thatInput = string.upper(that)
@@ -159,7 +159,7 @@ class PatternMgr:
 		topicInput = re.sub(self._puncStripRE, " ", topicInput)
 		
 		# Pass the input off to the recursive call
-		patMatch, template = self._match(input.split(), thatInput.split(), topicInput.split(), self._root)
+		patMatch, template = self._match(input.decode('utf-8').split(), thatInput.split(), topicInput.split(), self._root)
 		return template
 	# 最终返回的是template模版信息
 
@@ -302,10 +302,10 @@ class PatternMgr:
 				except KeyError: template = None
 			return (pattern, template)
 
-		first = words[0]
-		suffix = words[1:]
+		first = words[0]  #处理第一个词
+		suffix = words[1:] #剩下作为后缀，递归用？
 		
-		# Check underscore.
+		# Check underscore.检查下滑线 目前标准ＡＩＭＬ文件已经不使用
 		# Note: this is causing problems in the standard AIML set, and is
 		# currently disabled.
 		if root.has_key(self._UNDERSCORE):
@@ -345,3 +345,27 @@ class PatternMgr:
 
 		# No matches were found.
 		return (None, None)			
+
+
+if __name__ == "__main__":
+	pattern = '张健 * '
+	_root = {}
+	_templateCount = 0
+	_botName = u"Nameless"
+	punctuation = "\"`~!@#$%^&*()-_=+[{]}\|;:',<.>/?"
+	_puncStripRE = re.compile("[" + re.escape(punctuation) + "]", re.U)  # FIXED: chinese unicode
+	_whitespaceRE = re.compile("\s+", re.LOCALE | re.UNICODE)
+	if len(pattern) == 0:
+		print 'None'
+	# Mutilate the input.  Remove all punctuation and convert the
+	# text to all caps.
+	# upper不会改变中文输入内容
+	inputa = string.upper(pattern)  # 处理input,不改变中文结构
+	print inputa
+	out = re.sub(_puncStripRE," ",inputa)
+	print out,type(out),out.decode('utf-8').split()
+    #out = out.split()
+    #print out
+
+	# Pass the input off to the recursive call
+	#patMatch, template = self._match(input.split(), thatInput.split(), topicInput.split(), self._root)

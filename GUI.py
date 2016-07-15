@@ -11,6 +11,7 @@ root.mainloop()  %进入窗体的主循环
 '''
 
 import aiml
+from wordscut import jiebacut
 from translate import Translator
 from Tkinter import *
 import datetime
@@ -21,13 +22,16 @@ from worklog import *
 
 #发送按钮事件
 def sendmessage(k):
-    msg = text_msg.get().encode('utf-8') # 获取输入框信息
+    raw_msg = text_msg.get().encode('utf-8') # 获取输入框信息
+
+    msg = jiebacut(raw_msg) #分词后用空格分隔，进行匹配
+    print msg
 
     #在聊天内容上方加一行 显示发送人及发送时间
     if msg:
         msgcontent = unicode('我:', 'utf-8') + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '\n '
         text_msglist.insert(END, msgcontent, 'green')
-        text_msglist.insert(END, msg + '\n')
+        text_msglist.insert(END, raw_msg + '\n')
         text_msg.delete(0, END)
     else:
         pass
@@ -41,7 +45,7 @@ def sendmessage(k):
         writelog(msg)
     else:
         bot_response = k.respond(msg) # bot_response() 回复某些信息
-        # print bot_response
+        print bot_response,type(bot_response)
         if bot_response:
             msgcontent = unicode('Robot:', 'utf-8') + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '\n '
             text_msglist.insert(END, msgcontent, 'green')
