@@ -14,7 +14,7 @@
 			<template>exec-brainsave()</template>
 		</category>
 		<category>
-			<pattern>*再见</pattern>
-			<template>&lt;srai&gt;BYE&lt;/srai&gt;</template>
+			<pattern>SEARCH * </pattern>
+			<template>exec-searchfor()</template>
 		</category>
 	</aiml>

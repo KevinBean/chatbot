@@ -16,6 +16,9 @@ from xml.dom import minidom
 import traceback
 import xlrd
 from wordscut import jiebacut
+import jieba # 利用jieba进行中文分词
+import nltk  # 利用nltk进行其他处理
+import re
 
 def format(file,patterns,templates):
     try:
@@ -120,6 +123,34 @@ def xls2aiml(filename,xlsname,apart,keyword):
     format(filename, patterns, templates)
     return
 
+def txt2aiml(filename):
+
+    read_file = open(filename, 'r')
+    text = read_file.read()
+    text = text.replace('  ',' ')
+    text = text.replace(' ','')
+    text = text.decode('utf-8')
+
+    # 以工程说明书为例
+    pattern = re.compile(ur'.*[k][V].*[工][程]',re.U)
+    # seg_list = jieba.cut(text, cut_all=False)
+    # print("Full Mode: " + "/ ".join(seg_list))  # 全模式
+    seg_list = jieba.lcut(text, cut_all=False) #jieba分成了词
+    tok = nltk.word_tokenize(text)  #nltk分成了句子
+
+    # 寻找工程名称，因为说明书封面都会有工程名称，因此以第一次出现的工程名称为准
+    for i in range(len(tok)):
+        if re.match(pattern,tok[i]):
+            m = re.findall(pattern, tok[i])
+            print m[0].encode('utf-8')
+            break
+        '''if u'工程' in tok[i]:
+            print tok[i]
+            break'''
+
+    # print seg_list
+    print seg_list
+    print tok
 
 
 
@@ -138,10 +169,15 @@ if __name__ == "__main__":
      # quit:exit()
      # worklog:worklog(msg) msg是调用时的输入函数
      '''
+    '''
     filename = "standard/cn-phone.aiml"
     xlsname = "doc/phone.xls"
     apart = ' * ' #分隔符
     keyword = "电话" #关键字
     xls2aiml(filename,xlsname,apart,keyword)
+    '''
+
+    filename = u'doc/SL351C-A11-01.txt'
+    txt2aiml(filename)
 
 

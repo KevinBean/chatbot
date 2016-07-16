@@ -20,10 +20,17 @@ from ScrolledText import ScrolledText #文本区加滑动条
 
 from worklog import *
 
+def read_msg():
+    '''
+    获取输入框信息msg
+    :return: raw_msg
+    '''
+    return text_msg.get().encode('utf-8')  # 获取输入框信息
+
 def worklog():
     filename = 'doc/worklog.xlsx'
     sheetname = u'工作记录单'
-    raw_msg = read_msg()
+    raw_msg = read_msg() #读取输入信息
     # msg = jiebacut(raw_msg)
     print raw_msg,type(raw_msg)
     writelog(filename,sheetname,raw_msg)
@@ -34,13 +41,13 @@ def worklog():
 def brainsave():
     kernel.saveBrain("bot_brain.brn")
 
+def searchfor():
+    raw_msg = read_msg()  # 读取输入信息
+    msg = str(raw_msg.encode('utf-8'))  # 特殊处理。将unicode统一处理成字符串
+    msg = msg.replace('SEARCH','')
 
-def read_msg():
-    '''
-    获取输入框信息msg
-    :return: raw_msg
-    '''
-    return text_msg.get().encode('utf-8')  # 获取输入框信息
+
+
 
 #发送按钮事件
 def sendmessage():
