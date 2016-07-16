@@ -12,7 +12,7 @@ root.mainloop()  %进入窗体的主循环
 
 import aiml
 from wordscut import jiebacut
-from translate import Translator
+# from translate import Translator #利用翻译模块转换中英文
 from Tkinter import *
 import datetime
 import time
