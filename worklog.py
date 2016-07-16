@@ -100,4 +100,5 @@ def changeencode(data,cols):
 if __name__ == "__main__":
     filename = 'doc/worklog.xlsx'
     sheetname = u'工作记录单'
+    print type(sheetname),type(filename)
     writelog(filename,sheetname,u'＊＊输变电工程，电话沟通，需要修改站址。')

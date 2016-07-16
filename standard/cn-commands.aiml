@@ -3,15 +3,15 @@
 		<meta author="KevinBean" language="zh"/>
 		<category>
 			<pattern>QUIT</pattern>
-			<template>execexit()</template>
+			<template>exec-exit()</template>
 		</category>
 		<category>
 			<pattern>WORKLOG * </pattern>
-			<template>execworklog()</template>
+			<template>exec-worklog()</template>
 		</category>
 		<category>
-			<pattern>再见*</pattern>
-			<template>&lt;srai&gt;BYE&lt;/srai&gt;</template>
+			<pattern>SAVE</pattern>
+			<template>exec-brainsave()</template>
 		</category>
 		<category>
 			<pattern>*再见</pattern>

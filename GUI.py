@@ -24,10 +24,15 @@ def worklog():
     filename = 'doc/worklog.xlsx'
     sheetname = u'工作记录单'
     raw_msg = read_msg()
+    # msg = jiebacut(raw_msg)
+    print raw_msg,type(raw_msg)
     writelog(filename,sheetname,raw_msg)
     msgcontent = unicode('Robot:', 'utf-8') + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '\n '
     text_msglist.insert(END, msgcontent, 'green')
     text_msglist.insert(END, '已执行记录操作' + '\n')
+
+def brainsave():
+    kernel.saveBrain("bot_brain.brn")
 
 
 def read_msg():
@@ -38,7 +43,7 @@ def read_msg():
     return text_msg.get().encode('utf-8')  # 获取输入框信息
 
 #发送按钮事件
-def sendmessage(k):
+def sendmessage():
     '''
     :param k: aiml处理核心参数kernel
     :return:
@@ -76,9 +81,9 @@ def sendmessage(k):
             text_msglist.yview(END)  # 文本区滚动条自动下滑
             text_msg.delete(0, END)
             '''
-    bot_response = k.respond(msg)  # bot_response() 信息回复
-    if 'exec' in bot_response:
-        exec (bot_response.replace('exec', ''))
+    bot_response = kernel.respond(msg)  # bot_response() 信息回复
+    if 'exec-' in bot_response:
+        exec (bot_response.replace('exec-', ''))
         text_msglist.yview(END)  # 文本区滚动条自动下滑
         text_msg.delete(0, END)  # 清除信息发送框，因为下面处理中有些函数要调用信息发送框中内容，因此放在处理函数之后再清除
     elif bot_response:
@@ -93,6 +98,7 @@ def sendmessage(k):
 
 if __name__ == "__main__":
     # 创建Kernel()和 AIML 学习文件
+    global kernel #kernel左权全局变量，方便调用
     kernel = aiml.Kernel()
     kernel.learn("std-startup.xml")
     kernel.respond("load aiml b")
@@ -116,7 +122,7 @@ if __name__ == "__main__":
     select_lable =Label(frame_center_bottom,text='请选择')
     text_select = Listbox(frame_center_bottom,width=20,height = 2)
     button_lable = Label(frame_right_bottom,text='按我')
-    button_sendmsg = Button(frame_right_bottom, text=unicode('发送', 'utf-8'), command=lambda:sendmessage(k = kernel))
+    button_sendmsg = Button(frame_right_bottom, text=unicode('发送', 'utf-8'), command=sendmessage)
     # 不显示的标签
     text_respond = Label(frame_top)
 
