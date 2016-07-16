@@ -19,6 +19,7 @@ from wordscut import jiebacut
 import jieba # 利用jieba进行中文分词
 import nltk  # 利用nltk进行其他处理
 import re
+import pandas
 
 def format(file,patterns,templates):
     try:
@@ -100,22 +101,27 @@ def xls2aiml(filename,xlsname,apart,keyword):
                 template = str(int(template))
 
             pattern = basepattern + apart + keyword # 模式1
+            pattern = pattern.replace('  ',' ').replace('* *','*')
             patterns = patterns + [pattern]
             templates = templates + [template]
 
             pattern = keyword + apart + basepattern # 模式2
+            pattern = pattern.replace('  ', ' ').replace('* *', '*')
             patterns = patterns + [pattern]
             templates = templates + [template]
 
             pattern = basepattern + ' ' + keyword       # 模式3
+            pattern = pattern.replace('  ', ' ').replace('* *', '*')
             patterns = patterns + [pattern]
             templates = templates + [template]
 
             pattern = keyword + ' ' + basepattern      # 模式4
+            pattern = pattern.replace('  ', ' ').replace('* *', '*')
             patterns = patterns + [pattern]
             templates = templates + [template]
 
             pattern = basepattern      # 模式5
+            pattern = pattern.replace('  ', ' ').replace('* *', '*')
             patterns = patterns + [pattern]
             templates = templates + [template]
 
@@ -123,30 +129,111 @@ def xls2aiml(filename,xlsname,apart,keyword):
     format(filename, patterns, templates)
     return
 
-def txt2aiml(filename):
+def txt2aiml(txtname):
+    '''
+    从txt文件中寻找有用信息，存入xls，再调用xls2aiml转换为aiml
+    经测，能解决1/3的问题，目前有以下不足：
+    1。只能匹配一句回答，而且不一定是最准确的那一句；
+    2。必须提前人工提取关键词去对文件建立aiml；
+    3。匹配的模式变种还不够，会漏掉一些情况，需要改进xls2aiml
+    :param txtname: txt文件名
+    :return: 无
+    '''
 
-    read_file = open(filename, 'r')
+    read_file = open(txtname, 'r')
     text = read_file.read()
     text = text.replace('  ',' ')
     text = text.replace(' ','')
     text = text.decode('utf-8')
 
+
     # 以工程说明书为例
-    pattern = re.compile(ur'.*[k][V].*[工][程]',re.U)
+    project = re.compile(ur'.*[k][V].*[工][程]',re.U)
     # seg_list = jieba.cut(text, cut_all=False)
     # print("Full Mode: " + "/ ".join(seg_list))  # 全模式
     seg_list = jieba.lcut(text, cut_all=False) #jieba分成了词
     tok = nltk.word_tokenize(text)  #nltk分成了句子
 
+    keyword = ''
     # 寻找工程名称，因为说明书封面都会有工程名称，因此以第一次出现的工程名称为准
     for i in range(len(tok)):
-        if re.match(pattern,tok[i]):
-            m = re.findall(pattern, tok[i])
-            print m[0].encode('utf-8')
+        if re.match(project,tok[i]):
+            m = re.findall(project, tok[i])
+            keyword = m[0]
+            keyword = keyword[:2].encode('utf-8')
+            print keyword
             break
+
+
         '''if u'工程' in tok[i]:
             print tok[i]
             break'''
+    '''
+    # xlwt中文编码有问题  UnicodeDecodeError: 'ascii' codec can't decode byte 0xe7 in position 0: ordinal not in range(128)
+    workbook = xlwt.Workbook()
+    sheetname = 'aiml'
+    sheet = workbook.add_sheet(sheetname)
+
+    # 寻找信息"位于"，"电缆长度"，"终端塔" 找到信息后，写入xls的行
+    locate = re.compile(ur'.*[位][于].*',re.U)
+    cablelengh = re.compile(ur'.*[电][缆].*［长][度].*',re.U)
+    tower = re.compile(ur'.*[终][端][塔].*',re.U)
+    j = 0
+    for i in range(len(tok)):
+        if re.match(locate,tok[i]):
+            m = re.findall(locate, tok[i])
+            sheet.write(j,0,u"位于")
+            sheet.write(j,1,m[0].encode('utf-8'))
+            j = j+1
+        elif re.match(cablelengh,tok[i]):
+            m = re.findall(cablelengh, tok[i])
+            sheet.write(j,0,u"电缆 * 长度")
+            sheet.write(j,1,m[0].encode('utf-8'))
+            j = j + 1
+        elif re.match(tower,tok[i]):
+            m = re.findall(tower, tok[i])
+            sheet.write(j,0,u"终端塔")
+            sheet.write(j,1,m[0].encode('utf-8'))
+            j = j + 1
+    # print sheet.cell_value(2,1)
+    xlsname = txtname.replace('txt','xls').encode('utf-8')# 保存成xls文件，便于xls2aiml函数调用
+    workbook.save(xlsname)
+
+    '''
+
+    locate = re.compile(ur'.*[位][于].*', re.U)
+    cablelengh = re.compile(ur'.*[电][缆].*［长][度].*', re.U)
+    tower = re.compile(ur'.*[终][端][塔].*', re.U)
+
+    locatesheet = '无信息'
+    cablelenghsheet = '无信息'
+    towersheet = '无信息'
+    for i in range(len(tok)):
+        if re.match(locate, tok[i]):
+            m = re.findall(locate, tok[i])
+            locatesheet = m[0]
+        elif re.match(cablelengh, tok[i]):
+            m = re.findall(cablelengh, tok[i])
+            cablelenghsheet = m[0]
+        elif re.match(tower, tok[i]):
+            m = re.findall(tower, tok[i])
+            towersheet = m[0]
+    sheet = [locatesheet,cablelenghsheet,towersheet]
+    print sheet
+
+    '''fdict = dict(sheet)
+    print fdict
+    sheet = pandas.DataFrame(fdict,index=[0])'''
+    pd = pandas.DataFrame(sheet,index=[u" * 位于 * ",u" * 电缆 * 长度 * ",u" * 终端塔 * "])
+
+    xlsname = txtname.replace('txt', 'xls') # 保存成xls文件，便于xls2aiml函数调用
+    sheetname = 'aiml'
+    pd.to_excel(xlsname, sheetname, engine='openpyxl')  # engine改为'openpyxl'即可写入unicode
+    # ew.save()  #需要用变量代替
+
+    filename = txtname.replace('txt', 'aiml').replace('doc/','standard/cn-')  # 保存成aiml文件，便于aiml函数调用
+    apart = ''  # 分隔符
+    xls2aiml(filename,xlsname,apart,' * ' + keyword + ' * ')
 
     # print seg_list
     print seg_list
