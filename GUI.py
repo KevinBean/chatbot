@@ -20,11 +20,32 @@ from ScrolledText import ScrolledText #文本区加滑动条
 
 from worklog import *
 
+def worklog():
+    filename = 'doc/worklog.xlsx'
+    sheetname = u'工作记录单'
+    raw_msg = read_msg()
+    writelog(filename,sheetname,raw_msg)
+    msgcontent = unicode('Robot:', 'utf-8') + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '\n '
+    text_msglist.insert(END, msgcontent, 'green')
+    text_msglist.insert(END, '已执行记录操作' + '\n')
+
+
+def read_msg():
+    '''
+    获取输入框信息msg
+    :return: raw_msg
+    '''
+    return text_msg.get().encode('utf-8')  # 获取输入框信息
+
 #发送按钮事件
 def sendmessage(k):
-    raw_msg = text_msg.get().encode('utf-8') # 获取输入框信息
+    '''
+    :param k: aiml处理核心参数kernel
+    :return:
+    '''
 
-    msg = jiebacut(raw_msg) #分词后用空格分隔，进行匹配
+    raw_msg = read_msg()
+    msg = jiebacut(raw_msg)
     print msg
 
     #在聊天内容上方加一行 显示发送人及发送时间
@@ -32,12 +53,14 @@ def sendmessage(k):
         msgcontent = unicode('我:', 'utf-8') + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '\n '
         text_msglist.insert(END, msgcontent, 'green')
         text_msglist.insert(END, raw_msg + '\n')
-        text_msg.delete(0, END)
+        text_msglist.yview(END)  # 文本区滚动条自动下滑
+        # text_msg.delete(0, END) # 清除信息发送框，因为下面处理中有些函数要调用信息发送框中内容，因此放在处理函数之后再清除
     else:
         pass
+
     # msg=>可执行＼无参数的函数调用语句bot_response，如'quit'=>'execexit()'，可以简化这里的ifelse语句，但相应的增加了commands.aiml
     # 文件的维护量 可以用exec(bot_response.replace('exec',''))来执行调用
-    if msg == "quit":
+    '''if msg == "quit":
         exit()
     elif msg == "save":
         k.saveBrain("bot_brain.brn")
@@ -52,6 +75,21 @@ def sendmessage(k):
             text_msglist.insert(END, bot_response + '\n')
             text_msglist.yview(END)  # 文本区滚动条自动下滑
             text_msg.delete(0, END)
+            '''
+    bot_response = k.respond(msg)  # bot_response() 信息回复
+    if 'exec' in bot_response:
+        exec (bot_response.replace('exec', ''))
+        text_msglist.yview(END)  # 文本区滚动条自动下滑
+        text_msg.delete(0, END)  # 清除信息发送框，因为下面处理中有些函数要调用信息发送框中内容，因此放在处理函数之后再清除
+    elif bot_response:
+        msgcontent = unicode('Robot:', 'utf-8') + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '\n '
+        text_msglist.insert(END, msgcontent, 'green')
+        text_msglist.insert(END, bot_response + '\n')
+        text_msglist.yview(END)  # 文本区滚动条自动下滑
+        text_msg.delete(0, END)
+    else:
+        pass
+    return msg
 
 if __name__ == "__main__":
     # 创建Kernel()和 AIML 学习文件

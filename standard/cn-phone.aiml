@@ -1,0 +1,1664 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<aiml version="1.0">
+		<meta author="KevinBean" language="zh"/>
+		<category>
+			<pattern>姓名 * 电话</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>电话 * 姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>姓名 电话</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>电话 姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>周彤 * 电话</pattern>
+			<template>63678501</template>
+		</category>
+		<category>
+			<pattern>电话 * 周彤</pattern>
+			<template>63678501</template>
+		</category>
+		<category>
+			<pattern>周彤 电话</pattern>
+			<template>63678501</template>
+		</category>
+		<category>
+			<pattern>电话 周彤</pattern>
+			<template>63678501</template>
+		</category>
+		<category>
+			<pattern>周彤</pattern>
+			<template>63678501</template>
+		</category>
+		<category>
+			<pattern>夏泉 * 电话</pattern>
+			<template>63678502</template>
+		</category>
+		<category>
+			<pattern>电话 * 夏泉</pattern>
+			<template>63678502</template>
+		</category>
+		<category>
+			<pattern>夏泉 电话</pattern>
+			<template>63678502</template>
+		</category>
+		<category>
+			<pattern>电话 夏泉</pattern>
+			<template>63678502</template>
+		</category>
+		<category>
+			<pattern>夏泉</pattern>
+			<template>63678502</template>
+		</category>
+		<category>
+			<pattern>张凯 * 电话</pattern>
+			<template>63678505</template>
+		</category>
+		<category>
+			<pattern>电话 * 张凯</pattern>
+			<template>63678505</template>
+		</category>
+		<category>
+			<pattern>张凯 电话</pattern>
+			<template>63678505</template>
+		</category>
+		<category>
+			<pattern>电话 张凯</pattern>
+			<template>63678505</template>
+		</category>
+		<category>
+			<pattern>张凯</pattern>
+			<template>63678505</template>
+		</category>
+		<category>
+			<pattern>韩晓鹏 * 电话</pattern>
+			<template>63678506</template>
+		</category>
+		<category>
+			<pattern>电话 * 韩晓鹏</pattern>
+			<template>63678506</template>
+		</category>
+		<category>
+			<pattern>韩晓鹏 电话</pattern>
+			<template>63678506</template>
+		</category>
+		<category>
+			<pattern>电话 韩晓鹏</pattern>
+			<template>63678506</template>
+		</category>
+		<category>
+			<pattern>韩晓鹏</pattern>
+			<template>63678506</template>
+		</category>
+		<category>
+			<pattern>赵海涛 * 电话</pattern>
+			<template>63678526</template>
+		</category>
+		<category>
+			<pattern>电话 * 赵海涛</pattern>
+			<template>63678526</template>
+		</category>
+		<category>
+			<pattern>赵海涛 电话</pattern>
+			<template>63678526</template>
+		</category>
+		<category>
+			<pattern>电话 赵海涛</pattern>
+			<template>63678526</template>
+		</category>
+		<category>
+			<pattern>赵海涛</pattern>
+			<template>63678526</template>
+		</category>
+		<category>
+			<pattern>李伟 * 电话</pattern>
+			<template>63678508</template>
+		</category>
+		<category>
+			<pattern>电话 * 李伟</pattern>
+			<template>63678508</template>
+		</category>
+		<category>
+			<pattern>李伟 电话</pattern>
+			<template>63678508</template>
+		</category>
+		<category>
+			<pattern>电话 李伟</pattern>
+			<template>63678508</template>
+		</category>
+		<category>
+			<pattern>李伟</pattern>
+			<template>63678508</template>
+		</category>
+		<category>
+			<pattern>姓名 * 电话</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>电话 * 姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>姓名 电话</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>电话 姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>王伟勇 * 电话</pattern>
+			<template>63678513</template>
+		</category>
+		<category>
+			<pattern>电话 * 王伟勇</pattern>
+			<template>63678513</template>
+		</category>
+		<category>
+			<pattern>王伟勇 电话</pattern>
+			<template>63678513</template>
+		</category>
+		<category>
+			<pattern>电话 王伟勇</pattern>
+			<template>63678513</template>
+		</category>
+		<category>
+			<pattern>王伟勇</pattern>
+			<template>63678513</template>
+		</category>
+		<category>
+			<pattern>郑宝恒 * 电话</pattern>
+			<template>63678516</template>
+		</category>
+		<category>
+			<pattern>电话 * 郑宝恒</pattern>
+			<template>63678516</template>
+		</category>
+		<category>
+			<pattern>郑宝恒 电话</pattern>
+			<template>63678516</template>
+		</category>
+		<category>
+			<pattern>电话 郑宝恒</pattern>
+			<template>63678516</template>
+		</category>
+		<category>
+			<pattern>郑宝恒</pattern>
+			<template>63678516</template>
+		</category>
+		<category>
+			<pattern>张健 * 电话</pattern>
+			<template>63678515</template>
+		</category>
+		<category>
+			<pattern>电话 * 张健</pattern>
+			<template>63678515</template>
+		</category>
+		<category>
+			<pattern>张健 电话</pattern>
+			<template>63678515</template>
+		</category>
+		<category>
+			<pattern>电话 张健</pattern>
+			<template>63678515</template>
+		</category>
+		<category>
+			<pattern>张健</pattern>
+			<template>63678515</template>
+		</category>
+		<category>
+			<pattern>兰立娟 * 电话</pattern>
+			<template>63678549</template>
+		</category>
+		<category>
+			<pattern>电话 * 兰立娟</pattern>
+			<template>63678549</template>
+		</category>
+		<category>
+			<pattern>兰立娟 电话</pattern>
+			<template>63678549</template>
+		</category>
+		<category>
+			<pattern>电话 兰立娟</pattern>
+			<template>63678549</template>
+		</category>
+		<category>
+			<pattern>兰立娟</pattern>
+			<template>63678549</template>
+		</category>
+		<category>
+			<pattern>陈怡帆 * 电话</pattern>
+			<template>63678547</template>
+		</category>
+		<category>
+			<pattern>电话 * 陈怡帆</pattern>
+			<template>63678547</template>
+		</category>
+		<category>
+			<pattern>陈怡帆 电话</pattern>
+			<template>63678547</template>
+		</category>
+		<category>
+			<pattern>电话 陈怡帆</pattern>
+			<template>63678547</template>
+		</category>
+		<category>
+			<pattern>陈怡帆</pattern>
+			<template>63678547</template>
+		</category>
+		<category>
+			<pattern>赵悦 * 电话</pattern>
+			<template>63678738</template>
+		</category>
+		<category>
+			<pattern>电话 * 赵悦</pattern>
+			<template>63678738</template>
+		</category>
+		<category>
+			<pattern>赵悦 电话</pattern>
+			<template>63678738</template>
+		</category>
+		<category>
+			<pattern>电话 赵悦</pattern>
+			<template>63678738</template>
+		</category>
+		<category>
+			<pattern>赵悦</pattern>
+			<template>63678738</template>
+		</category>
+		<category>
+			<pattern>李俊 * 电话</pattern>
+			<template>63678541</template>
+		</category>
+		<category>
+			<pattern>电话 * 李俊</pattern>
+			<template>63678541</template>
+		</category>
+		<category>
+			<pattern>李俊 电话</pattern>
+			<template>63678541</template>
+		</category>
+		<category>
+			<pattern>电话 李俊</pattern>
+			<template>63678541</template>
+		</category>
+		<category>
+			<pattern>李俊</pattern>
+			<template>63678541</template>
+		</category>
+		<category>
+			<pattern>杨磊 * 电话</pattern>
+			<template>63678722</template>
+		</category>
+		<category>
+			<pattern>电话 * 杨磊</pattern>
+			<template>63678722</template>
+		</category>
+		<category>
+			<pattern>杨磊 电话</pattern>
+			<template>63678722</template>
+		</category>
+		<category>
+			<pattern>电话 杨磊</pattern>
+			<template>63678722</template>
+		</category>
+		<category>
+			<pattern>杨磊</pattern>
+			<template>63678722</template>
+		</category>
+		<category>
+			<pattern>传真 * 电话</pattern>
+			<template>63371500</template>
+		</category>
+		<category>
+			<pattern>电话 * 传真</pattern>
+			<template>63371500</template>
+		</category>
+		<category>
+			<pattern>传真 电话</pattern>
+			<template>63371500</template>
+		</category>
+		<category>
+			<pattern>电话 传真</pattern>
+			<template>63371500</template>
+		</category>
+		<category>
+			<pattern>传真</pattern>
+			<template>63371500</template>
+		</category>
+		<category>
+			<pattern>服务 热线 * 电话</pattern>
+			<template>63678888</template>
+		</category>
+		<category>
+			<pattern>电话 * 服务 热线</pattern>
+			<template>63678888</template>
+		</category>
+		<category>
+			<pattern>服务 热线 电话</pattern>
+			<template>63678888</template>
+		</category>
+		<category>
+			<pattern>电话 服务 热线</pattern>
+			<template>63678888</template>
+		</category>
+		<category>
+			<pattern>服务 热线</pattern>
+			<template>63678888</template>
+		</category>
+		<category>
+			<pattern>刘淑萍 * 电话</pattern>
+			<template>63678548</template>
+		</category>
+		<category>
+			<pattern>电话 * 刘淑萍</pattern>
+			<template>63678548</template>
+		</category>
+		<category>
+			<pattern>刘淑萍 电话</pattern>
+			<template>63678548</template>
+		</category>
+		<category>
+			<pattern>电话 刘淑萍</pattern>
+			<template>63678548</template>
+		</category>
+		<category>
+			<pattern>刘淑萍</pattern>
+			<template>63678548</template>
+		</category>
+		<category>
+			<pattern>姜伟伟 * 电话</pattern>
+			<template>63678933</template>
+		</category>
+		<category>
+			<pattern>电话 * 姜伟伟</pattern>
+			<template>63678933</template>
+		</category>
+		<category>
+			<pattern>姜伟伟 电话</pattern>
+			<template>63678933</template>
+		</category>
+		<category>
+			<pattern>电话 姜伟伟</pattern>
+			<template>63678933</template>
+		</category>
+		<category>
+			<pattern>姜伟伟</pattern>
+			<template>63678933</template>
+		</category>
+		<category>
+			<pattern>陶沙 * 电话</pattern>
+			<template>63678563</template>
+		</category>
+		<category>
+			<pattern>电话 * 陶沙</pattern>
+			<template>63678563</template>
+		</category>
+		<category>
+			<pattern>陶沙 电话</pattern>
+			<template>63678563</template>
+		</category>
+		<category>
+			<pattern>电话 陶沙</pattern>
+			<template>63678563</template>
+		</category>
+		<category>
+			<pattern>陶沙</pattern>
+			<template>63678563</template>
+		</category>
+		<category>
+			<pattern>吴钢 * 电话</pattern>
+			<template>63678566</template>
+		</category>
+		<category>
+			<pattern>电话 * 吴钢</pattern>
+			<template>63678566</template>
+		</category>
+		<category>
+			<pattern>吴钢 电话</pattern>
+			<template>63678566</template>
+		</category>
+		<category>
+			<pattern>电话 吴钢</pattern>
+			<template>63678566</template>
+		</category>
+		<category>
+			<pattern>吴钢</pattern>
+			<template>63678566</template>
+		</category>
+		<category>
+			<pattern>张扬 * 电话</pattern>
+			<template>63678577</template>
+		</category>
+		<category>
+			<pattern>电话 * 张扬</pattern>
+			<template>63678577</template>
+		</category>
+		<category>
+			<pattern>张扬 电话</pattern>
+			<template>63678577</template>
+		</category>
+		<category>
+			<pattern>电话 张扬</pattern>
+			<template>63678577</template>
+		</category>
+		<category>
+			<pattern>张扬</pattern>
+			<template>63678577</template>
+		</category>
+		<category>
+			<pattern>庞霞 * 电话</pattern>
+			<template>63678565</template>
+		</category>
+		<category>
+			<pattern>电话 * 庞霞</pattern>
+			<template>63678565</template>
+		</category>
+		<category>
+			<pattern>庞霞 电话</pattern>
+			<template>63678565</template>
+		</category>
+		<category>
+			<pattern>电话 庞霞</pattern>
+			<template>63678565</template>
+		</category>
+		<category>
+			<pattern>庞霞</pattern>
+			<template>63678565</template>
+		</category>
+		<category>
+			<pattern>张辉 * 电话</pattern>
+			<template>63678586</template>
+		</category>
+		<category>
+			<pattern>电话 * 张辉</pattern>
+			<template>63678586</template>
+		</category>
+		<category>
+			<pattern>张辉 电话</pattern>
+			<template>63678586</template>
+		</category>
+		<category>
+			<pattern>电话 张辉</pattern>
+			<template>63678586</template>
+		</category>
+		<category>
+			<pattern>张辉</pattern>
+			<template>63678586</template>
+		</category>
+		<category>
+			<pattern>李婷 * 电话</pattern>
+			<template>63678567</template>
+		</category>
+		<category>
+			<pattern>电话 * 李婷</pattern>
+			<template>63678567</template>
+		</category>
+		<category>
+			<pattern>李婷 电话</pattern>
+			<template>63678567</template>
+		</category>
+		<category>
+			<pattern>电话 李婷</pattern>
+			<template>63678567</template>
+		</category>
+		<category>
+			<pattern>李婷</pattern>
+			<template>63678567</template>
+		</category>
+		<category>
+			<pattern>杨柳 * 电话</pattern>
+			<template>63678564</template>
+		</category>
+		<category>
+			<pattern>电话 * 杨柳</pattern>
+			<template>63678564</template>
+		</category>
+		<category>
+			<pattern>杨柳 电话</pattern>
+			<template>63678564</template>
+		</category>
+		<category>
+			<pattern>电话 杨柳</pattern>
+			<template>63678564</template>
+		</category>
+		<category>
+			<pattern>杨柳</pattern>
+			<template>63678564</template>
+		</category>
+		<category>
+			<pattern>姓名 * 电话</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>电话 * 姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>姓名 电话</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>电话 姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>王勇 * 电话</pattern>
+			<template>63678561</template>
+		</category>
+		<category>
+			<pattern>电话 * 王勇</pattern>
+			<template>63678561</template>
+		</category>
+		<category>
+			<pattern>王勇 电话</pattern>
+			<template>63678561</template>
+		</category>
+		<category>
+			<pattern>电话 王勇</pattern>
+			<template>63678561</template>
+		</category>
+		<category>
+			<pattern>王勇</pattern>
+			<template>63678561</template>
+		</category>
+		<category>
+			<pattern>郝超 * 电话</pattern>
+			<template>63678638</template>
+		</category>
+		<category>
+			<pattern>电话 * 郝超</pattern>
+			<template>63678638</template>
+		</category>
+		<category>
+			<pattern>郝超 电话</pattern>
+			<template>63678638</template>
+		</category>
+		<category>
+			<pattern>电话 郝超</pattern>
+			<template>63678638</template>
+		</category>
+		<category>
+			<pattern>郝超</pattern>
+			<template>63678638</template>
+		</category>
+		<category>
+			<pattern>周鑫 * 电话</pattern>
+			<template>63678987</template>
+		</category>
+		<category>
+			<pattern>电话 * 周鑫</pattern>
+			<template>63678987</template>
+		</category>
+		<category>
+			<pattern>周鑫 电话</pattern>
+			<template>63678987</template>
+		</category>
+		<category>
+			<pattern>电话 周鑫</pattern>
+			<template>63678987</template>
+		</category>
+		<category>
+			<pattern>周鑫</pattern>
+			<template>63678987</template>
+		</category>
+		<category>
+			<pattern>张敏 * 电话</pattern>
+			<template>63678517</template>
+		</category>
+		<category>
+			<pattern>电话 * 张敏</pattern>
+			<template>63678517</template>
+		</category>
+		<category>
+			<pattern>张敏 电话</pattern>
+			<template>63678517</template>
+		</category>
+		<category>
+			<pattern>电话 张敏</pattern>
+			<template>63678517</template>
+		</category>
+		<category>
+			<pattern>张敏</pattern>
+			<template>63678517</template>
+		</category>
+		<category>
+			<pattern>王巾 * 电话</pattern>
+			<template>63678769</template>
+		</category>
+		<category>
+			<pattern>电话 * 王巾</pattern>
+			<template>63678769</template>
+		</category>
+		<category>
+			<pattern>王巾 电话</pattern>
+			<template>63678769</template>
+		</category>
+		<category>
+			<pattern>电话 王巾</pattern>
+			<template>63678769</template>
+		</category>
+		<category>
+			<pattern>王巾</pattern>
+			<template>63678769</template>
+		</category>
+		<category>
+			<pattern>孙嘉 * 电话</pattern>
+			<template>63678984</template>
+		</category>
+		<category>
+			<pattern>电话 * 孙嘉</pattern>
+			<template>63678984</template>
+		</category>
+		<category>
+			<pattern>孙嘉 电话</pattern>
+			<template>63678984</template>
+		</category>
+		<category>
+			<pattern>电话 孙嘉</pattern>
+			<template>63678984</template>
+		</category>
+		<category>
+			<pattern>孙嘉</pattern>
+			<template>63678984</template>
+		</category>
+		<category>
+			<pattern>姓名 * 电话</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>电话 * 姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>姓名 电话</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>电话 姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>黄奕 * 电话</pattern>
+			<template>63678518</template>
+		</category>
+		<category>
+			<pattern>电话 * 黄奕</pattern>
+			<template>63678518</template>
+		</category>
+		<category>
+			<pattern>黄奕 电话</pattern>
+			<template>63678518</template>
+		</category>
+		<category>
+			<pattern>电话 黄奕</pattern>
+			<template>63678518</template>
+		</category>
+		<category>
+			<pattern>黄奕</pattern>
+			<template>63678518</template>
+		</category>
+		<category>
+			<pattern>赵瑞 * 电话</pattern>
+			<template>63678521</template>
+		</category>
+		<category>
+			<pattern>电话 * 赵瑞</pattern>
+			<template>63678521</template>
+		</category>
+		<category>
+			<pattern>赵瑞 电话</pattern>
+			<template>63678521</template>
+		</category>
+		<category>
+			<pattern>电话 赵瑞</pattern>
+			<template>63678521</template>
+		</category>
+		<category>
+			<pattern>赵瑞</pattern>
+			<template>63678521</template>
+		</category>
+		<category>
+			<pattern>张杰 超 * 电话</pattern>
+			<template>63678532</template>
+		</category>
+		<category>
+			<pattern>电话 * 张杰 超</pattern>
+			<template>63678532</template>
+		</category>
+		<category>
+			<pattern>张杰 超 电话</pattern>
+			<template>63678532</template>
+		</category>
+		<category>
+			<pattern>电话 张杰 超</pattern>
+			<template>63678532</template>
+		</category>
+		<category>
+			<pattern>张杰 超</pattern>
+			<template>63678532</template>
+		</category>
+		<category>
+			<pattern>冯烨 * 电话</pattern>
+			<template>63120710</template>
+		</category>
+		<category>
+			<pattern>电话 * 冯烨</pattern>
+			<template>63120710</template>
+		</category>
+		<category>
+			<pattern>冯烨 电话</pattern>
+			<template>63120710</template>
+		</category>
+		<category>
+			<pattern>电话 冯烨</pattern>
+			<template>63120710</template>
+		</category>
+		<category>
+			<pattern>冯烨</pattern>
+			<template>63120710</template>
+		</category>
+		<category>
+			<pattern>耿春莉 * 电话</pattern>
+			<template>63678627</template>
+		</category>
+		<category>
+			<pattern>电话 * 耿春莉</pattern>
+			<template>63678627</template>
+		</category>
+		<category>
+			<pattern>耿春莉 电话</pattern>
+			<template>63678627</template>
+		</category>
+		<category>
+			<pattern>电话 耿春莉</pattern>
+			<template>63678627</template>
+		</category>
+		<category>
+			<pattern>耿春莉</pattern>
+			<template>63678627</template>
+		</category>
+		<category>
+			<pattern>田红 * 电话</pattern>
+			<template>63678520</template>
+		</category>
+		<category>
+			<pattern>电话 * 田红</pattern>
+			<template>63678520</template>
+		</category>
+		<category>
+			<pattern>田红 电话</pattern>
+			<template>63678520</template>
+		</category>
+		<category>
+			<pattern>电话 田红</pattern>
+			<template>63678520</template>
+		</category>
+		<category>
+			<pattern>田红</pattern>
+			<template>63678520</template>
+		</category>
+		<category>
+			<pattern>岳 婷婷 * 电话</pattern>
+			<template>63678553</template>
+		</category>
+		<category>
+			<pattern>电话 * 岳 婷婷</pattern>
+			<template>63678553</template>
+		</category>
+		<category>
+			<pattern>岳 婷婷 电话</pattern>
+			<template>63678553</template>
+		</category>
+		<category>
+			<pattern>电话 岳 婷婷</pattern>
+			<template>63678553</template>
+		</category>
+		<category>
+			<pattern>岳 婷婷</pattern>
+			<template>63678553</template>
+		</category>
+		<category>
+			<pattern>姓名 * 电话</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>电话 * 姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>姓名 电话</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>电话 姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>张晔 * 电话</pattern>
+			<template>63678555</template>
+		</category>
+		<category>
+			<pattern>电话 * 张晔</pattern>
+			<template>63678555</template>
+		</category>
+		<category>
+			<pattern>张晔 电话</pattern>
+			<template>63678555</template>
+		</category>
+		<category>
+			<pattern>电话 张晔</pattern>
+			<template>63678555</template>
+		</category>
+		<category>
+			<pattern>张晔</pattern>
+			<template>63678555</template>
+		</category>
+		<category>
+			<pattern>罗梓怡 * 电话</pattern>
+			<template>63678554</template>
+		</category>
+		<category>
+			<pattern>电话 * 罗梓怡</pattern>
+			<template>63678554</template>
+		</category>
+		<category>
+			<pattern>罗梓怡 电话</pattern>
+			<template>63678554</template>
+		</category>
+		<category>
+			<pattern>电话 罗梓怡</pattern>
+			<template>63678554</template>
+		</category>
+		<category>
+			<pattern>罗梓怡</pattern>
+			<template>63678554</template>
+		</category>
+		<category>
+			<pattern>郑雅琦 * 电话</pattern>
+			<template>63678552</template>
+		</category>
+		<category>
+			<pattern>电话 * 郑雅琦</pattern>
+			<template>63678552</template>
+		</category>
+		<category>
+			<pattern>郑雅琦 电话</pattern>
+			<template>63678552</template>
+		</category>
+		<category>
+			<pattern>电话 郑雅琦</pattern>
+			<template>63678552</template>
+		</category>
+		<category>
+			<pattern>郑雅琦</pattern>
+			<template>63678552</template>
+		</category>
+		<category>
+			<pattern>艾子 君 * 电话</pattern>
+			<template>63678560</template>
+		</category>
+		<category>
+			<pattern>电话 * 艾子 君</pattern>
+			<template>63678560</template>
+		</category>
+		<category>
+			<pattern>艾子 君 电话</pattern>
+			<template>63678560</template>
+		</category>
+		<category>
+			<pattern>电话 艾子 君</pattern>
+			<template>63678560</template>
+		</category>
+		<category>
+			<pattern>艾子 君</pattern>
+			<template>63678560</template>
+		</category>
+		<category>
+			<pattern>于雯溪 * 电话</pattern>
+			<template>63678550</template>
+		</category>
+		<category>
+			<pattern>电话 * 于雯溪</pattern>
+			<template>63678550</template>
+		</category>
+		<category>
+			<pattern>于雯溪 电话</pattern>
+			<template>63678550</template>
+		</category>
+		<category>
+			<pattern>电话 于雯溪</pattern>
+			<template>63678550</template>
+		</category>
+		<category>
+			<pattern>于雯溪</pattern>
+			<template>63678550</template>
+		</category>
+		<category>
+			<pattern>王浩楠 * 电话</pattern>
+			<template>63120714</template>
+		</category>
+		<category>
+			<pattern>电话 * 王浩楠</pattern>
+			<template>63120714</template>
+		</category>
+		<category>
+			<pattern>王浩楠 电话</pattern>
+			<template>63120714</template>
+		</category>
+		<category>
+			<pattern>电话 王浩楠</pattern>
+			<template>63120714</template>
+		</category>
+		<category>
+			<pattern>王浩楠</pattern>
+			<template>63120714</template>
+		</category>
+		<category>
+			<pattern>姓名 * 电话</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>电话 * 姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>姓名 电话</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>电话 姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>王 友军 * 电话</pattern>
+			<template>63678690</template>
+		</category>
+		<category>
+			<pattern>电话 * 王 友军</pattern>
+			<template>63678690</template>
+		</category>
+		<category>
+			<pattern>王 友军 电话</pattern>
+			<template>63678690</template>
+		</category>
+		<category>
+			<pattern>电话 王 友军</pattern>
+			<template>63678690</template>
+		</category>
+		<category>
+			<pattern>王 友军</pattern>
+			<template>63678690</template>
+		</category>
+		<category>
+			<pattern>郭自平 * 电话</pattern>
+			<template>63678535</template>
+		</category>
+		<category>
+			<pattern>电话 * 郭自平</pattern>
+			<template>63678535</template>
+		</category>
+		<category>
+			<pattern>郭自平 电话</pattern>
+			<template>63678535</template>
+		</category>
+		<category>
+			<pattern>电话 郭自平</pattern>
+			<template>63678535</template>
+		</category>
+		<category>
+			<pattern>郭自平</pattern>
+			<template>63678535</template>
+		</category>
+		<category>
+			<pattern>徐汀 * 电话</pattern>
+			<template>63678527</template>
+		</category>
+		<category>
+			<pattern>电话 * 徐汀</pattern>
+			<template>63678527</template>
+		</category>
+		<category>
+			<pattern>徐汀 电话</pattern>
+			<template>63678527</template>
+		</category>
+		<category>
+			<pattern>电话 徐汀</pattern>
+			<template>63678527</template>
+		</category>
+		<category>
+			<pattern>徐汀</pattern>
+			<template>63678527</template>
+		</category>
+		<category>
+			<pattern>陈卓 * 电话</pattern>
+			<template>63678693</template>
+		</category>
+		<category>
+			<pattern>电话 * 陈卓</pattern>
+			<template>63678693</template>
+		</category>
+		<category>
+			<pattern>陈卓 电话</pattern>
+			<template>63678693</template>
+		</category>
+		<category>
+			<pattern>电话 陈卓</pattern>
+			<template>63678693</template>
+		</category>
+		<category>
+			<pattern>陈卓</pattern>
+			<template>63678693</template>
+		</category>
+		<category>
+			<pattern>王 兴华 * 电话</pattern>
+			<template>63678537</template>
+		</category>
+		<category>
+			<pattern>电话 * 王 兴华</pattern>
+			<template>63678537</template>
+		</category>
+		<category>
+			<pattern>王 兴华 电话</pattern>
+			<template>63678537</template>
+		</category>
+		<category>
+			<pattern>电话 王 兴华</pattern>
+			<template>63678537</template>
+		</category>
+		<category>
+			<pattern>王 兴华</pattern>
+			<template>63678537</template>
+		</category>
+		<category>
+			<pattern>赵 经纬 * 电话</pattern>
+			<template>63678524</template>
+		</category>
+		<category>
+			<pattern>电话 * 赵 经纬</pattern>
+			<template>63678524</template>
+		</category>
+		<category>
+			<pattern>赵 经纬 电话</pattern>
+			<template>63678524</template>
+		</category>
+		<category>
+			<pattern>电话 赵 经纬</pattern>
+			<template>63678524</template>
+		</category>
+		<category>
+			<pattern>赵 经纬</pattern>
+			<template>63678524</template>
+		</category>
+		<category>
+			<pattern>韩旭 * 电话</pattern>
+			<template>63678559</template>
+		</category>
+		<category>
+			<pattern>电话 * 韩旭</pattern>
+			<template>63678559</template>
+		</category>
+		<category>
+			<pattern>韩旭 电话</pattern>
+			<template>63678559</template>
+		</category>
+		<category>
+			<pattern>电话 韩旭</pattern>
+			<template>63678559</template>
+		</category>
+		<category>
+			<pattern>韩旭</pattern>
+			<template>63678559</template>
+		</category>
+		<category>
+			<pattern>潘敏燕 * 电话</pattern>
+			<template>63678530</template>
+		</category>
+		<category>
+			<pattern>电话 * 潘敏燕</pattern>
+			<template>63678530</template>
+		</category>
+		<category>
+			<pattern>潘敏燕 电话</pattern>
+			<template>63678530</template>
+		</category>
+		<category>
+			<pattern>电话 潘敏燕</pattern>
+			<template>63678530</template>
+		</category>
+		<category>
+			<pattern>潘敏燕</pattern>
+			<template>63678530</template>
+		</category>
+		<category>
+			<pattern>周苗 * 电话</pattern>
+			<template>63678533</template>
+		</category>
+		<category>
+			<pattern>电话 * 周苗</pattern>
+			<template>63678533</template>
+		</category>
+		<category>
+			<pattern>周苗 电话</pattern>
+			<template>63678533</template>
+		</category>
+		<category>
+			<pattern>电话 周苗</pattern>
+			<template>63678533</template>
+		</category>
+		<category>
+			<pattern>周苗</pattern>
+			<template>63678533</template>
+		</category>
+		<category>
+			<pattern>王少莉 * 电话</pattern>
+			<template>63678528</template>
+		</category>
+		<category>
+			<pattern>电话 * 王少莉</pattern>
+			<template>63678528</template>
+		</category>
+		<category>
+			<pattern>王少莉 电话</pattern>
+			<template>63678528</template>
+		</category>
+		<category>
+			<pattern>电话 王少莉</pattern>
+			<template>63678528</template>
+		</category>
+		<category>
+			<pattern>王少莉</pattern>
+			<template>63678528</template>
+		</category>
+		<category>
+			<pattern>吴迪 * 电话</pattern>
+			<template>63678683</template>
+		</category>
+		<category>
+			<pattern>电话 * 吴迪</pattern>
+			<template>63678683</template>
+		</category>
+		<category>
+			<pattern>吴迪 电话</pattern>
+			<template>63678683</template>
+		</category>
+		<category>
+			<pattern>电话 吴迪</pattern>
+			<template>63678683</template>
+		</category>
+		<category>
+			<pattern>吴迪</pattern>
+			<template>63678683</template>
+		</category>
+		<category>
+			<pattern>传真 * 电话</pattern>
+			<template>63678530</template>
+		</category>
+		<category>
+			<pattern>电话 * 传真</pattern>
+			<template>63678530</template>
+		</category>
+		<category>
+			<pattern>传真 电话</pattern>
+			<template>63678530</template>
+		</category>
+		<category>
+			<pattern>电话 传真</pattern>
+			<template>63678530</template>
+		</category>
+		<category>
+			<pattern>传真</pattern>
+			<template>63678530</template>
+		</category>
+		<category>
+			<pattern>刘波 * 电话</pattern>
+			<template>63678571</template>
+		</category>
+		<category>
+			<pattern>电话 * 刘波</pattern>
+			<template>63678571</template>
+		</category>
+		<category>
+			<pattern>刘波 电话</pattern>
+			<template>63678571</template>
+		</category>
+		<category>
+			<pattern>电话 刘波</pattern>
+			<template>63678571</template>
+		</category>
+		<category>
+			<pattern>刘波</pattern>
+			<template>63678571</template>
+		</category>
+		<category>
+			<pattern>李秦 * 电话</pattern>
+			<template>63678572</template>
+		</category>
+		<category>
+			<pattern>电话 * 李秦</pattern>
+			<template>63678572</template>
+		</category>
+		<category>
+			<pattern>李秦 电话</pattern>
+			<template>63678572</template>
+		</category>
+		<category>
+			<pattern>电话 李秦</pattern>
+			<template>63678572</template>
+		</category>
+		<category>
+			<pattern>李秦</pattern>
+			<template>63678572</template>
+		</category>
+		<category>
+			<pattern>王智 * 电话</pattern>
+			<template>63678570</template>
+		</category>
+		<category>
+			<pattern>电话 * 王智</pattern>
+			<template>63678570</template>
+		</category>
+		<category>
+			<pattern>王智 电话</pattern>
+			<template>63678570</template>
+		</category>
+		<category>
+			<pattern>电话 王智</pattern>
+			<template>63678570</template>
+		</category>
+		<category>
+			<pattern>王智</pattern>
+			<template>63678570</template>
+		</category>
+		<category>
+			<pattern>运维 * 电话</pattern>
+			<template>63678569</template>
+		</category>
+		<category>
+			<pattern>电话 * 运维</pattern>
+			<template>63678569</template>
+		</category>
+		<category>
+			<pattern>运维 电话</pattern>
+			<template>63678569</template>
+		</category>
+		<category>
+			<pattern>电话 运维</pattern>
+			<template>63678569</template>
+		</category>
+		<category>
+			<pattern>运维</pattern>
+			<template>63678569</template>
+		</category>
+		<category>
+			<pattern>运维 * 电话</pattern>
+			<template>63678580</template>
+		</category>
+		<category>
+			<pattern>电话 * 运维</pattern>
+			<template>63678580</template>
+		</category>
+		<category>
+			<pattern>运维 电话</pattern>
+			<template>63678580</template>
+		</category>
+		<category>
+			<pattern>电话 运维</pattern>
+			<template>63678580</template>
+		</category>
+		<category>
+			<pattern>运维</pattern>
+			<template>63678580</template>
+		</category>
+		<category>
+			<pattern>运维 * 电话</pattern>
+			<template>63678573</template>
+		</category>
+		<category>
+			<pattern>电话 * 运维</pattern>
+			<template>63678573</template>
+		</category>
+		<category>
+			<pattern>运维 电话</pattern>
+			<template>63678573</template>
+		</category>
+		<category>
+			<pattern>电话 运维</pattern>
+			<template>63678573</template>
+		</category>
+		<category>
+			<pattern>运维</pattern>
+			<template>63678573</template>
+		</category>
+		<category>
+			<pattern>检修 间 * 电话</pattern>
+			<template>63678678</template>
+		</category>
+		<category>
+			<pattern>电话 * 检修 间</pattern>
+			<template>63678678</template>
+		</category>
+		<category>
+			<pattern>检修 间 电话</pattern>
+			<template>63678678</template>
+		</category>
+		<category>
+			<pattern>电话 检修 间</pattern>
+			<template>63678678</template>
+		</category>
+		<category>
+			<pattern>检修 间</pattern>
+			<template>63678678</template>
+		</category>
+		<category>
+			<pattern>机房 * 电话</pattern>
+			<template>63678887</template>
+		</category>
+		<category>
+			<pattern>电话 * 机房</pattern>
+			<template>63678887</template>
+		</category>
+		<category>
+			<pattern>机房 电话</pattern>
+			<template>63678887</template>
+		</category>
+		<category>
+			<pattern>电话 机房</pattern>
+			<template>63678887</template>
+		</category>
+		<category>
+			<pattern>机房</pattern>
+			<template>63678887</template>
+		</category>
+		<category>
+			<pattern>姓名 * 电话</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>电话 * 姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>姓名 电话</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>电话 姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>姓名</pattern>
+			<template>电话</template>
+		</category>
+		<category>
+			<pattern>王玮 * 电话</pattern>
+			<template>63678978</template>
+		</category>
+		<category>
+			<pattern>电话 * 王玮</pattern>
+			<template>63678978</template>
+		</category>
+		<category>
+			<pattern>王玮 电话</pattern>
+			<template>63678978</template>
+		</category>
+		<category>
+			<pattern>电话 王玮</pattern>
+			<template>63678978</template>
+		</category>
+		<category>
+			<pattern>王玮</pattern>
+			<template>63678978</template>
+		</category>
+		<category>
+			<pattern>庞淑颖 * 电话</pattern>
+			<template>63678976</template>
+		</category>
+		<category>
+			<pattern>电话 * 庞淑颖</pattern>
+			<template>63678976</template>
+		</category>
+		<category>
+			<pattern>庞淑颖 电话</pattern>
+			<template>63678976</template>
+		</category>
+		<category>
+			<pattern>电话 庞淑颖</pattern>
+			<template>63678976</template>
+		</category>
+		<category>
+			<pattern>庞淑颖</pattern>
+			<template>63678976</template>
+		</category>
+		<category>
+			<pattern>曲友立 * 电话</pattern>
+			<template>63120758</template>
+		</category>
+		<category>
+			<pattern>电话 * 曲友立</pattern>
+			<template>63120758</template>
+		</category>
+		<category>
+			<pattern>曲友立 电话</pattern>
+			<template>63120758</template>
+		</category>
+		<category>
+			<pattern>电话 曲友立</pattern>
+			<template>63120758</template>
+		</category>
+		<category>
+			<pattern>曲友立</pattern>
+			<template>63120758</template>
+		</category>
+		<category>
+			<pattern>钟迪 * 电话</pattern>
+			<template>63678978</template>
+		</category>
+		<category>
+			<pattern>电话 * 钟迪</pattern>
+			<template>63678978</template>
+		</category>
+		<category>
+			<pattern>钟迪 电话</pattern>
+			<template>63678978</template>
+		</category>
+		<category>
+			<pattern>电话 钟迪</pattern>
+			<template>63678978</template>
+		</category>
+		<category>
+			<pattern>钟迪</pattern>
+			<template>63678978</template>
+		</category>
+		<category>
+			<pattern>王万红 * 电话</pattern>
+			<template>63678965</template>
+		</category>
+		<category>
+			<pattern>电话 * 王万红</pattern>
+			<template>63678965</template>
+		</category>
+		<category>
+			<pattern>王万红 电话</pattern>
+			<template>63678965</template>
+		</category>
+		<category>
+			<pattern>电话 王万红</pattern>
+			<template>63678965</template>
+		</category>
+		<category>
+			<pattern>王万红</pattern>
+			<template>63678965</template>
+		</category>
+		<category>
+			<pattern>李 甦 * 电话</pattern>
+			<template>63678556</template>
+		</category>
+		<category>
+			<pattern>电话 * 李 甦</pattern>
+			<template>63678556</template>
+		</category>
+		<category>
+			<pattern>李 甦 电话</pattern>
+			<template>63678556</template>
+		</category>
+		<category>
+			<pattern>电话 李 甦</pattern>
+			<template>63678556</template>
+		</category>
+		<category>
+			<pattern>李 甦</pattern>
+			<template>63678556</template>
+		</category>
+		<category>
+			<pattern>李峥 * 电话</pattern>
+			<template>63678558</template>
+		</category>
+		<category>
+			<pattern>电话 * 李峥</pattern>
+			<template>63678558</template>
+		</category>
+		<category>
+			<pattern>李峥 电话</pattern>
+			<template>63678558</template>
+		</category>
+		<category>
+			<pattern>电话 李峥</pattern>
+			<template>63678558</template>
+		</category>
+		<category>
+			<pattern>李峥</pattern>
+			<template>63678558</template>
+		</category>
+		<category>
+			<pattern>孟昭瑾 * 电话</pattern>
+			<template>63678557</template>
+		</category>
+		<category>
+			<pattern>电话 * 孟昭瑾</pattern>
+			<template>63678557</template>
+		</category>
+		<category>
+			<pattern>孟昭瑾 电话</pattern>
+			<template>63678557</template>
+		</category>
+		<category>
+			<pattern>电话 孟昭瑾</pattern>
+			<template>63678557</template>
+		</category>
+		<category>
+			<pattern>孟昭瑾</pattern>
+			<template>63678557</template>
+		</category>
+		<category>
+			<pattern>白洪波 * 电话</pattern>
+			<template>63678529</template>
+		</category>
+		<category>
+			<pattern>电话 * 白洪波</pattern>
+			<template>63678529</template>
+		</category>
+		<category>
+			<pattern>白洪波 电话</pattern>
+			<template>63678529</template>
+		</category>
+		<category>
+			<pattern>电话 白洪波</pattern>
+			<template>63678529</template>
+		</category>
+		<category>
+			<pattern>白洪波</pattern>
+			<template>63678529</template>
+		</category>
+		<category>
+			<pattern>黄淑荣 * 电话</pattern>
+			<template>63678529</template>
+		</category>
+		<category>
+			<pattern>电话 * 黄淑荣</pattern>
+			<template>63678529</template>
+		</category>
+		<category>
+			<pattern>黄淑荣 电话</pattern>
+			<template>63678529</template>
+		</category>
+		<category>
+			<pattern>电话 黄淑荣</pattern>
+			<template>63678529</template>
+		</category>
+		<category>
+			<pattern>黄淑荣</pattern>
+			<template>63678529</template>
+		</category>
+		<category>
+			<pattern>李 拥军 * 电话</pattern>
+			<template>63678575</template>
+		</category>
+		<category>
+			<pattern>电话 * 李 拥军</pattern>
+			<template>63678575</template>
+		</category>
+		<category>
+			<pattern>李 拥军 电话</pattern>
+			<template>63678575</template>
+		</category>
+		<category>
+			<pattern>电话 李 拥军</pattern>
+			<template>63678575</template>
+		</category>
+		<category>
+			<pattern>李 拥军</pattern>
+			<template>63678575</template>
+		</category>
+		<category>
+			<pattern>吴茜 * 电话</pattern>
+			<template>63678576</template>
+		</category>
+		<category>
+			<pattern>电话 * 吴茜</pattern>
+			<template>63678576</template>
+		</category>
+		<category>
+			<pattern>吴茜 电话</pattern>
+			<template>63678576</template>
+		</category>
+		<category>
+			<pattern>电话 吴茜</pattern>
+			<template>63678576</template>
+		</category>
+		<category>
+			<pattern>吴茜</pattern>
+			<template>63678576</template>
+		</category>
+	</aiml>

@@ -21,18 +21,18 @@ import pandas
 import xlrd
 import time
 
-def jointPoint():
+def jointPoint(filename,sheetname):
     # Read the file
-    xls = xlrd.open_workbook('worklog.xlsx')
-    sheet = xls.sheet_by_name(u'工作记录单')
-    print(str(sheet.cell(2,2)).decode('utf-8'),sheet.nrows)
+    xls = xlrd.open_workbook(filename) #需要用变量代替
+    sheet = xls.sheet_by_name(sheetname)   #需要用变量代替
+    print(str(sheet.cell(2,2)).decode('utf-8'),sheet.nrows)  #需要用变量代替
     # 寻找记录起始位置行，也就是第1列名称为空的位置
     # for i in range(sheet.nrows):
     #    if sheet.cell_value(i,2) == '' and sheet.cell_value(i,2) == '':
     #        row = i
     return sheet.nrows
 
-def writelog(talktoMe):
+def writelog(filename,sheetname,talktoMe):
     logTypes = ['出版/记录',
                 '工程节点/记录',
                 '其他记录',
@@ -43,8 +43,8 @@ def writelog(talktoMe):
     outofPlans = ['计划内',
                   '额外',
                   '调整变更']
-    num = jointPoint()
-    name = talktoMe[:8]
+    num = jointPoint(filename,sheetname)  # 寻找记录起始位置行，也就是第1列名称为空的位置
+    name = talktoMe[:8]   #以下需要用变量代替
     logType = logTypes[0]
     datetime = time.strftime("%Y / %m / %d %H:%M", time.localtime())
     howmanyHours = 5
@@ -71,10 +71,10 @@ def writelog(talktoMe):
     workFrame = pandas.DataFrame(worklog,index=[0])
     # 后面append开启ignore_index=True，就不用这里columns参数控制显示顺序了
     columns = [u'序号',u'名称/关键词',u'类型',u'日期/时间',u'持续时间（小时）',
-    u'折合工日（自动计算）',u'具体内容',u'后续处理情况',u'额外工作量？',u'调整变更比率',u'备注1',u'备注2']
+    u'折合工日（自动计算）',u'具体内容',u'后续处理情况',u'额外工作量？',u'调整变更比率',u'备注1',u'备注2'] #需要用变量代替
     print num
     print worklog.keys()[0],len(worklog.keys())
-    sheet = pandas.read_excel('worklog.xlsx',sheetname=u'工作记录单')
+    sheet = pandas.read_excel(filename,sheetname) #需要用变量代替
     sheet =pandas.DataFrame(sheet)
     sheethead = sheet[:num-1]
     # sheettail = sheet[num+1:]
@@ -86,8 +86,8 @@ def writelog(talktoMe):
 
     print newsheet[num-1:num+1]
     # ew = pandas.ExcelWriter('worklog.xlsx')
-    newsheet.to_excel('worklog.xlsx',sheet_name=u'工作记录单',engine='openpyxl') #engine改为'openpyxl'即可写入unicode
-    # ew.save()
+    newsheet.to_excel(filename,sheetname,engine='openpyxl') #engine改为'openpyxl'即可写入unicode
+    # ew.save()  #需要用变量代替
 
 
 
@@ -98,4 +98,6 @@ def changeencode(data,cols):
     return data
 
 if __name__ == "__main__":
-    writelog(u'＊＊输变电工程，电话沟通，需要修改站址。')
+    filename = 'doc/worklog.xlsx'
+    sheetname = u'工作记录单'
+    writelog(filename,sheetname,u'＊＊输变电工程，电话沟通，需要修改站址。')

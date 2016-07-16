@@ -2,7 +2,7 @@
 	<aiml version="1.0">
 		<meta author="KevinBean" language="zh"/>
 		<category>
-			<pattern>WENTI1</pattern>
+			<pattern>WEN*TI1</pattern>
 			<template>daan1</template>
 		</category>
 		<category>

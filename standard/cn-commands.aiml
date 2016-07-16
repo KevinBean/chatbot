@@ -6,11 +6,15 @@
 			<template>execexit()</template>
 		</category>
 		<category>
-			<pattern>WORKLOG*</pattern>
-			<template>execwritelog(msg)</template>
+			<pattern>WORKLOG * </pattern>
+			<template>execworklog()</template>
 		</category>
 		<category>
-			<pattern>再见</pattern>
+			<pattern>再见*</pattern>
+			<template>&lt;srai&gt;BYE&lt;/srai&gt;</template>
+		</category>
+		<category>
+			<pattern>*再见</pattern>
 			<template>&lt;srai&gt;BYE&lt;/srai&gt;</template>
 		</category>
 	</aiml>

@@ -59,6 +59,7 @@ xls2aiml可以将xls第1＼2列作为模式＼回答整理成aiml。并且可以
 ### worklog.py 实现将输入的文字转换为格式化的工作记录条目，并汇入excel文件
 - 使用pandas做数据条目的汇总，包括读取原excel文件，读取数据后增加新条目，再写回文件
 - newsheet.to_excel('newworklog.xlsx',engine='openpyxl') #engine改为'openpyxl'即可写入unicode
+- 函数中有些参数需要改为函数输入变量表述
 
 ### 可以通过翻译工具解决AIML对中文的处理,比如输入内容先经过翻译处理后变成英文内容,英文内容经AIML处理后输出,输出再翻译成中文显示。
 输入中文->翻译为英文->AIML处理->英文结果->翻译成中文
