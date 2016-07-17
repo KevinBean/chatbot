@@ -6,12 +6,13 @@
 备注1	备注2'
 先只实现 名称 时间 具体内容 的记录
 
-！！！！！！！放弃操作xls以及所有的office文件！！！！！！！！！！！！！
-
-不管以前的xls文件，直接从头开始创建一个csv文件，并且添加内容。
-
 pandas的to_excel，to_csv等输出函数不能处理unicode字符。好崩溃！！！！！！！！！！
+xlwt不能处理unicode字符，弃用！！！
 newsheet.to_excel('newworklog.xlsx',engine='openpyxl') #engine改为'openpyxl'即可写入unicode
+
+TODOS:
+！！！！！！！放弃操作xls以及所有的office文件！！！！！！！！！！！！！
+不管以前的xls文件，直接从头开始创建一个csv文件，并且添加内容。
 
 '''
 
@@ -33,6 +34,14 @@ def jointPoint(filename,sheetname):
     return sheet.nrows
 
 def writelog(filename,sheetname,talktoMe):
+    '''
+    使用pandas将worklog内容记录到filename文件的sheetname表单。
+    TODOS：对输入内容做信息提取处理。
+    :param filename:
+    :param sheetname:
+    :param talktoMe:
+    :return:
+    '''
     logTypes = ['出版/记录',
                 '工程节点/记录',
                 '其他记录',

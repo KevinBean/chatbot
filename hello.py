@@ -1,5 +1,5 @@
 # -*- coding: latin-1 -*-
-# 起始欢迎界面。
+# 命令行版的起始欢迎界面。
 
 import aiml
 from translate import Translator

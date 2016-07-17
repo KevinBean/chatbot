@@ -6,7 +6,7 @@ import nltk  # 利用nltk进行其他处理
 
 
 def doc2txt(filename):
-    # 从word中提取text
+    # 从word（docx格式）中提取text，保存为txt
     document = Document(filename)
     docText = '\n\n'.join([
                               paragraph.text.encode('utf-8') for paragraph in document.paragraphs
