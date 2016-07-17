@@ -105,25 +105,104 @@ def xls2aiml(filename,xlsname,apart,keyword):
             patterns = patterns + [pattern]
             templates = templates + [template]
 
+            pattern = ' * ' + basepattern + apart + keyword # 模式1
+            pattern = pattern.replace('  ',' ').replace('* *','*')
+            patterns = patterns + [pattern]
+            templates = templates + [template]
+
+            pattern = basepattern + apart + keyword + ' * '# 模式1
+            pattern = pattern.replace('  ',' ').replace('* *','*')
+            patterns = patterns + [pattern]
+            templates = templates + [template]
+
+            pattern = ' * ' + basepattern + apart + keyword + ' * '# 模式1
+            pattern = pattern.replace('  ',' ').replace('* *','*')
+            patterns = patterns + [pattern]
+            templates = templates + [template]
+
             pattern = keyword + apart + basepattern # 模式2
             pattern = pattern.replace('  ', ' ').replace('* *', '*')
             patterns = patterns + [pattern]
             templates = templates + [template]
 
-            pattern = basepattern + ' ' + keyword       # 模式3
+            pattern = ' * ' +keyword + apart + basepattern # 模式2
             pattern = pattern.replace('  ', ' ').replace('* *', '*')
             patterns = patterns + [pattern]
             templates = templates + [template]
 
-            pattern = keyword + ' ' + basepattern      # 模式4
+            pattern = keyword + apart + basepattern + ' * ' # 模式2
             pattern = pattern.replace('  ', ' ').replace('* *', '*')
             patterns = patterns + [pattern]
             templates = templates + [template]
 
-            pattern = basepattern      # 模式5
+            pattern = ' * ' +keyword + apart + basepattern + ' * ' # 模式2
             pattern = pattern.replace('  ', ' ').replace('* *', '*')
             patterns = patterns + [pattern]
             templates = templates + [template]
+
+            pattern = basepattern + ' ' + keyword      # 模式3
+            pattern = pattern.replace('  ', ' ').replace('* *', '*')
+            patterns = patterns + [pattern]
+            templates = templates + [template]
+
+            pattern = ' * ' +basepattern + ' ' + keyword       # 模式3
+            pattern = pattern.replace('  ', ' ').replace('* *', '*')
+            patterns = patterns + [pattern]
+            templates = templates + [template]
+
+            pattern = basepattern + ' ' + keyword + ' * '      # 模式3
+            pattern = pattern.replace('  ', ' ').replace('* *', '*')
+            patterns = patterns + [pattern]
+            templates = templates + [template]
+
+            pattern = ' * ' +basepattern + ' ' + keyword + ' * '      # 模式3
+            pattern = pattern.replace('  ', ' ').replace('* *', '*')
+            patterns = patterns + [pattern]
+            templates = templates + [template]
+
+            pattern = keyword + ' ' + basepattern    # 模式4
+            pattern = pattern.replace('  ', ' ').replace('* *', '*')
+            patterns = patterns + [pattern]
+            templates = templates + [template]
+
+            pattern = ' * ' +keyword + ' ' + basepattern     # 模式4
+            pattern = pattern.replace('  ', ' ').replace('* *', '*')
+            patterns = patterns + [pattern]
+            templates = templates + [template]
+
+            pattern = keyword + ' ' + basepattern + ' * '     # 模式4
+            pattern = pattern.replace('  ', ' ').replace('* *', '*')
+            patterns = patterns + [pattern]
+            templates = templates + [template]
+
+            pattern = ' * ' +keyword + ' ' + basepattern + ' * '     # 模式4
+            pattern = pattern.replace('  ', ' ').replace('* *', '*')
+            patterns = patterns + [pattern]
+            templates = templates + [template]
+
+            pattern = basepattern    # 模式5
+            pattern = pattern.replace('  ', ' ').replace('* *', '*')
+            patterns = patterns + [pattern]
+            templates = templates + [template]
+
+            pattern = ' * ' +basepattern      # 模式5
+            pattern = pattern.replace('  ', ' ').replace('* *', '*')
+            patterns = patterns + [pattern]
+            templates = templates + [template]
+
+            pattern = basepattern + ' * '     # 模式5
+            pattern = pattern.replace('  ', ' ').replace('* *', '*')
+            patterns = patterns + [pattern]
+            templates = templates + [template]
+
+            pattern = ' * ' +basepattern + ' * '     # 模式5
+            pattern = pattern.replace('  ', ' ').replace('* *', '*')
+            patterns = patterns + [pattern]
+            templates = templates + [template]
+
+
+
+
 
     print patterns
     format(filename, patterns, templates)
@@ -224,7 +303,7 @@ def txt2aiml(txtname):
     '''fdict = dict(sheet)
     print fdict
     sheet = pandas.DataFrame(fdict,index=[0])'''
-    pd = pandas.DataFrame(sheet,index=[u" * 位于 * ",u" * 电缆 * 长度 * ",u" * 终端塔 * "])
+    pd = pandas.DataFrame(sheet,index=[u" 位于 ",u" 电缆 * 长度 ",u" 终端塔 "])
 
     xlsname = txtname.replace('txt', 'xls') # 保存成xls文件，便于xls2aiml函数调用
     sheetname = 'aiml'
@@ -232,8 +311,8 @@ def txt2aiml(txtname):
     # ew.save()  #需要用变量代替
 
     filename = txtname.replace('txt', 'aiml').replace('doc/','standard/cn-')  # 保存成aiml文件，便于aiml函数调用
-    apart = ''  # 分隔符
-    xls2aiml(filename,xlsname,apart,' * ' + keyword + ' * ')
+    apart = ' * '  # 分隔符
+    xls2aiml(filename,xlsname,apart,keyword)
 
     # print seg_list
     print seg_list

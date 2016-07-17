@@ -16,9 +16,11 @@ from wordscut import jiebacut
 from Tkinter import *
 import datetime
 import time
+import os
 from ScrolledText import ScrolledText #文本区加滑动条
 
 from worklog import *
+from formataiml import *
 
 def read_msg():
     '''
@@ -42,12 +44,48 @@ def brainsave():
     kernel.saveBrain("bot_brain.brn")
 
 def searchfor():
-    raw_msg = read_msg()  # 读取输入信息
-    msg = str(raw_msg.encode('utf-8'))  # 特殊处理。将unicode统一处理成字符串
-    msg = msg.replace('SEARCH','')
+    '''
+    目前的search ＊ 是一个强制搜索工具，就是每次处理时都
+    :return:
+    '''
+    print 'searchfor'
+    raw_msg = read_msg().upper()  # 读取输入信息
+    msg = jiebacut(raw_msg)
+    # msg = str(raw_msg.encode('utf-8'))  # 特殊处理。将unicode统一处理成字符串
+    msg = msg.replace('SEARCH','') # 剥去SEARCH 搜索标记，先判断msg中是否有既定答案？？？这一步有必要吗？
+    print msg
 
+    bot_response = kernel.respond(msg)  # bot_response() 信息回复
+    print bot_response
+    if bot_response != '':  # bot_response == ''就是没有找到有效匹配
+        msgcontent = unicode('Robot:', 'utf-8') + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '\n '
+        text_msglist.insert(END, msgcontent, 'green')
+        text_msglist.insert(END, bot_response + '\n')
+        text_msglist.yview(END)  # 文本区滚动条自动下滑
+    else:
+        msgcontent = unicode('Robot:', 'utf-8') + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '\n '
+        text_msglist.insert(END, msgcontent, 'green')
+        text_msglist.insert(END, '正在查找...' + '\n')
+        text_msglist.yview(END)  # 文本区滚动条自动下滑
 
+        # 遍历目录，从所有txt中生成aiml
+        docdir = 'doc/'
+        doclist = os.walk(docdir)
+        for root, dirs, files in doclist:
+            for name in files:
+                print os.path.join(root, name)
+                # 预留位置。要保证所有的文档都有对应的txt，目前采用手动保存模式。
+                filename = os.path.join(root, name)
+                if '.txt' in filename:
+                    txt2aiml(filename)  # 下一步应该增加搜索关键词到这个函数
 
+        kernel.respond("load aiml b") # 重新读取aiml库
+        bot_response = kernel.respond(msg)  # bot_response() 信息回复 重新查找回复
+        if bot_response != '':  # 如果还找不到匹配，那就显示抱歉 bot_response == ''就是没有找到有效匹配
+            text_msglist.insert(END, '找到以下信息：'+ '\n' + bot_response + '\n')
+        else:
+            text_msglist.insert(END, '抱歉，未能找到您要的信息' + '\n')
+        text_msglist.yview(END)  # 文本区滚动条自动下滑
 
 #发送按钮事件
 def sendmessage():
