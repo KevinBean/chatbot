@@ -1,11 +1,14 @@
 # 聊天机器人结构设计
 
 ## TODOS 
+
 ### 语料库的来源问题 
 #### **Waiting 翻译standard语料库**  
 #### 爬取文档,实现aiml自动生成。 
 
 - 爬取文档使用jieba和nltk 
+
+- 使用jieba的关键词提取以及搜索引擎分词功能？
 
 - 可利用formataiml.py中format(file,pattern,template) 
 
