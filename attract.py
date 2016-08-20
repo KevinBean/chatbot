@@ -5,7 +5,6 @@
 from gensim import corpora, models, similarities
 import logging
 import jieba # 利用jieba进行中文分词
-from docx import Document #使用python-docx包# 主程序
 import os
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
