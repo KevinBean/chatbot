@@ -6,6 +6,7 @@ from gensim import corpora, models, similarities
 import logging
 import jieba # 利用jieba进行中文分词
 from docx import Document #使用python-docx包# 主程序
+import os
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 #对文件进行分句
@@ -103,17 +104,42 @@ def findinFiles(filename, samples): #使用tfidf
         # print file
         return lines[x]
 
+def filepart(filename, start, end):
+    '''
+    提取文件的一部分，写入新文件，返回新文件内容
+    :param filename:
+    :param start:
+    :param end:
+    :return: newfilename
+    '''
+    newfilename = []
+    for file in filename:
+        lines = cutlines(file)
+        docText = '\n'.join(lines[start:end])
+        #print docText
 
+        # 保存文件
+        # document.save('doc/new-SL351C-A11-01.doc')
+        newfile = os.path.dirname(file) + 'part' + str(start) + 'to' +str(end) + os.path.basename(file)
+        output_file = open(newfile, 'w')
+        output_file.write(docText)
+        output_file.close()
+        newfilename.append(newfile)
+    return newfilename
 
-
-filename = [u'doc/SL351C-A11-01.txt'] # u'doc/管廊缆线敷设技术条件.docx'
-dictpath = u'dict/dict.txt'
-gongchengming = u'南营110kV送电工程'
-gongchengbianhao = u'SM221C-A11-01'
-jiedi = u'本工程单回电缆采用两端直接接地的接地方式，即在电缆线路两端电缆终端处，电缆的金属屏蔽层及铠装层经接地引线分别引出，在灰峪站内与站内接地网做可靠连接、在终端塔侧与铁塔接地极引线做可靠连接。'
-gaikuang = u'南营110kV变电站拟建于丰台区长辛店北部地区，长辛店北部地区位于丰台永定河绿色生态发展带，目前处于全面发展的阶段，规划重点项目包括辛庄一级开发项目、201所改造项目、解放军通信团项目、丰台科技园西区II期等。其中，丰台科技园西区II期项目，总建筑面积150万平方米，主要为技术创新基地、科技成果孵化基地、高新技术产业化基地、教育科研、办公等用地，负荷预测约60MW；201所改造项目未来负荷将达到25MW；辛庄土地一级开发项目总建筑面积约129万平方米，主要为居住及配套共建用地，负荷预测约为18MW；解放军通信团项目总建筑面积约10万平方米，主要为军事类用地，负荷预测约15MW；第九届园艺博览会项目，占地267公顷，总建筑面积16万平方米，主要为旅游、商业、公建用地，负荷预测约20MW。未来该区域负荷将达到138MW。详情见下表2-1所示。'
-samples = [gongchengbianhao, gongchengming, jiedi, gaikuang]
-dictionary = filetoDict(filename, dictpath)
-# findinFile(filename[0], dictionary, jiedi)
-for sample in samples:
-    print findinFiles(filename, sample) .decode('utf-8')
+if __name__ == "__main__":
+    filename = [u'doc/SL351C-A11-01.txt']  # u'doc/管廊缆线敷设技术条件.docx'
+    print filepart(filename, 0, 20)
+    dictpath = u'dict/dict.txt'
+    gongchengming = u'南营110kV送电工程'
+    gongchengbianhao = u'SM221C-A11-01'
+    jiedi = u'本工程单回电缆采用两端直接接地的接地方式，即在电缆线路两端电缆终端处，电缆的金属屏蔽层及铠装层经接地引线分别引出，在灰峪站内与站内接地网做可靠连接、在终端塔侧与铁塔接地极引线做可靠连接。'
+    gaikuang = u'南营110kV变电站拟建于丰台区长辛店北部地区，长辛店北部地区位于丰台永定河绿色生态发展带，目前处于全面发展的阶段，规划重点项目包括辛庄一级开发项目、201所改造项目、解放军通信团项目、丰台科技园西区II期等。其中，丰台科技园西区II期项目，总建筑面积150万平方米，主要为技术创新基地、科技成果孵化基地、高新技术产业化基地、教育科研、办公等用地，负荷预测约60MW；201所改造项目未来负荷将达到25MW；辛庄土地一级开发项目总建筑面积约129万平方米，主要为居住及配套共建用地，负荷预测约为18MW；解放军通信团项目总建筑面积约10万平方米，主要为军事类用地，负荷预测约15MW；第九届园艺博览会项目，占地267公顷，总建筑面积16万平方米，主要为旅游、商业、公建用地，负荷预测约20MW。未来该区域负荷将达到138MW。详情见下表2-1所示。'
+    samples1 = [gongchengbianhao, gongchengming]
+    samples2 = [jiedi, gaikuang]
+    dictionary = filetoDict(filename, dictpath)
+    # findinFile(filename[0], dictionary, jiedi)
+    for sample in samples2:
+        print findinFiles(filename, sample).decode('utf-8') #提取长段落信息时，使用全文本
+    for sample in samples1:
+        print findinFiles(filepart(filename,0,20), sample).decode('utf-8') # 提取工程名和编号的时候，使用文本前面一部分
