@@ -193,10 +193,16 @@
 #### user.dict
 为自定义词典。基本格式：单词 词频 词性
 
+## attract.py
+根据模板从文档中提取特定段落信息
+
 ## readdoc.py
 
 ### doc2txt函数
-从word（docx格式）中提取text，保存为txt
+从word（docx格式、doc）中提取text，保存为txt
+
+### doc2txt函数
+doc格式读取只能在windows下实现
 
 # AIML
 研究AIML的源文件。/Users/bianbin/anaconda/lib/python2.7/UserDict.py 
