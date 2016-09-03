@@ -1,10 +1,13 @@
 # -*- coding=utf-8 -*-
 # import pandas
+# 直接改成pandoc转换更便捷
+#
 from docx import Document #使用python-docx包
 import jieba # 利用jieba进行中文分词
 import nltk  # 利用nltk进行其他处理
-from win32com import client as wc
 import os
+if os.name == 'nt':
+    from win32com import client as wc
 
 
 def docx2txt(filename):
@@ -38,12 +41,17 @@ def doc2txt(filename):
     output_file.close()
 
 if __name__ == '__main__':
-    filename = ur'D:\Personal\我的文档\GitHub\chatbot\doc\X9384K-AB-01.doc' # u'doc/管廊缆线敷设技术条件.docx'
+    #filename = ur'D:\Personal\我的文档\GitHub\chatbot\doc\X9384K-AB-01.doc' # u'doc/管廊缆线敷设技术条件.docx'
+    filename = u'doc/SL331C-A-01.docx'
     filename = os.path.normpath(filename)
     print filename
     # filename = r'd:/test1.doc'
-    doc2txt(filename)
-    newfilename = filename.replace(u'.doc', u'.txt')
+    if '.docx' in filename:
+        docx2txt(filename)
+        newfilename = filename.replace(u'.docx', u'.txt')
+    elif '.doc' in filename:
+        doc2txt(filename)
+        newfilename = filename.replace(u'.doc', u'.txt')
     read_file = open(newfilename,'r')
     text = read_file.read()
     text = text.replace('  ',' ')
