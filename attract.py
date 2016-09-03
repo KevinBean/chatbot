@@ -168,18 +168,20 @@ def systemReftoinfo(filename,dictpath,info):
     zailiuliang = findinFile(filename, dictionary, sample_zailiuliang)
     print zailiuliang
     # 系统载流量(A)
-    pattern1 = re.compile(u'，.{0,15}载流量.+[0-9]+A.*。*')  # 匹配模式载流量为XXXA
-    pattern11 = re.compile(u'[0-9]+\.[0-9]+A')  # 匹配模式XXXA
-    pattern2 = re.compile(u'，.{0,15}载流量.+[0-9]+MVA.*。*')  # 无XXXA描述时，匹配模式XXXMVA
-    pattern21 = re.compile(u'[0-9]+\.[0-9]+MVA')  # 匹配模式XXXMVA
+    pattern1 = re.compile(u'，[\u4e00-\u9fa5]+载流量.+[0-9]+A.*。*')  # 匹配模式载流量为XXXA
+    pattern11 = re.compile(u'[0-9]+\.*[0-9]+A')  # 匹配模式XXXA
+    pattern2 = re.compile(u'，[\u4e00-\u9fa5]+载流量.+[0-9]+MVA.*。*')  # 无XXXA描述时，匹配模式XXXMVA
+    pattern21 = re.compile(u'[0-9]+\.*[0-9]+MVA')  # 匹配模式XXXMVA
     zailiuliang = zailiuliang.replace(u'。', u'，').replace(',', u'，')
     if re.search(pattern1, zailiuliang):
-        systemRef = re.search(pattern1, zailiuliang).group()
+        zailiuliang = re.search(pattern1, zailiuliang).group()
+        print zailiuliang
         value = re.search(pattern11, zailiuliang)  # 提取载流量XXXA
         print value.group()
         systemRefValue = int(value.group().replace('A', ''))  # 提取载流量值
     elif re.search(pattern2, zailiuliang):
-        systemRef = re.search(pattern2, zailiuliang).group()
+        zailiuliang = re.search(pattern2, zailiuliang).group()
+        print zailiuliang
         value = re.search(pattern21, zailiuliang)  # 提取载流量XXXMVA
         print value.group()
         if type(dianyadengji) == int:
@@ -243,10 +245,10 @@ def projectinfo(filename, excelname, sheetname, dictpath):
     sample_systemRef = u'综上所述，统筹考虑电网规划发展及用电负荷的发展情况，建议北宫站～南营站电缆线路按照载流量不小于200MVA（1050A）选择，并考虑一定裕度。'
     systemRef = findinFile(filename,dictionary, sample_systemRef)
     # 系统载流量(A)
-    pattern1 = re.compile(u'，.{0,15}载流量.+[0-9]+A.*。*') #匹配模式载流量为XXXA
-    pattern11 = re.compile(u'[0-9]+\.[0-9]+A') #匹配模式XXXA
-    pattern2 = re.compile(u'，.{0,15}载流量.+[0-9]+MVA.*。*') #无XXXA描述时，匹配模式XXXMVA
-    pattern21 = re.compile(u'[0-9]+\.[0-9]+MVA') #匹配模式XXXMVA
+    pattern1 = re.compile(u'，[\u4e00-\u9fa5]+载流量.+[0-9]+A.*。*') #匹配模式载流量为XXXA
+    pattern11 = re.compile(u'[0-9]+\.*[0-9]+A') #匹配模式XXXA
+    pattern2 = re.compile(u'，[\u4e00-\u9fa5]+载流量.+[0-9]+MVA.*。*') #无XXXA描述时，匹配模式XXXMVA
+    pattern21 = re.compile(u'[0-9]+\.*[0-9]+MVA') #匹配模式XXXMVA
     systemRef = systemRef.replace(u'。',u'，').replace(',',u'，')
     if re.search(pattern1,systemRef):
         systemRef = re.search(pattern1, systemRef).group()
@@ -261,7 +263,7 @@ def projectinfo(filename, excelname, sheetname, dictpath):
             systemRefValue = int(round(float(value.group().replace('MVA', ''))*1000/dianyadengji/1.732)) #计算载流量值
     else:
         systemRefValue = '未知'
-
+    print systemRefValue
     info = {u'日期':datetime,
                    u'工程名':gongchengming,
                                 u'工程编号':gongchengbianhao,
@@ -306,9 +308,9 @@ if __name__ == "__main__":
             u'电压等级': 110
             }
     # 测试读取系统信息
-    filename = u'doc/SL331C-A-011.txt'
+    filename = u'doc/SL331C-A-01.txt'
     systemReftoinfo(filename,dictpath,info)
-    print info[u'电压等级']
+    print info[u'电压等级'],info[u'系统载流量(A)']
     filenames = [u'doc/SL351C-A11-01.txt', u'doc/SL331C-A11-01.txt', u'doc/SL171K-A-01.txt']  # u'doc/管廊缆线敷设技术条件.docx'
 
     dictionary = filetoDict(filenames, dictpath)
