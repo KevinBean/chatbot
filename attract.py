@@ -6,6 +6,7 @@ from gensim import corpora, models, similarities
 import logging
 import jieba # 利用jieba进行中文分词
 import os
+import re
 import csv
 import pandas as pd
 import time
@@ -130,6 +131,66 @@ def filepart(filename, start, end):
         newfilename.append(newfile)
     return newfilename
 
+def systemReftoinfo(filename,dictpath,info):
+    '''
+    根据系统提资提取有效信息。
+    :param filename:
+    :param dictpath:
+    :return:
+    '''
+    dictionary = corpora.Dictionary.load_from_text(dictpath)
+
+    input = open(filename,'r')
+    systemRef = input.read()
+    input.close()
+
+    # 电压等级
+    pattern = re.compile(u'[0-9]+kV')
+    print re.findall(pattern, systemRef)
+    if re.search(pattern, systemRef):
+        result = re.findall(pattern, systemRef)
+        resultset = set(result)
+        mostresult = u''
+        mostnum = 0
+        for res in resultset:
+            rescount = result.count(res)
+            print rescount,res,mostnum
+            if rescount > mostnum:
+                mostnum = rescount
+                mostresult = res
+        dianyadengji = int(mostresult.replace(u'kV', ''))
+    else:
+        dianyadengji = '未知'
+    print dianyadengji, type(dianyadengji)
+
+    # 系统载流量提资
+    sample_zailiuliang = u'综上所述，统筹考虑电网规划发展及用电负荷的发展情况，建议北宫站～南营站电缆线路按照载流量不小于200MVA（1050A）选择，并考虑一定裕度。'
+    zailiuliang = findinFile(filename, dictionary, sample_zailiuliang)
+    print zailiuliang
+    # 系统载流量(A)
+    pattern1 = re.compile(u'，.{0,15}载流量.+[0-9]+A.*。*')  # 匹配模式载流量为XXXA
+    pattern11 = re.compile(u'[0-9]+\.[0-9]+A')  # 匹配模式XXXA
+    pattern2 = re.compile(u'，.{0,15}载流量.+[0-9]+MVA.*。*')  # 无XXXA描述时，匹配模式XXXMVA
+    pattern21 = re.compile(u'[0-9]+\.[0-9]+MVA')  # 匹配模式XXXMVA
+    zailiuliang = zailiuliang.replace(u'。', u'，').replace(',', u'，')
+    if re.search(pattern1, zailiuliang):
+        systemRef = re.search(pattern1, zailiuliang).group()
+        value = re.search(pattern11, zailiuliang)  # 提取载流量XXXA
+        print value.group()
+        systemRefValue = int(value.group().replace('A', ''))  # 提取载流量值
+    elif re.search(pattern2, zailiuliang):
+        systemRef = re.search(pattern2, zailiuliang).group()
+        value = re.search(pattern21, zailiuliang)  # 提取载流量XXXMVA
+        print value.group()
+        if type(dianyadengji) == int:
+            systemRefValue = int(round(float(value.group().replace('MVA', '')) * 1000 / dianyadengji / 1.732))  # 计算载流量值
+    else:
+        systemRefValue = '未知'
+    info[u'电压等级'] = dianyadengji
+    info[u'系统载流量提资'] = zailiuliang
+    info[u'系统载流量(A)'] = systemRefValue
+    return info
+
 def projectinfo(filename, excelname, sheetname, dictpath):
     dictionary = corpora.Dictionary.load_from_text(dictpath)
     # 日期
@@ -146,6 +207,23 @@ def projectinfo(filename, excelname, sheetname, dictpath):
     # 工程概况
     sample_gaikuang = u'南营110kV变电站拟建于丰台区长辛店北部地区，长辛店北部地区位于丰台永定河绿色生态发展带，目前处于全面发展的阶段，规划重点项目包括辛庄一级开发项目、201所改造项目、解放军通信团项目、丰台科技园西区II期等。其中，丰台科技园西区II期项目，总建筑面积150万平方米，主要为技术创新基地、科技成果孵化基地、高新技术产业化基地、教育科研、办公等用地，负荷预测约60MW；201所改造项目未来负荷将达到25MW；辛庄土地一级开发项目总建筑面积约129万平方米，主要为居住及配套共建用地，负荷预测约为18MW；解放军通信团项目总建筑面积约10万平方米，主要为军事类用地，负荷预测约15MW；第九届园艺博览会项目，占地267公顷，总建筑面积16万平方米，主要为旅游、商业、公建用地，负荷预测约20MW。未来该区域负荷将达到138MW。详情见下表2-1所示。'
     gaikuang = findinFile(filename, dictionary, sample_gaikuang)
+    # 电缆选型
+    sample_dianlanxuanxing = u'根据系统要求，新建110kV线路按照传输容量不小于1134A选择，并考虑一定裕度。本工程电缆敷设在电力隧道中，在环境温度40℃、线芯运行温度90℃、品字形接触排列的条件下运行，参考现状运行电缆的技术资料，铜芯、交联聚乙烯绝缘、截面800平方毫米、阻燃外护套电缆的载流量约为1150A，满足系统安全运行的要求，故选用ZC-YJLW02-64/110kV-1×800mm2电缆。'
+    dianlanxuanxing = findinFile(filename, dictionary, sample_dianlanxuanxing)
+    # 电缆型号
+    pattern = re.compile(u'Z.+kV.+mm2+')  # 匹配电缆型号
+    if re.search(pattern, dianlanxuanxing):
+        dianlanxinghao = re.search(pattern, dianlanxuanxing).group()
+    else:
+        dianlanxinghao = u'请检查电缆选型部分'
+    print dianlanxinghao
+    # 电压等级
+    pattern = re.compile(u'[0-9]+kV')
+    if re.search(pattern,dianlanxinghao):
+        dianyadengji = int(re.search(pattern,dianlanxinghao).group().replace('kV','').replace('kv',''))
+    else:
+        dianyadengji = '未知'
+    print dianyadengji,type(dianyadengji)
     # 设计人
     shejiren = ''
     # 校核人
@@ -161,6 +239,29 @@ def projectinfo(filename, excelname, sheetname, dictpath):
     panchang = findinFile(filename, dictionary, sample_panchang)
     # 设计阶段
     shejijieduan = ''
+    # 系统载流量提资
+    sample_systemRef = u'综上所述，统筹考虑电网规划发展及用电负荷的发展情况，建议北宫站～南营站电缆线路按照载流量不小于200MVA（1050A）选择，并考虑一定裕度。'
+    systemRef = findinFile(filename,dictionary, sample_systemRef)
+    # 系统载流量(A)
+    pattern1 = re.compile(u'，.{0,15}载流量.+[0-9]+A.*。*') #匹配模式载流量为XXXA
+    pattern11 = re.compile(u'[0-9]+\.[0-9]+A') #匹配模式XXXA
+    pattern2 = re.compile(u'，.{0,15}载流量.+[0-9]+MVA.*。*') #无XXXA描述时，匹配模式XXXMVA
+    pattern21 = re.compile(u'[0-9]+\.[0-9]+MVA') #匹配模式XXXMVA
+    systemRef = systemRef.replace(u'。',u'，').replace(',',u'，')
+    if re.search(pattern1,systemRef):
+        systemRef = re.search(pattern1, systemRef).group()
+        value = re.search(pattern11, systemRef) #提取载流量XXXA
+        print value.group()
+        systemRefValue = int(value.group().replace('A', '')) #提取载流量值
+    elif re.search(pattern2,systemRef):
+        systemRef = re.search(pattern2,systemRef).group()
+        value = re.search(pattern21, systemRef) #提取载流量XXXMVA
+        print value.group()
+        if type(dianyadengji) == int:
+            systemRefValue = int(round(float(value.group().replace('MVA', ''))*1000/dianyadengji/1.732)) #计算载流量值
+    else:
+        systemRefValue = '未知'
+
     info = {u'日期':datetime,
                    u'工程名':gongchengming,
                                 u'工程编号':gongchengbianhao,
@@ -171,24 +272,57 @@ def projectinfo(filename, excelname, sheetname, dictpath):
                                 u'盘长':panchang,
                                 u'电缆路径':dianlanlujing,
                                 u'敷设环境':fushehuanjing,
-                                u'设计阶段':shejijieduan
+                                u'设计阶段':shejijieduan,
+                                u'系统载流量提资':systemRef,
+                                u'系统载流量(A)':systemRefValue,
+                                u'电缆选型':dianlanxuanxing,
+                                u'电缆型号':dianlanxinghao
     }
     print info
-    sheet = pd.read_excel(excelname, sheetname)  # 需要用变量代替
-    sheet = pd.DataFrame(sheet)
-    sheet = sheet.append(info, ignore_index=True)  # 开启ignore_index=True 则按照列标题匹配增加行数据
-    sheet.to_excel(excelname, sheetname)  # engine改为'openpyxl'即可写入unicode
+    if excelname:
+        sheet = pd.read_excel(excelname, sheetname)  # 需要用变量代替
+        sheet = pd.DataFrame(sheet)
+        sheet = sheet.append(info, ignore_index=True)  # 开启ignore_index=True 则按照列标题匹配增加行数据
+        sheet.to_excel(excelname, sheetname,engine='openpyxl')  # engine改为'openpyxl'即可写入unicode
+    return info
 
 if __name__ == "__main__":
-    filenames = [u'doc/SL351C-A11-01.txt', u'doc/SL331C-A01-01.txt', u'doc/X9384K-AB-01.txt']  # u'doc/管廊缆线敷设技术条件.docx'
     dictpath = u'dict/dict.txt' #训练数据越多越准确
-    dictionary = filetoDict(filenames, dictpath)
-    excelname = u'D:\Personal\我的文档\GitHub\chatbot\doc\出图统计.xlsx'
-    sheetname = 'Sheet1'
-    filename = u'D:\Personal\我的文档\GitHub\chatbot\doc\SK573C-A11-01.doc'
-    doc2txt(filename)
+    info = {u'日期': 'datetime',
+            u'工程名': 'gongchengming',
+            u'工程编号': 'gongchengbianhao',
+            u'接地方式': 'jiedi',
+            u'工程概况': 'gaikuang',
+            u'设计人': 'shejiren',
+            u'校核人': 'jiaoheren',
+            u'盘长': 'panchang',
+            u'电缆路径': 'dianlanlujing',
+            u'敷设环境': 'fushehuanjing',
+            u'设计阶段': 'shejijieduan',
+            u'系统载流量提资': 'systemRef',
+            u'系统载流量(A)': 'systemRefValue',
+            u'电缆选型':'dianlanxuanxing',
+            u'电缆型号': 'dianlanxinghao',
+            u'电压等级': 110
+            }
+    # 测试读取系统信息
+    filename = u'doc/SL331C-A-011.txt'
+    systemReftoinfo(filename,dictpath,info)
+    print info[u'电压等级']
+    filenames = [u'doc/SL351C-A11-01.txt', u'doc/SL331C-A11-01.txt', u'doc/SL171K-A-01.txt']  # u'doc/管廊缆线敷设技术条件.docx'
 
-    projectinfo(filename.replace(u'.doc', u'.txt'), excelname, sheetname, dictpath)
+    dictionary = filetoDict(filenames, dictpath)
+    # excelname = u'D:\Personal\我的文档\GitHub\chatbot\doc\出图统计.xlsx'
+    excelname = u'doc/出图统计.xlsx'
+    sheetname = 'Sheet1'
+    # filename = u'D:\Personal\我的文档\GitHub\chatbot\doc\SK573C-A11-01.doc'
+    filename = u'doc/SK372K-AA-01.txt'
+    if '.docx' in filename:
+        docx2txt(filename)
+    elif '.doc' in filename:
+        doc2txt(filename)
+
+    # projectinfo(filename.replace(u'.doc', u'.txt'), excelname, sheetname, dictpath)
 
 '''
     filename = [u'doc/SL351C-A11-01.txt']  # u'doc/管廊缆线敷设技术条件.docx'
