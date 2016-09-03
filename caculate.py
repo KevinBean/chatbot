@@ -8,6 +8,8 @@
 import jieba
 import re
 from attract import *
+import pickle
+import pprint
 
 class shuomingshu:
     dianlanxinghao = ''
@@ -31,7 +33,8 @@ class shuomingshu:
         cs.Cable['载流量'] = int(raw_input(u'请输入载流量(A)：'))
         cs = jiemianxuanze(cs,'s') #进行截面选择
         cs.Cable['电缆型号'] = 'ZC-YJLW02-' + str(int(round(cs.Cable['电压等级']/1.732))) + '/' + str(cs.Cable['电压等级']) + 'kV-1×' + str(cs.Cable['截面']) + 'mm2'
-
+        cs = dianlanlujing(cs)
+        print(cs.startPoint.values(),cs.endPoint.values())
         return cs
 
 
@@ -47,25 +50,38 @@ def jiemianxuanze(cs, type):
                 cs.Cable['截面'] = 630
                 cs.Cable['最大载流量'] = 950
             elif cs.Cable['载流量'] in range(950,1150):
+                cs.Cable['截面'] = 800
                 cs.Cable['最大载流量'] = 1150
+            cs.Cable['波节'] = 6
     print cs.Cable['截面']
     return cs
 
 def dianlanlujing(cs):
-    APoint = cs.Point
+    APoint = cs.startPoint
     APoint['名称'] = raw_input('请输入起点名称：')
-    APoint['类型'] = raw_input('请输入起点类型：GIS 或 户外')
+    APoint['类型'] = raw_input('请输入起点类型：1(GIS) 或 2(户外)')
+    if APoint['类型'] == '1':
+        APoint['类型'] = 'GIS'
+    elif APoint['类型'] =='2':
+        APoint['类型'] = '户外'
     APoint['高度'] = raw_input('请输入起点引上高度（数字）：')
     APoint['平面长度'] = raw_input('请输入起点平面长度（数字，m）：')
     APoint['里程'] = raw_input('请输入起点平面里程（数字，m）：')
-    cs.startPoint = APoint
-    BPoint = cs.Point
+
+    BPoint = cs.endPoint
     BPoint['名称'] = raw_input('请输入终点名称：')
-    BPoint['类型'] = raw_input('请输入终点类型：GIS 或 户外')
+    BPoint['类型'] = raw_input('请输入终点类型：1(GIS) 或 2(户外)')
+    if APoint['类型'] == '1':
+        APoint['类型'] = 'GIS'
+    elif APoint['类型'] =='2':
+        APoint['类型'] = '户外'
     BPoint['高度'] = raw_input('请输入终点引上高度（数字）：')
     BPoint['平面长度'] = raw_input('请输入终点平面长度（数字，m）：')
     BPoint['里程'] = raw_input('请输入终点平面里程（数字，m）：')
-    cs.endPoint = BPoint
+
+    cs.Tunnel['里程'] = BPoint['里程'] - APoint['里程']
+    cs.Tunnel['金具'] = cs.Tunnel['里程'] / cs.Cable['波节']
+    cs.Tunnel['电缆'] = cs.Tunnel['里程'] * cs.System['裕度']
     return cs
 
 
@@ -81,9 +97,8 @@ class cableSystem:
     bojie = {110:12, 220:6} #波节 m
     System ={'回路数':2, '裕度':1.05}
     zailiuliang = {'750' :400, '950':630}
-    Point = {'名称':'','类型':'户外', '高度':10, '平面长度':10,'里程':0} #起点类型
-    startPoint = Point #起点
-    endPoint = Point #终点
+    startPoint = {'名称':'','类型':'户外', '高度':10, '平面长度':10,'里程':0} #起点类型
+    endPoint = {'名称':'','类型':'户外', '高度':10, '平面长度':10,'里程':0} #终点类型
     Cable = {'电压等级':0, '波节':0, '载流量':0,'最大载流量':0, '截面':0, '电缆型号':u''}
     Tunnel = {'里程':0, '金具':0, '电缆':0}
     Material = {'电缆':0,
@@ -146,3 +161,16 @@ material['电缆'] = material
 sms = shuomingshu(cable['电缆型号'])
 print(sms.dianlanxuanxing())
 
+pkl = '0371'
+
+pklfile = 'dict/' + pkl +'.pkl'
+output = open(pklfile, 'wb')
+pickle.dump(cs1,output)
+output.close()
+
+inputfile = open(pklfile,'rb')
+cs2 = pickle.load(inputfile)
+pprint.pprint(cs2)
+inputfile.close()
+print cs2.Cable['截面']
+print cs2.zailiuliang
