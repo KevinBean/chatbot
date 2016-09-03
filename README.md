@@ -169,9 +169,9 @@
 ### jointPoint函数
 找到新添加的worklog从哪一行开始。
 
-
-
-
+## generate.py
+生成说明书。
+写成markdown格式，然后用pandoc来转换成docx
 
 
 
@@ -197,6 +197,8 @@
 根据模板从文档中提取特定段落信息
 
 ## readdoc.py
+
+直接改成用pandoc转换更便捷
 
 ### doc2txt函数
 从word（docx格式、doc）中提取text，保存为txt
