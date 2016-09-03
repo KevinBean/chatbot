@@ -17,19 +17,27 @@ p.add_run(u'双回110kV电缆')
 '''
 import pypandoc as pydoc
 from caculate import *
+import pickle
+
+pkl = '0371'
 
 sms = shuomingshu(n=1)
 cs = sms.dianlan()
 print(cs.Cable['电缆型号'])
+# 保存数据以备调用
+pklfile = 'dict/' + pkl +'.pkl'
+output = open(pklfile, 'wb')
+pickle.dump(cs,output)
+output.close()
 
 lujing = ''
 lujing += u'## 电缆路径'
 lujing += '\n'
 lujing += u'本工程新建'
 lujing += u'双回110kV电缆'
-lujing += u'自' + cs.startPoint['名称'] # 替换成起点名称
+lujing += u'自' + cs.startPoint['名称'].decode('utf-8') # 替换成起点名称
 lujing += '' #替换成路径描述 电缆路径描述是可以根据地图自动生成的
-lujing += u'至' + u'终点名称' + u'。' # 替换成终点名称
+lujing += u'至' + cs.endPoint['名称'].decode('utf-8')  + u'。' # 替换成终点名称
 lujing += '\n'
 lujing += '\n'
 
