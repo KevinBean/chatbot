@@ -10,20 +10,26 @@ import re
 from attract import *
 import pickle
 import pprint
+import pypandoc
 
 class shuomingshu:
     dianlanxinghao = ''
     def __init__(self,n):
         self.dianlanxinghao = n
         # 提取提资信息？？？
-        filename = u'doc/SK372K-AA-01.docx'
+        #filename = u'doc/互提资料单03（送电）.doc'
+        filename= u'D:\Personal\我的文档\GitHub\chatbot\doc\X9348K-X-02 互提资料单 送电.docx'
         dictpath =u'dict/dict.txt'
+        # 生成txt文件
         if '.docx' in filename:
-            docx2txt(filename)
+            docx2txt(filename) #改为使用pandoc
             newfilename = filename.replace(u'.docx', u'.txt')
+            #pypandoc.convert_file(filename, 'markdown', 'docx', outputfile=newfilename)
         elif '.doc' in filename:
-            doc2txt(filename)
+            doc2txt(filename) #改为使用pandoc
             newfilename = filename.replace(u'.doc', u'.txt')
+            #pypandoc.convert_file(filename, 'txt', 'doc', outputfile=newfilename)
+
         self.info = projectinfo(newfilename, '', '', dictpath)
     def dianlanxuanxing(self):
         return '故本工程选用' + self.dianlanxinghao +'电缆。 '
