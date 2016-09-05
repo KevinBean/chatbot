@@ -11,23 +11,71 @@ if os.name == 'nt':
 
 
 def docx2txt(filename):
-    # 从word（docx格式）中提取text，保存为txt
-    document = Document(filename)
-    docText = '\n\n'.join([
-                              paragraph.text.encode('utf-8') for paragraph in document.paragraphs
-                              ])
-    print docText
-
-    # 保存文件
-    # document.save('doc/new-SL351C-A11-01.doc')
     newfilename = filename.replace(u'docx', u'txt')
-    output_file = open(newfilename, 'w')
-    output_file.write(docText)
-    output_file.close()
+    if os.name == 'nt':
+        print 'nt'
+        word = wc.Dispatch('Word.Application')
+        doc = word.Documents.Open(filename)
+        doc.SaveAs(newfilename, 4)
+        doc.Close()
+        word.Quit() #另存为txt文件，编码为gbk
+        input_file = open(newfilename, 'r')
+        gbktxt = input_file.read()
+        utftxt = gbktxt.decode('gbk').encode('utf-8') #读取txt文件，将gbk转换成utf-8
+        input_file.close()
+        output_file = open(newfilename, 'w')
+        output_file.write(utftxt) #保存utf-8文本
+        output_file.close()
+
+    else:
+        # 从word（docx格式）中提取text，保存为txt
+        document = Document(filename)
+        docText = '\n\n'.join([
+                                  paragraph.text.encode('utf-8') for paragraph in document.paragraphs
+                                  ])
+        print docText
+        # 保存文件
+        # document.save('doc/new-SL351C-A11-01.doc')
+
+        output_file = open(newfilename, 'w')
+        output_file.write(docText)
+        output_file.close()
+
 
 def doc2txt(filename):
-    word = wc.Dispatch('Word.Application')
-    filename = os.path.normpath(filename)
+    newfilename = filename.replace(u'docx', u'txt')
+    if os.name == 'nt':
+        print 'nt'
+        word = wc.Dispatch('Word.Application')
+        doc = word.Documents.Open(filename)
+        doc.SaveAs(newfilename, 4)
+        doc.Close()
+        word.Quit() #另存为txt文件，编码为gbk
+        input_file = open(newfilename, 'r')
+        gbktxt = input_file.read()
+        utftxt = gbktxt.decode('gbk').encode('utf-8') #读取txt文件，将gbk转换成utf-8
+        input_file.close()
+        output_file = open(newfilename, 'w')
+        output_file.write(utftxt) #保存utf-8文本
+        output_file.close()
+
+    else:
+        # 从word（docx格式）中提取text，保存为txt
+        document = Document(filename)
+        docText = '\n\n'.join([
+                                  paragraph.text.encode('utf-8') for paragraph in document.paragraphs
+                                  ])
+        print docText
+        # 保存文件
+        # document.save('doc/new-SL351C-A11-01.doc')
+
+        output_file = open(newfilename, 'w')
+        output_file.write(docText)
+        output_file.close()
+    '''word = wc.Dispatch('Word.Application')
+    #filepath = os.path.abspath('.').decode('gbk').encode('utf-8') #获取文件绝对路径
+    #print filepath,type(filepath),type(filename)
+    #filename = os.path.join(filepath.decode('utf-8') + filename).replace('/','\\').decode('gbk').encode('utf-8')
     print filename
     doc = word.Documents.Open(filename) # 所有Paragraph即段落对象，都是通过Paragraph.Range.Text来访问它的文字的
     docText = '\n\n'.join([
@@ -38,11 +86,11 @@ def doc2txt(filename):
     print newfilename
     output_file = open(newfilename, 'w')
     output_file.write(docText)
-    output_file.close()
+    output_file.close()'''
 
 if __name__ == '__main__':
     #filename = ur'D:\Personal\我的文档\GitHub\chatbot\doc\X9384K-AB-01.doc' # u'doc/管廊缆线敷设技术条件.docx'
-    filename = u'doc/SL331C-A-01.docx'
+    filename = u'D:\Personal\我的文档\GitHub\chatbot\doc\X9348K-X-02 互提资料单 送电.docx'
     filename = os.path.normpath(filename)
     print filename
     # filename = r'd:/test1.doc'
