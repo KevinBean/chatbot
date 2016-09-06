@@ -2,6 +2,19 @@
 
 ## TODOS 
 
+### readdoc调试记录
+os.name == nt
+使用win32com进行处理，注意转换后默认编码为gbk
+    if os.name == 'nt':
+        print 'nt'
+        word = wc.Dispatch('Word.Application')
+        doc = word.Documents.Open(filename)
+        doc.SaveAs(newfilename, 4)  # 17对应于下表中的
+        doc.Close()
+        word.Quit()
+os.name != nt
+使用pandoc进行处理
+
 ### 语料库的来源问题 
 #### **Waiting 翻译standard语料库**  
 #### 爬取文档,实现aiml自动生成。 
