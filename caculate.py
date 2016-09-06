@@ -85,9 +85,9 @@ def dianlanlujing(cs):
     BPoint['平面长度'] = raw_input('请输入终点平面长度（数字，m）：')
     BPoint['里程'] = raw_input('请输入终点平面里程（数字，m）：')
 
-    cs.Tunnel['里程'] = BPoint['里程'] - APoint['里程']
-    cs.Tunnel['金具'] = cs.Tunnel['里程'] / cs.Cable['波节']
-    cs.Tunnel['电缆'] = cs.Tunnel['里程'] * cs.System['裕度']
+    cs.Tunnel['里程'] = float(BPoint['里程']) - float(APoint['里程'])
+    cs.Tunnel['金具'] = float(cs.Tunnel['里程']) / float(cs.Cable['波节'])
+    cs.Tunnel['电缆'] = float(cs.Tunnel['里程']) * float(cs.System['裕度'])
     return cs
 
 
