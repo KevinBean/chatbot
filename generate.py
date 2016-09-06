@@ -17,10 +17,13 @@ p.add_run(u'双回110kV电缆')
 '''
 import pypandoc as pydoc
 from caculate import *
+from attract import *
 import pickle
 
 pkl = '0371'
 
+'''
+#生成测试文件
 sms = shuomingshu(n=1)
 cs = sms.dianlan()
 print(cs.Cable['电缆型号'])
@@ -29,6 +32,26 @@ pklfile = 'dict/' + pkl +'.pkl'
 output = open(pklfile, 'wb')
 pickle.dump(cs,output)
 output.close()
+'''
+#读取保存的测试数据
+readcs = open(pklfile,'r')
+cs = pickle.load(readcs)
+readcs.close()
+
+#读取提资文件中系统概况
+filename = u'D:\Personal\我的文档\GitHub\chatbot\doc\X9348K-X-02 互提资料单 送电.txt' #系统提资文件路径
+dictpath = u'D:\Personal\我的文档\GitHub\chatbot\dict\dict.txt'  # 训练数据越多越准确
+dictionary = corpora.Dictionary.load_from_text(dictpath)
+sample_xitonggaikuang = u'将村齐线“T”接南山的110kV线路破口接入永定变电站，形成永定～南山以及永定～规划园博园的110kV线路。本期工程完成后，南山站电源将由永定站提供；园博园站电源也由永定站主供，吕村站作为备用电源。'
+xtgk = findinFile(filename, dictionary, sample_xitonggaikuang)
+print xtgk
+#生成系统概况段落
+xitonggaikuang = ''
+xitonggaikuang += u'## 系统概况'
+xitonggaikuang += '\n'
+xitonggaikuang += xtgk
+xitonggaikuang += '\n'
+xitonggaikuang += '\n'
 
 lujing = ''
 lujing += u'## 电缆路径'
@@ -91,7 +114,7 @@ gongzuoliang += '|' + u'安装：' + '|' + '|' + '|'
 gongzuoliang += '\n'
 gongzuoliang += '\n'
 
-output = lujing + dianqibufen +gongzuoliang
+output = xitonggaikuang + lujing + dianqibufen +gongzuoliang
 
 '''
 output = open ('test.md', 'w')
