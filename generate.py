@@ -37,10 +37,17 @@ output.close()
 readcs = open(pklfile,'r')
 cs = pickle.load(readcs)
 readcs.close()
+#生成测试文件
+sms = shuomingshu(n=1)
+cs = sms.dianlan()
 
 #读取提资文件中系统概况
-filename = u'D:\Personal\我的文档\GitHub\chatbot\doc\X9348K-X-02 互提资料单 送电.txt' #系统提资文件路径
-dictpath = u'D:\Personal\我的文档\GitHub\chatbot\dict\dict.txt'  # 训练数据越多越准确
+if os.name == 'nt':
+    filename = u'D:\Personal\我的文档\GitHub\chatbot\doc\X9348K-X-02 互提资料单 送电.txt' #系统提资文件路径
+    dictpath = u'D:\Personal\我的文档\GitHub\chatbot\dict\dict.txt'  # 训练数据越多越准确
+else:
+    filename = u'doc/X9348K-X-02 互提资料单 送电.txt'  # 系统提资文件路径
+    dictpath = u'dict/dict.txt'  # 训练数据越多越准确
 dictionary = corpora.Dictionary.load_from_text(dictpath)
 sample_xitonggaikuang = u'将村齐线“T”接南山的110kV线路破口接入永定变电站，形成永定～南山以及永定～规划园博园的110kV线路。本期工程完成后，南山站电源将由永定站提供；园博园站电源也由永定站主供，吕村站作为备用电源。'
 xtgk = findinFile(filename, dictionary, sample_xitonggaikuang)
@@ -97,6 +104,13 @@ dianqibufen += u'全线敷设在电力隧道及电缆夹层中，' #替换成敷
 dianqibufen += u'全线敷设在电力隧道及电缆夹层中，' #替换成敷设环境
 dianqibufen += '\n'
 dianqibufen += '\n'
+dianqibufen += u'#### 附件选型'
+dianqibufen += '\n'
+print cs.MaterialType['户外终端']
+dianqibufen += u'户外终端' + cs.MaterialType['户外终端']
+dianqibufen += '\n'
+dianqibufen += '\n'
+
 
 gongzuoliang = ''
 gongzuoliang += u'主要工作量：'
@@ -112,9 +126,19 @@ gongzuoliang += '|' + '65' + '|' + '43' + '|' + '21' + '|'
 gongzuoliang += '\n'
 gongzuoliang += '|' + u'安装：' + '|' + '|' + '|'
 gongzuoliang += '\n'
+gongzuoliang += '|' + u'户外终端' + '|' + cs.MaterialType['户外终端'] + '|' + str(cs.Material['户外终端']) + '|'
 gongzuoliang += '\n'
 
-output = xitonggaikuang + lujing + dianqibufen +gongzuoliang
+gongzuoliang += '\n'
+gongzuoliang += '\n'
+
+jiedifangshi = ''
+jiedifangshi += u'## 电缆接地方式'
+jiedifangshi += '\n'
+
+
+
+output = xitonggaikuang + lujing + dianqibufen +gongzuoliang + jiedifangshi
 
 '''
 output = open ('test.md', 'w')
