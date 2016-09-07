@@ -16,31 +16,16 @@ class shuomingshu:
     dianlanxinghao = ''
     def __init__(self,n):
         self.dianlanxinghao = n
-        # 提取提资信息？？？
-        #filename = u'doc/互提资料单03（送电）.doc'
-        if os.name == 'nt':
-            filename = u'D:\Personal\我的文档\GitHub\chatbot\doc\X9348K-X-02 互提资料单 送电.docx'
-            filename = os.path.normpath(filename)
-        else:
-            filename = u'doc/X9348K-X-02 互提资料单 送电.docx'
-        dictpath =u'dict/dict.txt'
-        # 生成txt文件
-        if '.docx' in filename:
-            docx2txt(filename) #改为使用pandoc
-            newfilename = filename.replace(u'.docx', u'.txt')
-            #pypandoc.convert_file(filename, 'markdown', 'docx', outputfile=newfilename)
-        elif '.doc' in filename:
-            doc2txt(filename) #改为使用pandoc
-            newfilename = filename.replace(u'.doc', u'.txt')
-            #pypandoc.convert_file(filename, 'txt', 'doc', outputfile=newfilename)
 
-        self.info = projectinfo(newfilename, '', '', dictpath)
     def dianlanxuanxing(self):
         return '故本工程选用' + self.dianlanxinghao +'电缆。 '
-    def dianlan(self):
+
+    def dianlan(self,filename,dictpath):
         cs = cableSystem()
+        ''''# 直接输入信息
         cs.Cable['电压等级'] = int(raw_input(u'请输入电压等级(kV)：'))
-        cs.Cable['载流量'] = int(raw_input(u'请输入载流量(A)：'))
+        cs.Cable['载流量'] = int(raw_input(u'请输入载流量(A)：'))'''
+        readsystem(cs,filename,dictpath) #读取系统提资信息
         cs = jiemianxuanze(cs,'s') #进行截面选择
         print cs.Cable['截面']
         cs.Cable['电缆型号'] = 'ZC-YJLW02-' + str(int(round(cs.Cable['电压等级']/1.732))) + '/' + str(cs.Cable['电压等级']) + 'kV-1×' + str(cs.Cable['截面']) + 'mm2'
@@ -51,6 +36,39 @@ class shuomingshu:
         # cs = dianlanlujing(cs)
         print(cs.startPoint.values(),cs.endPoint.values())
         return cs
+
+
+def readsystem(cs,filename,dictpath):
+    # 提取提资信息？？？
+    '''
+    # filename = u'doc/互提资料单03（送电）.doc'
+    if os.name == 'nt':
+        filename = u'D:\Personal\我的文档\GitHub\chatbot\doc\X9348K-X-02 互提资料单 送电.docx'
+        filename = os.path.normpath(filename)
+    else:
+        filename = u'doc/X9348K-X-02 互提资料单 送电.docx'
+    dictpath = u'dict/dict.txt'
+    '''
+    # 生成txt文件
+    if '.docx' in filename:
+        docx2txt(filename)  # 改为使用pandoc
+        newfilename = filename.replace(u'.docx', u'.txt')
+        # pypandoc.convert_file(filename, 'markdown', 'docx', outputfile=newfilename)
+    elif '.doc' in filename:
+        doc2txt(filename)  # 改为使用pandoc
+        newfilename = filename.replace(u'.doc', u'.txt')
+        # pypandoc.convert_file(filename, 'txt', 'doc', outputfile=newfilename)
+    elif '.txt' in filename:
+        newfilename =filename
+
+    cs.info = systemReftoinfo(newfilename, dictpath, cs.info)
+    '''
+    info[u'电压等级'] = dianyadengji
+    info[u'系统载流量提资'] = zailiuliang
+    info[u'系统载流量(A)'] = systemRefValue
+    '''
+    cs.Cable['电压等级'] = cs.info[u'电压等级']
+    cs.Cable['载流量'] = cs.info[u'系统载流量(A)']
 
 
 def jiemianxuanze(cs, type):
@@ -151,6 +169,23 @@ class cableSystem:
                 '避雷器':0
                 }
     Ref = ref()
+    info = {u'日期': 0,
+            u'工程名': 0,
+            u'工程编号': 0,
+            u'接地方式': 0,
+            u'工程概况': 0,
+            u'设计人': 0,
+            u'校核人': 0,
+            u'盘长': 0,
+            u'电缆路径': 0,
+            u'敷设环境': 0,
+            u'设计阶段': 0,
+            u'系统载流量提资': 0,
+            u'系统载流量(A)': 0,
+            u'电缆选型': 0,
+            u'电缆型号': 0,
+            u'电压等级': 110
+            }
 
 cs1 =cableSystem()
 system = cs1.System
