@@ -66,7 +66,9 @@ def doc2txt(filename):
         output_file.close()
 
     else:
-        # 从word（docx格式）中提取text，保存为txt
+        # mac 下无法处理doc文件
+
+        ''''# 从word（docx格式）中提取text，保存为txt
         document = Document(filename)
         docText = '\n\n'.join([
                                   paragraph.text.encode('utf-8') for paragraph in document.paragraphs
@@ -77,7 +79,13 @@ def doc2txt(filename):
 
         output_file = open(newfilename, 'w')
         output_file.write(docText)
-        output_file.close()
+        output_file.close()'''
+
+        '''
+        #使用pandoc进行转换
+        pypandoc.convert_file(filename,'markdown','doc',outputfile=newfilename)
+        print newfilename'''
+
     '''word = wc.Dispatch('Word.Application')
     #filepath = os.path.abspath('.').decode('gbk').encode('utf-8') #获取文件绝对路径
     #print filepath,type(filepath),type(filename)
@@ -101,6 +109,7 @@ if __name__ == '__main__':
         filename = os.path.normpath(filename)
     else:
         filename = u'doc/X9348K-X-02 互提资料单 送电.docx'
+        filename = u'doc/北河系统提资（送电）.docx'
 
     print filename
     # filename = r'd:/test1.doc'
