@@ -5,6 +5,7 @@
 from docx import Document #使用python-docx包
 import jieba # 利用jieba进行中文分词
 import nltk  # 利用nltk进行其他处理
+import pypandoc
 import os
 if os.name == 'nt':
     from win32com import client as wc
@@ -28,6 +29,7 @@ def docx2txt(filename):
         output_file.close()
 
     else:
+        '''
         # 从word（docx格式）中提取text，保存为txt
         document = Document(filename)
         docText = '\n\n'.join([
@@ -40,6 +42,10 @@ def docx2txt(filename):
         output_file = open(newfilename, 'w')
         output_file.write(docText)
         output_file.close()
+        '''
+        #使用pandoc进行转换
+        pypandoc.convert_file(filename,'markdown','docx',outputfile=newfilename)
+        print newfilename
 
 
 def doc2txt(filename):
@@ -90,8 +96,12 @@ def doc2txt(filename):
 
 if __name__ == '__main__':
     #filename = ur'D:\Personal\我的文档\GitHub\chatbot\doc\X9384K-AB-01.doc' # u'doc/管廊缆线敷设技术条件.docx'
-    filename = u'D:\Personal\我的文档\GitHub\chatbot\doc\X9348K-X-02 互提资料单 送电.docx'
-    filename = os.path.normpath(filename)
+    if os.name == 'nt':
+        filename = u'D:\Personal\我的文档\GitHub\chatbot\doc\X9348K-X-02 互提资料单 送电.docx'
+        filename = os.path.normpath(filename)
+    else:
+        filename = u'doc/X9348K-X-02 互提资料单 送电.docx'
+
     print filename
     # filename = r'd:/test1.doc'
     if '.docx' in filename:
