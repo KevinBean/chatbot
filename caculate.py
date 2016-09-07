@@ -18,7 +18,11 @@ class shuomingshu:
         self.dianlanxinghao = n
         # 提取提资信息？？？
         #filename = u'doc/互提资料单03（送电）.doc'
-        filename= u'D:\Personal\我的文档\GitHub\chatbot\doc\X9348K-X-02 互提资料单 送电.docx'
+        if os.name == 'nt':
+            filename = u'D:\Personal\我的文档\GitHub\chatbot\doc\X9348K-X-02 互提资料单 送电.docx'
+            filename = os.path.normpath(filename)
+        else:
+            filename = u'doc/X9348K-X-02 互提资料单 送电.docx'
         dictpath =u'dict/dict.txt'
         # 生成txt文件
         if '.docx' in filename:
@@ -38,15 +42,21 @@ class shuomingshu:
         cs.Cable['电压等级'] = int(raw_input(u'请输入电压等级(kV)：'))
         cs.Cable['载流量'] = int(raw_input(u'请输入载流量(A)：'))
         cs = jiemianxuanze(cs,'s') #进行截面选择
+        print cs.Cable['截面']
         cs.Cable['电缆型号'] = 'ZC-YJLW02-' + str(int(round(cs.Cable['电压等级']/1.732))) + '/' + str(cs.Cable['电压等级']) + 'kV-1×' + str(cs.Cable['截面']) + 'mm2'
-        cs = dianlanlujing(cs)
+        cs.MaterialType['电缆'] = cs.Cable['电缆型号']
+        cs.MaterialType['GIS终端'] = str(cs.Cable['电压等级']) + '/' + str(cs.Cable['截面'])
+        cs.MaterialType['户外终端'] = str(cs.Cable['电压等级']) + '/' + str(cs.Cable['截面']) + u'爬电距离不小于' + str(cs.System['爬电比距'] * cs.Cable['电压等级']) + 'mm' + u'，建议使用' + cs.ZHONGDUANLEIXING[str(cs.Cable['电压等级'])] + u'产品'
+        cs.MaterialType['避雷器'] = cs.BILEIQILEIXING[str(cs.Cable['电压等级'])] + u'爬电距离不小于' + str(cs.System['爬电比距'] * cs.Cable['电压等级']) + 'mm'
+        # cs = dianlanlujing(cs)
         print(cs.startPoint.values(),cs.endPoint.values())
         return cs
 
 
 def jiemianxuanze(cs, type):
+    print type, type == 's',cs.Cable['载流量'] ,cs.Cable['载流量'] in range(0,750)
     if type == '':
-        type = raw_input('请输入载流量计算模式：s（简单）h（复杂）')
+        type = int(raw_input('请输入载流量计算模式：s（简单）h（复杂）'))
     if type == 's':
         if cs.Cable['电压等级'] == 110:
             if cs.Cable['载流量'] in range(0,750):
@@ -85,9 +95,12 @@ def dianlanlujing(cs):
     BPoint['平面长度'] = raw_input('请输入终点平面长度（数字，m）：')
     BPoint['里程'] = raw_input('请输入终点平面里程（数字，m）：')
 
-    cs.Tunnel['里程'] = float(BPoint['里程']) - float(APoint['里程'])
-    cs.Tunnel['金具'] = float(cs.Tunnel['里程']) / float(cs.Cable['波节'])
-    cs.Tunnel['电缆'] = float(cs.Tunnel['里程']) * float(cs.System['裕度'])
+    Tunnel = cs.Tunnel
+    Tunnel['里程'] = float(BPoint['里程']) - float(APoint['里程'])
+    Tunnel['金具'] = float(Tunnel['里程']) / float(cs.Cable['波节'])
+    Tunnel['电缆'] = float(Tunnel['里程']) * float(cs.System['裕度'])
+
+    cs.Material['电缆'] = Tunnel['电缆'] + APoint['电缆'] + BPoint['电缆']
     return cs
 
 
@@ -101,10 +114,12 @@ class ref:
 class cableSystem:
     #定义基本属性
     bojie = {110:12, 220:6} #波节 m
-    System ={'回路数':2, '裕度':1.05}
+    System ={'回路数':2, '裕度':1.05, '爬电比距':3.1}
+    ZHONGDUANLEIXING = {'110': u'复合绝缘型', '220': u'瓷套型'}
+    BILEIQILEIXING = {'110': u'HY10WZ-108/260S，无间隙氧化锌避雷器', '220': u'瓷套型'}
     zailiuliang = {'750' :400, '950':630}
-    startPoint = {'名称':'','类型':'户外', '高度':10, '平面长度':10,'里程':0} #起点类型
-    endPoint = {'名称':'','类型':'户外', '高度':10, '平面长度':10,'里程':0} #终点类型
+    startPoint = {'名称':'','类型':'户外', '高度':10, '平面长度':10,'里程':0, '电缆':0} #起点类型
+    endPoint = {'名称':'','类型':'户外', '高度':10, '平面长度':10,'里程':0, '电缆':0} #终点类型
     Cable = {'电压等级':0, '波节':0, '载流量':0,'最大载流量':0, '截面':0, '电缆型号':u''}
     Tunnel = {'里程':0, '金具':0, '电缆':0}
     Material = {'电缆':0,
@@ -118,7 +133,8 @@ class cableSystem:
                 '三线接地箱': 0,
                 '六线接地箱': 0,
                 '交叉互联电缆': 0,
-                '接地电缆': 0
+                '接地电缆': 0,
+                '避雷器':0
                 }
     MaterialType = {'电缆': 0,
                 '电缆（I路）': 0,
@@ -131,7 +147,8 @@ class cableSystem:
                 '三线接地箱': 0,
                 '六线接地箱': 0,
                 '交叉互联电缆': 0,
-                '接地电缆': 0
+                '接地电缆': 0,
+                '避雷器':0
                 }
     Ref = ref()
 
