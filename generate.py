@@ -3,6 +3,79 @@
 生成一份docx格式的说明书。
 使用md格式书写文档，使用pypandoc输出docx文件。
 '''
+import pypandoc as pydoc
+from caculate import *
+from attract import *
+import pickle
+'''
+from Tkinter import *
+
+root = Tk()
+root.title(u'说明书自动生成')
+
+# 创建几个frame作为容器
+frame_toplevel1 = Frame(width=380, height=270, bg='red')
+
+# 创建需要的几个元素
+
+    # 2. 创建主窗体
+    root = Tk()
+    root.title(unicode('对话窗口', 'utf-8'))
+
+    # 创建几个frame作为容器
+    frame_top = Frame(width=380, height=270, bg='red')
+    # frame_left_center  = Frame(width=380, height=100, bg='yellow')
+    frame_left_bottom = Frame(width=250, height=50)
+    frame_center_bottom = Frame(width = 70,height =50)
+    frame_right_bottom = Frame(width=60, height=50)
+    # frame_right     = Frame(width=170, height=400, bg='white')
+
+    ##创建需要的几个元素
+    # text_msglist作为对话信息展示区域，在sendmessage函数中处理
+    text_msglist = ScrolledText(frame_top,wrap=WORD)  #加滑动条的文本区，wrap自动换行
+    msg_lable = Label(frame_left_bottom,text='请输入')
+    # text_msg作为信息输入框按钮，其中信息被read_msg()函数读取
+    text_msg = Entry(frame_left_bottom,width=24)
+    select_lable =Label(frame_center_bottom,text='请选择')
+    text_select = Listbox(frame_center_bottom,width=20,height = 2)
+    button_lable = Label(frame_right_bottom,text='按我')
+    # button_sendmsg作为发送按钮，触发sendmessage函数
+    button_sendmsg = Button(frame_right_bottom, text=unicode('发送', 'utf-8'), command=sendmessage)
+    # 不显示的标签
+    text_respond = Label(frame_top)
+
+    # 创建一个绿色的tag
+    text_msglist.tag_config('green', foreground='#008B00')
+    # 3. 显示欢迎信息
+    insert_msg('Robot',u'您好,请问有什么可以帮您:)')
+
+    # 使用grid设置各个容器位置
+    frame_top.grid(row=0, column=0, padx=2, pady=5, columnspan=3,sticky=N)
+    # frame_left_center.grid(row=1, column=0, padx=2, pady=5)
+    frame_left_bottom.grid(row=1, column=0,sticky=W)
+    frame_center_bottom.grid(row=1,column=1,sticky=E)
+    frame_right_bottom.grid(row=1, column=2, padx=1, pady=2,sticky=E)
+    frame_top.grid_propagate(0)
+    frame_left_bottom.grid_propagate(0)
+    frame_right_bottom.grid_propagate(0)
+
+    # 把元素填充进frame
+    text_msglist.pack(expand=True, fill='both') #文本区加滑动条
+    msg_lable.grid()
+    text_msg.grid()
+    select_lable.grid()
+    text_select.grid()
+    button_lable.grid(sticky=W)
+    button_sendmsg.grid(sticky=E)
+
+
+    # 4. 主事件(窗体)循环，等待事件触发
+    root.mainloop()
+
+
+'''
+
+
 '''
 from docx import Document #使用python-docx包
 
@@ -15,10 +88,7 @@ p.add_run(u'双回110kV电缆')
 
 # 电缆电气部分
 '''
-import pypandoc as pydoc
-from caculate import *
-from attract import *
-import pickle
+
 
 pkl = '0371'
 
@@ -33,6 +103,9 @@ output = open(pklfile, 'wb')
 pickle.dump(cs,output)
 output.close()
 '''
+
+
+
 #读取提资文件中系统概况
 if os.name == 'nt':
     filename = u'D:\Personal\我的文档\GitHub\chatbot\doc\X9348K-X-02 互提资料单 送电.txt' #系统提资文件路径
@@ -138,6 +211,7 @@ gongzuoliang += '\n'
 jiedifangshi = ''
 jiedifangshi += u'## 电缆接地方式'
 jiedifangshi += '\n'
+jiedifangshi += cs.Cable['接地方式']
 
 
 
