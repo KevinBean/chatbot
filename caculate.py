@@ -118,10 +118,28 @@ def dianlanlujing(cs):
     Tunnel['金具'] = float(Tunnel['里程']) / float(cs.Cable['波节'])
     Tunnel['电缆'] = float(Tunnel['里程']) * float(cs.System['裕度'])
 
-    cs.Material['电缆'] = Tunnel['电缆'] + APoint['电缆'] + BPoint['电缆']
+    cs.Material['电缆'] = Tunnel['电缆'] + APoint['电缆'] + BPoint['电缆'] #未加接头制作的长度
+
+    cs = jiedifangshiChoose(cs)
+    print cs.Cable['接地方式'], cs.Material['电缆']
+    cs.Material['电缆'] = cs.Material['电缆'] + cs.Cable['分段数'] * cs.JIETOUZHIZUO[str(cs.Cable['电压等级'])] # 未加接头制作的长度
+
     return cs
 
-
+def jiedifangshiChoose(cs):
+    # 接地方式选择，下一步改为分类器
+    DIANLANPANCHANGMAX = {'110-400':1000, '110-630':900,'110-800':800}
+    dianlanpanchangmax = DIANLANPANCHANGMAX[str(cs.Cable['电压等级']) + '-' + str(cs.Cable['截面'])]
+    jiedifangshi = u'电缆接地方式拟选jiedifangshi的接地方式，即AStationATerminal侧直接接地，BStationBTerminal侧经保护器接地'
+    if cs.Material['电缆'] < dianlanpanchangmax:
+        jiedifangshi = jiedifangshi.replace(u'jiedifangshi', u'单端接地加回流线')
+        fenduanshu = 1
+    elif cs.Material['电缆'] > 3*dianlanpanchangmax:
+        jiedifangshi = jiedifangshi.replace(u'jiedifangshi', u'一组交叉互联两端直接接地')
+        fenduanshu = 3
+    cs.Cable['接地方式'] = jiedifangshi
+    cs.Cable['分段数'] = fenduanshu
+    return cs
 
 class ref:
     '''
@@ -134,11 +152,12 @@ class cableSystem:
     bojie = {110:12, 220:6} #波节 m
     System ={'回路数':2, '裕度':1.05, '爬电比距':3.1}
     ZHONGDUANLEIXING = {'110': u'复合绝缘型', '220': u'瓷套型'}
+    JIETOUZHIZUO = {'110': 2, '220': 3}
     BILEIQILEIXING = {'110': u'HY10WZ-108/260S，无间隙氧化锌避雷器', '220': u'瓷套型'}
     zailiuliang = {'750' :400, '950':630}
     startPoint = {'名称':'','类型':'户外', '高度':10, '平面长度':10,'里程':0, '电缆':0} #起点类型
     endPoint = {'名称':'','类型':'户外', '高度':10, '平面长度':10,'里程':0, '电缆':0} #终点类型
-    Cable = {'电压等级':0, '波节':0, '载流量':0,'最大载流量':0, '截面':0, '电缆型号':u''}
+    Cable = {'电压等级':0, '波节':0, '载流量':0,'最大载流量':0, '截面':0, '电缆型号':u'', '接地方式': u'','分段数':0}
     Tunnel = {'里程':0, '金具':0, '电缆':0}
     Material = {'电缆':0,
                 '电缆（I路）': 0,
