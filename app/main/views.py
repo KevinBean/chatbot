@@ -1,12 +1,15 @@
+# -*- coding=utf-8 -*-
 from flask import render_template, redirect, url_for, abort, flash, request,\
     current_app, make_response
 from flask_login import login_required, current_user
 from . import main
 from .forms import EditProfileForm, EditProfileAdminForm, PostForm,\
-    CommentForm
+    CommentForm,EditProjectForm
 from .. import db
 from ..models import Permission, Role, User, Post, Comment
 from ..decorators import admin_required, permission_required
+from attract import *
+import os
 
 
 @main.route('/', methods=['GET', 'POST'])
@@ -33,6 +36,24 @@ def index():
     return render_template('index.html', form=form, posts=posts,
                            show_followed=show_followed, pagination=pagination)
 
+@main.route('/project', methods=['GET', 'POST'])
+def project():
+    form = EditProjectForm()
+    form.MaxCurrent_Value.data = u'1150'
+    if form.validate_on_submit():
+        dictpath = u'/Users/bianbin/PycharmProjects/chatbot/dict/dict.txt'  # 训练数据越多越准确
+        info = {
+                u'系统载流量提资': 'systemRef',
+                u'系统载流量(A)': 'systemRefValue',
+                u'电压等级': '110'
+                }
+        # 存储文件
+        filename = form.SystemRef_File.data
+        form.SystemRef_File.raw_data.save(current_app.config['UPLOAD_FOLDER'] + filename)
+        systemReftoinfo(filename, dictpath, info)
+        form.MaxCurrent_Value = info[u'系统载流量(A)']
+        form.Voltage_Value = info[u'电压等级']
+    return render_template('project.html', form=form)
 
 @main.route('/user/<username>')
 def user(username):

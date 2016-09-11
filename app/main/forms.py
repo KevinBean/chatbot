@@ -1,10 +1,20 @@
+# -*- coding=utf-8 -*-
 from flask_wtf import Form
 from wtforms import StringField, TextAreaField, BooleanField, SelectField,\
-    SubmitField
+    SubmitField,FileField
 from wtforms.validators import Required, Length, Email, Regexp
 from wtforms import ValidationError
 from flask_pagedown.fields import PageDownField
 from ..models import Role, User
+
+# 工程编辑页面
+class EditProjectForm(Form):
+    MaxCurrent_Detail = StringField(u'系统载流量提资')
+    MaxCurrent_Value = StringField(u'系统载流量(A)')
+    Voltage_Value = StringField(u'电压等级(kV)')
+    SystemRef_File = FileField(u'输入系统提资文件')
+    submit = SubmitField(u'提取系统提资信息')
+
 
 class NameForm(Form):
     name = StringField('What is your name?', validators=[Required()])

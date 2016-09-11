@@ -2,9 +2,9 @@
 # import pandas
 # 直接改成pandoc转换更便捷
 #
-from docx import Document #使用python-docx包
-import jieba # 利用jieba进行中文分词
-import nltk  # 利用nltk进行其他处理
+# from docx import Document #使用python-docx包
+# import jieba # 利用jieba进行中文分词
+# import nltk  # 利用nltk进行其他处理
 import pypandoc
 import os
 if os.name == 'nt':
