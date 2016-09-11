@@ -1,7 +1,8 @@
 # -*- coding=utf-8 -*-
 from flask_wtf import Form
+from flask_wtf.file import FileField
 from wtforms import StringField, TextAreaField, BooleanField, SelectField,\
-    SubmitField,FileField
+    SubmitField
 from wtforms.validators import Required, Length, Email, Regexp
 from wtforms import ValidationError
 from flask_pagedown.fields import PageDownField
