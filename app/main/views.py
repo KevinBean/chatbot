@@ -10,6 +10,7 @@ from ..models import Permission, Role, User, Post, Comment
 from ..decorators import admin_required, permission_required
 from attract import *
 import os
+import pypandoc
 
 
 @main.route('/', methods=['GET', 'POST'])
@@ -36,8 +37,10 @@ def index():
     return render_template('index.html', form=form, posts=posts,
                            show_followed=show_followed, pagination=pagination)
 
+
 @main.route('/project', methods=['GET', 'POST'])
 def project():
+
     form = EditProjectForm()
     form.MaxCurrent_Value.data = u'1150'
     if form.validate_on_submit():
@@ -48,11 +51,20 @@ def project():
                 u'电压等级': '110'
                 }
         # 存储文件
-        filename = form.SystemRef_File.data
-        form.SystemRef_File.raw_data.save(current_app.config['UPLOAD_FOLDER'] + filename)
+        SystemRef = form.SystemRef_File.data
+        #filename = current_app.config['UPLOAD_FOLDER'] + '/SystemRef.txt'
+        filename = 'doc/互提资料单.txt'
+        outputfile = open(filename,'wb')
+        outputfile.write(SystemRef.encode('utf-8'))
+        outputfile.close()
+
+        # pypandoc.convert_text(SystemRef,'txt','string',outputfile= filename)
+        # form.SystemRef_File.dataraw_data.save(current_app.config['UPLOAD_FOLDER'] + filename)
         systemReftoinfo(filename, dictpath, info)
-        form.MaxCurrent_Value = info[u'系统载流量(A)']
-        form.Voltage_Value = info[u'电压等级']
+        form.MaxCurrent_Value.data = info[u'系统载流量(A)']
+        form.Voltage_Value.data = info[u'电压等级']
+        form.MaxCurrent_Detail.data = info[u'系统载流量提资']
+        # form.Voltage_Value.data = filename
     return render_template('project.html', form=form)
 
 @main.route('/user/<username>')

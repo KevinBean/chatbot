@@ -13,7 +13,7 @@ class EditProjectForm(Form):
     MaxCurrent_Detail = StringField(u'系统载流量提资')
     MaxCurrent_Value = StringField(u'系统载流量(A)')
     Voltage_Value = StringField(u'电压等级(kV)')
-    SystemRef_File = FileField(u'输入系统提资文件')
+    SystemRef_File = TextAreaField(u'输入系统提资文件')
     submit = SubmitField(u'提取系统提资信息')
 
 

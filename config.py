@@ -16,7 +16,7 @@ class Config:
     FLASKY_POSTS_PER_PAGE = 20
     FLASKY_FOLLOWERS_PER_PAGE = 50
     FLASKY_COMMENTS_PER_PAGE = 30
-    UPLOAD_FOLDER = '/uploads'
+    UPLOAD_FOLDER = '/Users/bianbin/PycharmProjects/chatbot/uploads'
 
     @staticmethod
     def init_app(app):
