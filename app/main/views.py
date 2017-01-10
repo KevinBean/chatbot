@@ -1,16 +1,18 @@
 # -*- coding=utf-8 -*-
 from flask import render_template, redirect, url_for, abort, flash, request,\
-    current_app, make_response
+    current_app, make_response,session
 from flask_login import login_required, current_user
 from . import main
 from .forms import EditProfileForm, EditProfileAdminForm, PostForm,\
-    CommentForm,EditProjectForm
+    CommentForm,EditProjectForm,WebChatbotForm
 from .. import db
 from ..models import Permission, Role, User, Post, Comment
 from ..decorators import admin_required, permission_required
 from attract import *
 import os
 import pypandoc
+import aiml
+from wordscut import jiebacut
 
 
 @main.route('/', methods=['GET', 'POST'])
@@ -44,6 +46,7 @@ def project():
     form = EditProjectForm()
     form.MaxCurrent_Value.data = u'1150'
     if form.validate_on_submit():
+
         dictpath = u'/Users/bianbin/PycharmProjects/chatbot/dict/dict.txt'  # 训练数据越多越准确
         info = {
                 u'系统载流量提资': 'systemRef',
@@ -66,6 +69,54 @@ def project():
         form.MaxCurrent_Detail.data = info[u'系统载流量提资']
         # form.Voltage_Value.data = filename
     return render_template('project.html', form=form)
+
+@main.route('/chatbot', methods=['GET', 'POST'])
+def chatbot():
+    # 1. 创建Kernel()和 并学习AIML 规则库文件
+    global kernel  # kernel作为全局变量，方便调用
+    kernel = aiml.Kernel()
+    kernel.learn("std-startup.xml")
+    kernel.respond("load aiml b")
+    #2.用户界面
+    form = WebChatbotForm()
+    try:
+        form.Chatroom.data = session['chatroom']
+    except:
+        pass
+    else:
+        pass
+
+    if form.Chatroom.data == '':
+        #初始欢迎信息
+        msgcontent = unicode('iRobot' + ':', 'utf-8') + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '\n '
+        msgcontent += u'您好,请问有什么可以帮您:)' + '\n '
+        form.Chatroom.data += msgcontent
+    # 处理输入信息
+    if form.validate_on_submit():
+        # 1. 读取输入数据，并分词
+        raw_msg = form.Input.data
+        msg = jiebacut(raw_msg)
+        print msg
+        # 2. 在聊天内容上方加一行 显示发送人及发送时间，以及输入信息内容
+        msgcontent = current_user.username + ':' + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '\n '
+        msgcontent += raw_msg + '\n '
+        form.Chatroom.data += msgcontent
+        # 3. 获取ＡＩＭＬ的响应bot_response
+        bot_response = kernel.respond(form.Input.data)  # bot_response() 信息回复
+        # 新的分类处理，根据响应信息内容分类处理
+        # msg=>可执行＼无参数的函数调用语句bot_response，如'quit'=>'execexit()'，可以简化这里的ifelse语句，但相应的增加了commands.aiml
+        # 文件的维护量 可以用exec(bot_response.replace('exec',''))来执行调用
+        # 4. 如果是含exec-的可执行响应，则用exec（）进行执行，调用对应特殊响应函数完成功能。msg与调用函数的对应关系在commands.aiml中定义，调用的函数体在本文件中。
+        if 'exec-' in bot_response:
+            exec (bot_response.replace('exec-', ''))
+            pass  # 清除信息发送框，因为下面处理中有些函数要调用信息发送框中内容，因此放在处理函数之后再清除
+        # 5. 如果是文本响应，则直接展示响应信息
+        elif bot_response:
+            msgcontent = unicode('iRobot' + ':', 'utf-8') + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '\n '
+            msgcontent += bot_response + '\n '
+            form.Chatroom.data += msgcontent
+            session['chatroom'] =form.Chatroom.data
+    return render_template('chatbot.html', form=form)
 
 @main.route('/user/<username>')
 def user(username):

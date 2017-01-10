@@ -52,8 +52,14 @@ def insert_msg(author,imsg,with_title = True):
     if with_title:
         msgcontent = unicode(author+':', 'utf-8') + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '\n '
         text_msglist.insert(END, msgcontent, 'green')
-    text_msglist.insert(END, imsg + '\n')
-    text_msglist.yview(END)  # 文本区滚动条自动下滑
+    # 以防被外部调用时text_msglist无定义
+    try:
+        print text_msglist
+    except:
+        pass
+    else:
+        text_msglist.insert(END, imsg + '\n')
+        text_msglist.yview(END)  # 文本区滚动条自动下滑
 
 ### 以下是特殊响应函数 ###
 def worklog():

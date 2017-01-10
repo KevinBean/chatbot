@@ -2,7 +2,7 @@
 from flask_wtf import Form
 from flask_wtf.file import FileField
 from wtforms import StringField, TextAreaField, BooleanField, SelectField,\
-    SubmitField
+    SubmitField,RadioField
 from wtforms.validators import Required, Length, Email, Regexp
 from wtforms import ValidationError
 from flask_pagedown.fields import PageDownField
@@ -10,11 +10,23 @@ from ..models import Role, User
 
 # 工程编辑页面
 class EditProjectForm(Form):
+    SystemRef_File = TextAreaField(u'输入系统提资文件')
+    submit_systemref = SubmitField(u'提取系统提资信息')
     MaxCurrent_Detail = StringField(u'系统载流量提资')
     MaxCurrent_Value = StringField(u'系统载流量(A)')
     Voltage_Value = StringField(u'电压等级(kV)')
-    SystemRef_File = TextAreaField(u'输入系统提资文件')
-    submit = SubmitField(u'提取系统提资信息')
+    Cable_Jiemian = StringField(u'电缆截面（mm2）')
+    AutoChoose = RadioField(choices=[('value',u'自动选择'),('value_two',u'手动修改')])
+    submit_autochoose = SubmitField(u'提交')
+
+
+
+
+# chatbot聊天界面
+class WebChatbotForm(Form):
+    Chatroom = TextAreaField(u'聊天窗口')
+    Input = StringField(u'请输入',validators=[Required()])
+    submit = SubmitField(u'发送')
 
 
 class NameForm(Form):
