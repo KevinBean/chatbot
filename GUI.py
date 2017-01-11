@@ -108,7 +108,7 @@ def searchfor():
                 # 预留位置。要保证所有的文档都有对应的txt，目前采用手动保存模式。
                 filename = os.path.join(root, name)
                 if '.txt' in filename:
-                    txt2aiml(filename)  # 下一步应该增加搜索关键词到这个函数
+                    txt2aiml(filename,msg)  # 下一步应该增加搜索关键词到这个函数
         # 5. 重新读取aiml库,重新查找回复,如果还找不到匹配，那就显示抱歉,如果找到就显示'找到以下信息：'
         kernel.respond("load aiml b")
         bot_response = kernel.respond(msg)  # bot_response() 信息回复 重新查找回复

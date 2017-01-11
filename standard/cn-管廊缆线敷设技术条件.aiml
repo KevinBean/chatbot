@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<aiml version="1.0">
+		<meta author="KevinBean" language="zh"/>
+		<category>
+			<pattern>位于 * 对于</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 位于 * 对于</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>位于 * 对于 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 位于 * 对于 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>对于 * 位于</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 对于 * 位于</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>对于 * 位于 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 对于 * 位于 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>位于 对于</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 位于 对于</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>位于 对于 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 位于 对于 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>对于 位于</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 对于 位于</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>对于 位于 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 对于 位于 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>位于</pattern>
+			<template>对于 无信息</template>
+		</category>
+		<category>
+			<pattern> * 位于</pattern>
+			<template>对于 对于 无信息</template>
+		</category>
+		<category>
+			<pattern>位于 * </pattern>
+			<template>对于 对于 对于 无信息</template>
+		</category>
+		<category>
+			<pattern> * 位于 * </pattern>
+			<template>对于 对于 对于 对于 无信息</template>
+		</category>
+		<category>
+			<pattern>电缆 * 长度 * 对于</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 电缆 * 长度 * 对于</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>电缆 * 长度 * 对于 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 电缆 * 长度 * 对于 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>对于 * 电缆 * 长度</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 对于 * 电缆 * 长度</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>对于 * 电缆 * 长度 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 对于 * 电缆 * 长度 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>电缆 * 长度 对于</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 电缆 * 长度 对于</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>电缆 * 长度 对于 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 电缆 * 长度 对于 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>对于 电缆 * 长度</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 对于 电缆 * 长度</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>对于 电缆 * 长度 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 对于 电缆 * 长度 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>电缆 * 长度</pattern>
+			<template>对于 无信息</template>
+		</category>
+		<category>
+			<pattern> * 电缆 * 长度</pattern>
+			<template>对于 对于 无信息</template>
+		</category>
+		<category>
+			<pattern>电缆 * 长度 * </pattern>
+			<template>对于 对于 对于 无信息</template>
+		</category>
+		<category>
+			<pattern> * 电缆 * 长度 * </pattern>
+			<template>对于 对于 对于 对于 无信息</template>
+		</category>
+		<category>
+			<pattern>终端塔 * 对于</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 终端塔 * 对于</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>终端塔 * 对于 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 终端塔 * 对于 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>对于 * 终端塔</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 对于 * 终端塔</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>对于 * 终端塔 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 对于 * 终端塔 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>终端塔 对于</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 终端塔 对于</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>终端塔 对于 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 终端塔 对于 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>对于 终端塔</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 对于 终端塔</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>对于 终端塔 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern> * 对于 终端塔 * </pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>终端塔</pattern>
+			<template>对于 无信息</template>
+		</category>
+		<category>
+			<pattern> * 终端塔</pattern>
+			<template>对于 对于 无信息</template>
+		</category>
+		<category>
+			<pattern>终端塔 * </pattern>
+			<template>对于 对于 对于 无信息</template>
+		</category>
+		<category>
+			<pattern> * 终端塔 * </pattern>
+			<template>对于 对于 对于 对于 无信息</template>
+		</category>
+	</aiml>

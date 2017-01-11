@@ -222,7 +222,54 @@ def xls2aiml(filename,xlsname,apart,keyword):
     format(filename, patterns, templates)
     return
 
-def txt2aiml(txtname):
+def txt2aiml(txtname,keyword):
+    # 1. 读取txt文件，并存为字符串格式
+    read_file = open(txtname, 'r')
+    text = read_file.read()
+    text = text.replace('  ',' ')
+    text = text.replace(' ','')
+    text = text.decode('utf-8')
+
+    # 2. 以工程说明书为例 分词＼分句
+    searchfor = re.compile(ur'.*[综][合][管][廊].*' ,re.U)
+    print '.*['+keyword+'].*'
+    # seg_list = jieba.cut(text, cut_all=False)
+    # print("Full Mode: " + "/ ".join(seg_list))  # 全模式
+    seg_list = jieba.lcut(text, cut_all=False) #jieba分成了词
+    tok = nltk.word_tokenize(text)  #nltk分成了句子
+    print tok
+    # 3. 根据搜索关键字，寻找对应信息
+    searchforsheet = ''
+    for i in range(len(tok)):
+        if re.match(searchfor, tok[i]):
+            m = re.findall(searchfor, tok[i])
+            searchforsheet = m[0]
+
+    sheet = searchforsheet
+    print sheet
+    if sheet != '':
+        # 4. 写成2列的xls文件
+        '''fdict = dict(sheet)
+        print fdict
+        sheet = pandas.DataFrame(fdict,index=[0])'''
+        pd = pandas.DataFrame(sheet,index=[keyword])
+
+        xlsname = txtname.replace('txt', 'xls')  # 保存成xls文件，便于xls2aiml函数调用
+        sheetname = 'aiml'
+        pd.to_excel(xlsname, sheetname, engine='openpyxl')  # engine改为'openpyxl'即可写入unicode
+        # ew.save()  #需要用变量代替
+
+        filename = txtname.replace('txt', 'aiml').replace('doc/', 'standard/cn-' + keyword)  # 保存成aiml文件，便于aiml函数调用
+        apart = ' * '  # 分隔符
+        # 6. 利用xls2aiml将xls文件变为aiml
+        xls2aiml(filename, xlsname, apart, keyword)
+
+        # print seg_list
+        print seg_list
+        print tok
+
+
+def projecttxt2aiml(txtname):
     '''
     从txt文件中寻找有用信息，存入xls，再调用xls2aiml转换为aiml
     目前有以下不足：
