@@ -2,8 +2,29 @@
 import sys,os
 from whoosh.index import create_in
 from whoosh.fields import *
+from whoosh.highlight import *
 from jieba.analyse import ChineseAnalyzer
 import json
+
+'''
+def escape(txt):  # 将txt文本中的空格、&、<、>、（"）、（'）转化成对应的的字符实体，以方便在html上显示
+    txt = txt.replace('&', '&')
+    txt = txt.replace(' ', ' ')
+    txt = txt.replace('<', '<')
+    txt = txt.replace('>', '>')
+    txt = txt.replace('"', '"')
+    txt = txt.replace('\'', "'")
+    return txt
+
+def txt2html(txt): #  txt转换为html，将txt以行为单位加上标签
+    txt =  escape(txt)
+    lines = txt.split(' ')
+    for i, line in enumerate(lines):
+        lines[i] = '<p>' + line + '</p>'
+        # lines[i] = '' + line + ''
+    txt = '<html><body>' + ''.join(lines) + '</body></html>'
+    return txt
+'''
 
 # 使用结巴中文分词
 analyzer = ChineseAnalyzer()
@@ -64,7 +85,7 @@ for root, dirs, files in doclist:
             writer.add_document(title=title.decode('utf-8'),
                                 path=filename.decode('utf-8'), content=txt.decode('utf-8'))
 
-
+# print txt,txt2html(txt)
 
 writer.add_document(title=u"第一篇文档", path=u"/a",
                     content=u"这是我们增加的第一篇文档")
@@ -72,7 +93,8 @@ writer.add_document(title=u"第二篇文档", path=u"/b",
                     content=u"第二篇文档也很interesting！")
 writer.commit()
 
-# 检索方式1
+# 检索方式1 同样有效
+'''
 try:
     searcher = ix.searcher()  # 创建一个检索器
     # 检索标题中出现'文档'的文档
@@ -88,13 +110,22 @@ try:
 
 finally:
     searcher.close()
+'''
 
 # 检索方式2
 from whoosh.qparser import QueryParser
+keyword = u"电缆终端"
 with ix.searcher() as searcher:
-    query = QueryParser("content", ix.schema).parse(u"电缆终端")
+    query = QueryParser("content", ix.schema).parse(keyword)
     results = searcher.search(query)
-    for result in results:
-        print result['path'], '\n-------------------', \
-            result.highlights('content'), '\n-------------------\n-------------------'
-print ix.doc_count()
+    # results.formatter = GenshiFormatter()
+    # 把结果写成html文件
+    lines = [u'' for n in range(len(results))]
+    for i, result in enumerate(results):
+        lines[i] = u'<div><p><a href="' + result['path'] + u'">' + result['title'] + u'</a></p>' + u'<p>' + result.highlights('content') + u'</p></div>'
+    html = u'<html><body>' + ''.join(lines) + u'</body></html>'
+    output_file = open(os.path.join(docdir, keyword + '.html'), 'w')
+    output_file.write(html.encode('utf-8'))
+    output_file.close()
+print html
+
