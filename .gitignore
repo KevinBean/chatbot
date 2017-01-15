@@ -18,3 +18,7 @@ indexdir/MAIN_WRITELOCK
 .idea/chatbot.iml
 
 .idea/misc.xml
+
+*.iml
+
+.idea/misc.xml
