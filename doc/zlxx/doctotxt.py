@@ -1,6 +1,7 @@
 # -*- coding=utf-8 -*-
 from readdoc import *
 import sys,os
+import time
 
 docdir = sys.path[0]
 print docdir
@@ -9,10 +10,25 @@ for root, dirs, files in doclist:
     for name in files:
         print os.path.join(root, name)
         # 预留位置。要保证所有的文档都有对应的txt，目前采用手动保存模式。
-        filename = os.path.join(root, name)
-        if '.docx' in filename:
-            docx2txt(filename)
-            newfilename = filename.replace(u'.docx', u'.txt')
-        elif '.doc' in filename:
-            doc2txt(filename)
-            newfilename = filename.replace(u'.doc', u'.txt')
+        filename = os.path.join(root, name) # .decode('gbk').encode('utf-8')
+        print filename.decode('gbk').encode('utf-8')
+        # print chardet.detect(filename)
+        # print filename.replace('.doc', '.txt')
+        if filename[-5:] == '.docx':
+            newfilename = filename.replace('.docx', '.txt')
+            if os.path.exists(newfilename):
+                pass
+            else:
+                docx2txt(filename)
+                time.sleep(1)
+        elif filename[-4:] == '.doc':
+            newfilename = filename.replace('.doc', '.txt')
+            if os.path.exists(newfilename):
+                pass
+            else:
+                doc2txt(filename)
+                time.sleep(1)
+
+
+
+
