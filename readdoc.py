@@ -107,7 +107,7 @@ def doc2txt(filename):
 
 def doc2html(filename):
     #  print type(filename),filename
-    newfilename = filename.replace('.doc', '.txt')
+    newfilename = filename.replace('.doc', '.htm')
     # filename = filename.decode('gbk').encode('utf-8')
     if os.name == 'nt':
         print 'nt'
@@ -118,7 +118,7 @@ def doc2html(filename):
         word.Quit() #另存为txt文件，编码为gbk
         input_file = open(newfilename, 'r')
         gbktxt = input_file.read()
-        utftxt = gbktxt.decode('gbk').encode('utf-8') #读取txt文件，将gbk转换成utf-8
+        utftxt = gbktxt.decode('gbk').encode('gb2312') #读取txt文件，将gbk转换成utf-8
         input_file.close()
         output_file = open(newfilename, 'w')
         output_file.write(utftxt) #保存utf-8文本

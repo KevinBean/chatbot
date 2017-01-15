@@ -71,9 +71,17 @@ for root, dirs, files in doclist:
             input_file = open(newfilename, 'r')
             txt = input_file.read()
             input_file.close()
-
-            writer.add_document(title=title.decode('utf-8'),
-                                path=filename.decode('utf-8'), content=txt.decode('utf-8'))
+            # 解决编码问题，NND
+            if os.name == 'nt':
+                title = title.decode('gb2312').encode('utf-8').decode('utf-8')
+                filename = filename.decode('gb2312').encode('utf-8').decode('utf-8')
+                txt = txt.decode('utf-8')
+            else:
+                title = title.decode('utf-8')
+                filename =filename.decode('utf-8')
+                txt = txt.decode('utf-8')
+            writer.add_document(title=title,
+                                path=filename, content=txt)
         elif filename[-4:] == '.doc':
             title = filename.replace('.doc', '')
             newfilename = filename.replace('.doc', '.txt')
@@ -81,9 +89,16 @@ for root, dirs, files in doclist:
             input_file = open(newfilename, 'r')
             txt = input_file.read()
             input_file.close()
-
-            writer.add_document(title=title.decode('utf-8'),
-                                path=filename.decode('utf-8'), content=txt.decode('utf-8'))
+            # 解决编码问题，NND
+            if os.name == 'nt':
+                title = title.decode('gb2312').encode('utf-8').decode('utf-8')
+                filename = filename.decode('gb2312').encode('utf-8').decode('utf-8')
+                txt = txt.decode('utf-8')
+            else:
+                title = title.decode('utf-8')
+                filename =filename.decode('utf-8')
+                txt = txt.decode('utf-8')
+            writer.add_document(title=title,path=filename, content=txt)
 
 # print txt,txt2html(txt)
 
@@ -122,10 +137,16 @@ with ix.searcher() as searcher:
     # 把结果写成html文件
     lines = [u'' for n in range(len(results))]
     for i, result in enumerate(results):
-        lines[i] = u'<div><p><a href="' + result['path'] + u'">' + result['title'] + u'</a></p>' + u'<p>' + result.highlights('content') + u'</p></div>'
+         lines[i] = u'<div><p><a href="' + result['path'] + u'">' + result['title'] + u'</a></p>' + u'<p>' + result.highlights('content') + u'</p></div>'
+
     html = u'<html><body>' + ''.join(lines) + u'</body></html>'
+    # 解决编码问题，NND
+    if os.name == 'nt':
+        html = html.encode('gb2312')
+    else:
+        html = html.encode('utf-8')
     output_file = open(os.path.join(docdir, keyword + '.html'), 'w')
-    output_file.write(html.encode('utf-8'))
+    output_file.write(html)
     output_file.close()
 print html
 
