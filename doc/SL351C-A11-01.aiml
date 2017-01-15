@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<aiml version="1.0">
+		<meta author="KevinBean" language="zh"/>
+		<category>
+			<pattern>位于 * 旺控</pattern>
+			<template>辛店居住组团位于海淀区西北旺镇北部地区，现状庄皇双回１１０千伏线路和环控、旺控、旺丰、旺丰控支４回３５千伏线路与辛店居住组团地块重叠，需将上述架空线路迁改入地。</template>
+		</category>
+		<category>
+			<pattern>旺控 * 位于</pattern>
+			<template>辛店居住组团位于海淀区西北旺镇北部地区，现状庄皇双回１１０千伏线路和环控、旺控、旺丰、旺丰控支４回３５千伏线路与辛店居住组团地块重叠，需将上述架空线路迁改入地。</template>
+		</category>
+		<category>
+			<pattern>位于 旺控</pattern>
+			<template>辛店居住组团位于海淀区西北旺镇北部地区，现状庄皇双回１１０千伏线路和环控、旺控、旺丰、旺丰控支４回３５千伏线路与辛店居住组团地块重叠，需将上述架空线路迁改入地。</template>
+		</category>
+		<category>
+			<pattern>旺控 位于</pattern>
+			<template>辛店居住组团位于海淀区西北旺镇北部地区，现状庄皇双回１１０千伏线路和环控、旺控、旺丰、旺丰控支４回３５千伏线路与辛店居住组团地块重叠，需将上述架空线路迁改入地。</template>
+		</category>
+		<category>
+			<pattern>位于</pattern>
+			<template>辛店居住组团位于海淀区西北旺镇北部地区，现状庄皇双回１１０千伏线路和环控、旺控、旺丰、旺丰控支４回３５千伏线路与辛店居住组团地块重叠，需将上述架空线路迁改入地。</template>
+		</category>
+		<category>
+			<pattern>电缆 * 长度 * 旺控</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>旺控 * 电缆 * 长度</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>电缆 * 长度 旺控</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>旺控 电缆 * 长度</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>电缆 * 长度</pattern>
+			<template>无信息</template>
+		</category>
+		<category>
+			<pattern>终端 塔 * 旺控</pattern>
+			<template>电力隧道：南段隧道自新建电缆终端塔ＺＨ１起，沿土井路自北向南至航天城站东侧止，北段隧道自风格渠西侧起，沿永丰北环路向西后与总参三部计算中心１１０千伏送电工程规划建设电力隧道东侧终点对接，新建２．０米×２．１米明开电力隧道１０２米，２．０米×２．３米暗挖电力隧道１６１０米。</template>
+		</category>
+		<category>
+			<pattern>旺控 * 终端 塔</pattern>
+			<template>电力隧道：南段隧道自新建电缆终端塔ＺＨ１起，沿土井路自北向南至航天城站东侧止，北段隧道自风格渠西侧起，沿永丰北环路向西后与总参三部计算中心１１０千伏送电工程规划建设电力隧道东侧终点对接，新建２．０米×２．１米明开电力隧道１０２米，２．０米×２．３米暗挖电力隧道１６１０米。</template>
+		</category>
+		<category>
+			<pattern>终端 塔 旺控</pattern>
+			<template>电力隧道：南段隧道自新建电缆终端塔ＺＨ１起，沿土井路自北向南至航天城站东侧止，北段隧道自风格渠西侧起，沿永丰北环路向西后与总参三部计算中心１１０千伏送电工程规划建设电力隧道东侧终点对接，新建２．０米×２．１米明开电力隧道１０２米，２．０米×２．３米暗挖电力隧道１６１０米。</template>
+		</category>
+		<category>
+			<pattern>旺控 终端 塔</pattern>
+			<template>电力隧道：南段隧道自新建电缆终端塔ＺＨ１起，沿土井路自北向南至航天城站东侧止，北段隧道自风格渠西侧起，沿永丰北环路向西后与总参三部计算中心１１０千伏送电工程规划建设电力隧道东侧终点对接，新建２．０米×２．１米明开电力隧道１０２米，２．０米×２．３米暗挖电力隧道１６１０米。</template>
+		</category>
+		<category>
+			<pattern>终端 塔</pattern>
+			<template>电力隧道：南段隧道自新建电缆终端塔ＺＨ１起，沿土井路自北向南至航天城站东侧止，北段隧道自风格渠西侧起，沿永丰北环路向西后与总参三部计算中心１１０千伏送电工程规划建设电力隧道东侧终点对接，新建２．０米×２．１米明开电力隧道１０２米，２．０米×２．３米暗挖电力隧道１６１０米。</template>
+		</category>
+	</aiml>
