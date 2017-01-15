@@ -3,3 +3,5 @@
 *.txt
 .idea/chatbot.iml
 .idea/misc.xml
+.idea/misc.xml
+*.iml
