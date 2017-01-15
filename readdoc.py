@@ -12,7 +12,7 @@ if os.name == 'nt':
 
 
 def docx2txt(filename):
-    newfilename = filename.replace(u'docx', u'txt')
+    newfilename = filename.replace('docx', 'txt')
     if os.name == 'nt':
         print 'nt'
         word = wc.Dispatch('Word.Application')
@@ -49,7 +49,9 @@ def docx2txt(filename):
 
 
 def doc2txt(filename):
-    newfilename = filename.replace(u'docx', u'txt')
+    #  print type(filename),filename
+    newfilename = filename.replace('.doc', '.txt')
+    # filename = filename.decode('gbk').encode('utf-8')
     if os.name == 'nt':
         print 'nt'
         word = wc.Dispatch('Word.Application')
@@ -64,6 +66,7 @@ def doc2txt(filename):
         output_file = open(newfilename, 'w')
         output_file.write(utftxt) #保存utf-8文本
         output_file.close()
+
 
     else:
         # mac 下无法处理doc文件
