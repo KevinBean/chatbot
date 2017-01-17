@@ -5,6 +5,7 @@
 {% block title %}Flasky{% endblock %}
 
 {% block page_content %}
+
 <div class="page-header">
     <h1>Hello, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Stranger{% endif %}!</h1>
 </div>
@@ -26,7 +27,12 @@
     {{ macros.pagination_widget(pagination, '.index') }}
 </div>
 {% endif %}
+<div>
+    {{ wtf.quick_form(form) }}
+
+</div>
 {% endblock %}
+
 
 {% block scripts %}
 {{ super() }}
