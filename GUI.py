@@ -33,6 +33,9 @@ from ScrolledText import ScrolledText #文本区加滑动条
 
 from worklog import *
 from formataiml import *
+import webbrowser
+from search import searchbywhoosh
+import chardet
 
 def read_msg():
     '''
@@ -89,9 +92,9 @@ def searchfor():
     :return:
     '''
     print 'searchfor'
-    # 1. 读取输入信息并分词
+    # 1. 读取输入信息
     raw_msg = read_msg().upper()  # 读取输入信息
-    msg = jiebacut(raw_msg)
+    msg = raw_msg
 
     # 2. 剥去SEARCH 搜索标记，先判断msg中是否有既定答案
     msg = msg.replace('SEARCH','')
@@ -105,9 +108,21 @@ def searchfor():
     else:
         insert_msg('Robot', '正在查找...' )
 
+        # 遍历目录，从所有txt中生成aiml,默认文件保存在/doc中
+        docdir = 'C:\Users\kevinbean\Documents\GitHub\chatbot'
+        # keyword转换为unicode
+        if type(msg) == 'unicode':
+            pass
+        else:
+            enco = chardet.detect(msg)
+            msg = msg.decode(enco['encoding'])
+        # print msg, type(msg),chardet.detect(msg)
+        #返回html结果,浏览器打开
+        htmlresultfile = searchbywhoosh(msg, docdir)
+        print htmlresultfile,type(htmlresultfile)
+        webbrowser.open(htmlresultfile)
+        '''
         # 遍历目录，从所有txt中生成aiml
-        docdir = 'doc/'
-        doclist = os.walk(docdir)
         for root, dirs, files in doclist:
             for name in files:
                 print os.path.join(root, name)
@@ -122,6 +137,7 @@ def searchfor():
             insert_msg('Robot','找到以下信息：'+ '\n' + bot_response, with_title=False)
         else:
             insert_msg('Robot','抱歉，未能找到您要的信息', with_title=False)
+        '''
 
 ### 以上是特殊响应函数 ###
 

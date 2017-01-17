@@ -2,6 +2,11 @@
 
 ## TODOS 
 
+### search.py
+doctohtml、doctotxt实现了原doc文件转换；
+search用whoosh和jieba实现了搜索功能，并且展示为html。
+GUI集成实现成功，输入“search关键字”，返回浏览器窗口。
+
 ### readdoc调试记录
 os.name == nt
 使用win32com进行处理，注意转换后默认编码为gbk

@@ -7,6 +7,7 @@
 # import nltk  # 利用nltk进行其他处理
 import pypandoc
 import os
+import chardet
 if os.name == 'nt':
     from win32com import client as wc
 
@@ -47,6 +48,41 @@ def docx2txt(filename):
         pypandoc.convert_file(filename,'markdown','docx',outputfile=newfilename)
         print newfilename
 
+def docx2html(filename):
+    newfilename = filename.replace('docx', 'htm')
+    if os.name == 'nt':
+        print 'nt'
+        word = wc.Dispatch('Word.Application')
+        doc = word.Documents.Open(filename)
+        doc.SaveAs(newfilename, 8)
+        doc.Close()
+        word.Quit() #另存为txt文件，编码为gbk
+        input_file = open(newfilename, 'r')
+        gbktxt = input_file.read()
+        utftxt = gbktxt.decode('gbk').encode('utf-8') #读取txt文件，将gbk转换成utf-8
+        input_file.close()
+        output_file = open(newfilename, 'w')
+        output_file.write(utftxt) #保存utf-8文本
+        output_file.close()
+
+    else:
+        '''
+        # 从word（docx格式）中提取text，保存为txt
+        document = Document(filename)
+        docText = '\n\n'.join([
+                                  paragraph.text.encode('utf-8') for paragraph in document.paragraphs
+                                  ])
+        print docText
+        # 保存文件
+        # document.save('doc/new-SL351C-A11-01.doc')
+
+        output_file = open(newfilename, 'w')
+        output_file.write(docText)
+        output_file.close()
+        '''
+        #使用pandoc进行转换
+        pypandoc.convert_file(filename,'markdown','docx',outputfile=newfilename)
+        print newfilename
 
 def doc2txt(filename):
     #  print type(filename),filename
@@ -118,7 +154,11 @@ def doc2html(filename):
         word.Quit() #另存为txt文件，编码为gbk
         input_file = open(newfilename, 'r')
         gbktxt = input_file.read()
-        utftxt = gbktxt.decode('gbk').encode('gb2312') #读取txt文件，将gbk转换成utf-8
+        enco = chardet.detect(gbktxt) # 获取字符编码
+        if enco['encoding'] == 'GB2312':
+            utftxt = gbktxt
+        else:
+            utftxt = gbktxt.decode(enco['encoding']).encode('gb2312') #读取txt文件，将gbk转换成utf-8
         input_file.close()
         output_file = open(newfilename, 'w')
         output_file.write(utftxt) #保存utf-8文本
