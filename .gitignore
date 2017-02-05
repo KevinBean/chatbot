@@ -7,7 +7,10 @@
 *.iml
 *.iml
 
-doc/*
+doc/*.htm*
+doc/*/*
+doc/*.txt
+doc/*.doc*
 
 *.htm
 
