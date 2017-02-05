@@ -1,16 +1,12 @@
 *.doc
 *.docx
 *.txt
+*.md
 .idea/chatbot.iml
 .idea/misc.xml
 .idea/misc.xml
 *.iml
 *.iml
-
-doc/*.htm*
-doc/*/*
-doc/*.txt
-doc/*.doc*
 
 *.htm
 
