@@ -7,6 +7,8 @@
 *.iml
 *.iml
 
+doc/*
+
 *.htm
 
 indexdir/_MAIN_1.toc
@@ -42,3 +44,4 @@ doc/zlxx/鐢电紗鏀灦.html
 *.jpg
 *.png
 *.html
+.idea/encodings.xml
